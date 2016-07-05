@@ -15,7 +15,6 @@ hs_err_pid*
 bin/
 tmp/
 target/
-target/m2e-wtp/web-resources/META-INF/maven/uade/sam/pom.properties
 *.tmp
 *.bak
 *.swp
