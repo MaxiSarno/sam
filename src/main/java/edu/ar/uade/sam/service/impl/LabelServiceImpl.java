@@ -12,7 +12,8 @@ import edu.ar.uade.sam.service.LabelService;
 
 public class LabelServiceImpl implements LabelService {
 	
-	private static final int LABEL_MAX_VALUE = 999;
+	public static final int LABEL_MAX_VALUE = 999;
+	
 	private static Map<Integer, List<Integer>> cache = new HashMap<Integer, List<Integer>>();
 	private static final List<Integer> numbers = LabelServiceImpl.numbers();
 	
@@ -29,7 +30,7 @@ public class LabelServiceImpl implements LabelService {
 		
 		for(String desc : descriptions) {
 			Integer labelNumber = this.getLabelNumber(testId);
-			Label label = new Label(labelNumber, desc);
+			Label label = new Label(testId, labelNumber, desc);
 			labels.add(label);
 		}
 		
@@ -55,16 +56,6 @@ public class LabelServiceImpl implements LabelService {
 
 	private Integer randomBetween(int max) {
 		return (int) (Math.random() * max);
-	}
-	
-	public static void main(String[] args) {
-		LabelService ls = new LabelServiceImpl();
-		for (int i = 0;i<99; i++) {
-			List<Label> labels = ls.createLabels(1, Arrays.asList("tang", "clight", "bc"));
-			for(Label l : labels) {
-				System.out.println(l);
-			}
-		}
 	}
 	
 }

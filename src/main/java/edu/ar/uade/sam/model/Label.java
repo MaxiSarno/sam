@@ -2,37 +2,38 @@ package edu.ar.uade.sam.model;
 
 public class Label {
 	
-	private int id;
-	private int testId;
-	private int labelNumber;
+	private Integer id;
+	private Integer testId;
+	private Integer labelNumber;
 	private String description;
 
-	public Label(Integer labelNumber, String desc) {
+	public Label(Integer testId, Integer labelNumber, String desc) {
+		this.testId = testId;
 		this.labelNumber = labelNumber;
 		this.description = desc;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getTestId() {
+	public Integer getTestId() {
 		return testId;
 	}
 
-	public void setTestId(int testId) {
+	public void setTestId(Integer testId) {
 		this.testId = testId;
 	}
 
-	public int getLabelNumber() {
+	public Integer getLabelNumber() {
 		return labelNumber;
 	}
 
-	public void setLabelNumber(int labelNumber) {
+	public void setLabelNumber(Integer labelNumber) {
 		this.labelNumber = labelNumber;
 	}
 
