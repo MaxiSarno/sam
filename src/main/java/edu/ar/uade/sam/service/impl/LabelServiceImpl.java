@@ -1,7 +1,6 @@
 package edu.ar.uade.sam.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,9 @@ public class LabelServiceImpl implements LabelService {
 	public static final int LABEL_MAX_VALUE = 999;
 	
 	private static Map<Integer, List<Integer>> cache = new HashMap<Integer, List<Integer>>();
-	private static final List<Integer> numbers = LabelServiceImpl.numbers();
+	private static final List<Integer> numbers = LabelServiceImpl.setupNumbers();
 	
-	private static List<Integer> numbers() {
+	private static List<Integer> setupNumbers() {
 		List<Integer> numbers = new ArrayList<Integer>();
 		for(int i = 0; i < LABEL_MAX_VALUE; i++) {
 			numbers.add(i);
