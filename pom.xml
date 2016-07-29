@@ -11,9 +11,11 @@
 	<properties>
 		<junit-version>4.12</junit-version>
 		<spring-version>4.3.0.RELEASE</spring-version>
+		<javax-version>2.0.1</javax-version>
 		<hibernate-version>5.2.1.Final</hibernate-version>
 		<mysql-version>6.0.3</mysql-version>
 		<guava-version>19.0</guava-version>
+		<jersey-version>2.23.1</jersey-version>
 	</properties>
 
 	<dependencies>
@@ -24,6 +26,26 @@
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- Javax -->
+		<dependency>
+		    <groupId>javax.ws.rs</groupId>
+   			<artifactId>javax.ws.rs-api</artifactId>
+		    <version>${javax-version}</version>
+		</dependency>
+		
+		<!-- Jersey -->
+		<dependency>
+		    <groupId>org.glassfish.jersey.containers</groupId>
+		    <artifactId>jersey-container-servlet</artifactId>
+		    <version>${jersey-version}</version>
+		</dependency>
+		<!-- if you are using Jersey client specific features without the server side -->
+		<dependency>
+		    <groupId>org.glassfish.jersey.core</groupId>
+		    <artifactId>jersey-client</artifactId>
+		    <version>${jersey-version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -63,5 +85,15 @@
 
 	<build>
 		<finalName>sam</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
