@@ -4,6 +4,12 @@ import java.util.List;
 
 import edu.ar.uade.sam.model.Label;
 
+/**
+ * Etiquetas para las muestras de cada experimento.
+ * 
+ * @author maxi
+ *
+ */
 //@Service
 public interface LabelService {
 	

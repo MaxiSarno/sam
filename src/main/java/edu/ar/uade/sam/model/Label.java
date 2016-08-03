@@ -1,5 +1,11 @@
 package edu.ar.uade.sam.model;
 
+/**
+ * Etiqueta para una muestrade una prueba, se usa para ofuscar la muestra para los jueces.
+ * 
+ * @author maxi
+ *
+ */
 public class Label {
 	
 	private Integer id;

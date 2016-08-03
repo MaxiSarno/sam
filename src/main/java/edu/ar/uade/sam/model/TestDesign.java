@@ -2,10 +2,16 @@ package edu.ar.uade.sam.model;
 
 import java.util.ArrayList;
 
+/**
+ * Diseño de una prueba con ciertas muestras para una poblacion especifica.
+ * 
+ * @author maxi
+ *
+ */
 public class TestDesign {
 
 	private Integer testId;
-	private ArrayList<TestSubject> tests;
+	private ArrayList<TestDesignSlot> testSlots;
 
 	public Integer getTestId() {
 		return testId;
@@ -15,17 +21,17 @@ public class TestDesign {
 		this.testId = testId;
 	}
 
-	public ArrayList<TestSubject> getTests() {
-		return tests;
+	public ArrayList<TestDesignSlot> getTestSlots() {
+		return testSlots;
 	}
 
-	public void setTests(ArrayList<TestSubject> tests) {
-		this.tests = tests;
+	public void setTestSlots(ArrayList<TestDesignSlot> testSlots) {
+		this.testSlots = testSlots;
 	}
 
 	public TestDesign(Integer testId) {
 		this.testId = testId;
-		this.tests = new ArrayList<TestSubject>();
+		this.testSlots = new ArrayList<TestDesignSlot>();
 	}
 
 }
