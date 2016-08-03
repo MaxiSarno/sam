@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import edu.ar.uade.sam.model.TestDesign;
 
-//@Service
+@Service
 public interface DesignService {
 	
 	/**
@@ -16,5 +16,7 @@ public interface DesignService {
 	 * @return
 	 */
 	public TestDesign createTestDesign(Integer testId, int personnel, List<String> samples);
+
+	public String alala();
 
 }
