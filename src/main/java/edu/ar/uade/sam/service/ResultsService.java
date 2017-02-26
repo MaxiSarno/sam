@@ -1,5 +1,7 @@
 package edu.ar.uade.sam.service;
 
+import org.springframework.stereotype.Service;
+
 import edu.ar.uade.sam.model.TestResult;
 
 /**
@@ -8,6 +10,7 @@ import edu.ar.uade.sam.model.TestResult;
  * @author maxi
  *
  */
+@Service
 public interface ResultsService {
 	
 	public void calculateResults(int testId);

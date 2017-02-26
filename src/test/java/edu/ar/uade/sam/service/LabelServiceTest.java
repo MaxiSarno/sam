@@ -14,11 +14,12 @@ public class LabelServiceTest {
 	
 	private LabelService labelService = new LabelServiceImpl();
 	
+	private static final List<String> descriptions = Arrays.asList("Tang", "Clight", "BC");
+	
 	@Test
 	public void testCreateLabels() {
-		List<String> descriptions = Arrays.asList("Tang", "Clight", "BC");
 		Integer testId = 1;
-		List<Label> labels = labelService.createLabels(testId , descriptions);
+		List<Label> labels = labelService.createLabels(testId , LabelServiceTest.descriptions);
 		
 		for(Label l : labels) {
 			Assert.assertEquals("TestId", testId,l.getTestId());
@@ -27,20 +28,18 @@ public class LabelServiceTest {
 	
 	@Test
 	public void testAmountOfLabelsGenerated() {
-		List<String> descriptions = Arrays.asList("Tang", "Clight", "BC");
-		List<Label> labels = labelService.createLabels(2, descriptions);
-		Assert.assertEquals("Same amount of labels as descriptions", descriptions.size(), labels.size());
+		List<Label> labels = labelService.createLabels(2, LabelServiceTest.descriptions);
+		Assert.assertEquals("Same amount of labels as descriptions", LabelServiceTest.descriptions.size(), labels.size());
 	}
 
 	@Test
 	public void testNoDuplicateNumbers() {
 		List<Integer> labelNumbers = new ArrayList<Integer>();
 		
-		List<String> descriptions = Arrays.asList("Tang", "Clight", "BC");
-		int limit = LabelServiceImpl.LABEL_MAX_VALUE/descriptions.size();
+		int limit = LabelServiceImpl.LABEL_MAX_VALUE/LabelServiceTest.descriptions.size();
 		
 		for(int i=0; i<limit; i++) {
-			List<Label> labels = labelService.createLabels(3, descriptions);
+			List<Label> labels = labelService.createLabels(3, LabelServiceTest.descriptions);
 			for (Label l : labels) {
 				Assert.assertFalse(labelNumbers.contains(l.getLabelNumber()));
 				labelNumbers.add(l.getLabelNumber());

@@ -34,4 +34,9 @@ public class TestDesignSlot {
 		this.labels = labels;
 	}
 
+	@Override
+	public String toString() {
+		return "TestDesignSlot [judge=" + judge + ", labels=" + labels + "]";
+	}
+
 }
