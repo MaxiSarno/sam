@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.service;
+package edu.uade.service;
 
 import java.util.Arrays;
 
@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ar.uade.sam.model.TestDesign;
-import edu.ar.uade.sam.service.impl.DesignServiceImpl;
-import edu.ar.uade.sam.service.impl.LabelServiceImpl;
+import edu.uade.model.TestDesign;
+import edu.uade.service.impl.DesignServiceImpl;
+import edu.uade.service.impl.LabelServiceImpl;
 
 public class DesignServiceTest {
 	

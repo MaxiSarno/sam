@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.controller;
+package edu.uade.controller;
 
 public class EvaluationControllerTest {
 	

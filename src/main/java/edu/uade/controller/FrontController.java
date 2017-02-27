@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.controller;
+package edu.uade.controller;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

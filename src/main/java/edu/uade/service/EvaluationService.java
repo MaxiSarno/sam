@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.service;
+package edu.uade.service;
 
 import org.springframework.stereotype.Service;
 

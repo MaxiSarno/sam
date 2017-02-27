@@ -1,6 +1,6 @@
-package edu.ar.uade.sam.service.impl;
+package edu.uade.service.impl;
 
-import edu.ar.uade.sam.service.EvaluationService;
+import edu.uade.service.EvaluationService;
 
 public class EvaluationServiceImpl implements EvaluationService {
 

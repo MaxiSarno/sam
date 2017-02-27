@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.service.impl;
+package edu.uade.service.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,11 +8,11 @@ import javax.inject.Inject;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import edu.ar.uade.sam.model.Label;
-import edu.ar.uade.sam.model.TestDesign;
-import edu.ar.uade.sam.model.TestDesignSlot;
-import edu.ar.uade.sam.service.DesignService;
-import edu.ar.uade.sam.service.LabelService;
+import edu.uade.model.Label;
+import edu.uade.model.TestDesign;
+import edu.uade.model.TestDesignSlot;
+import edu.uade.service.DesignService;
+import edu.uade.service.LabelService;
 
 public class DesignServiceImpl implements DesignService {
 	

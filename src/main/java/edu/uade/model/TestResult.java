@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.model;
+package edu.uade.model;
 
 /**
  * Resultado de la prueba producto de de evaluar los datos.

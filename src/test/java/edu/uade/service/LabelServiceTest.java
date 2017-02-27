@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.service;
+package edu.uade.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.ar.uade.sam.model.Label;
-import edu.ar.uade.sam.service.impl.LabelServiceImpl;
+import edu.uade.model.Label;
+import edu.uade.service.impl.LabelServiceImpl;
 
 public class LabelServiceTest {
 	

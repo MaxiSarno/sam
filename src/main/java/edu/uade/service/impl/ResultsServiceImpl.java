@@ -1,7 +1,7 @@
-package edu.ar.uade.sam.service.impl;
+package edu.uade.service.impl;
 
-import edu.ar.uade.sam.model.TestResult;
-import edu.ar.uade.sam.service.ResultsService;
+import edu.uade.model.TestResult;
+import edu.uade.service.ResultsService;
 
 public class ResultsServiceImpl implements ResultsService {
 

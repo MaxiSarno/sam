@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.model;
+package edu.uade.model;
 
 import java.util.ArrayList;
 

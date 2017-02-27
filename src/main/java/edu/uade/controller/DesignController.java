@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.controller;
+package edu.uade.controller;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Controller;
 
-import edu.ar.uade.sam.service.DesignService;
+import edu.uade.service.DesignService;
 
 @Controller
 @Path("design")

@@ -1,12 +1,12 @@
-package edu.ar.uade.sam.service.impl;
+package edu.uade.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.ar.uade.sam.model.Label;
-import edu.ar.uade.sam.service.LabelService;
+import edu.uade.model.Label;
+import edu.uade.service.LabelService;
 
 
 public class LabelServiceImpl implements LabelService {

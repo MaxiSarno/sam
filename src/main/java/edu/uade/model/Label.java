@@ -1,4 +1,4 @@
-package edu.ar.uade.sam.model;
+package edu.uade.model;
 
 /**
  * Etiqueta para una muestrade una prueba, se usa para ofuscar la muestra para los jueces.

@@ -1,6 +1,6 @@
-package edu.ar.uade.sam.service;
+package edu.uade.service;
 
-import edu.ar.uade.sam.model.EvaluationResult;
+import edu.uade.model.EvaluationResult;
 
 public class EvaluationServiceTest {
 	
