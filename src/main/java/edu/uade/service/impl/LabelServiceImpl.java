@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import edu.uade.model.Label;
 import edu.uade.service.LabelService;
 
-
+@Component
 public class LabelServiceImpl implements LabelService {
 	
 	public static final int LABEL_MAX_VALUE = 999;

@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Component;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import edu.uade.model.Label;
@@ -14,6 +16,7 @@ import edu.uade.model.TestDesignSlot;
 import edu.uade.service.DesignService;
 import edu.uade.service.LabelService;
 
+@Component
 public class DesignServiceImpl implements DesignService {
 	
 	@Inject

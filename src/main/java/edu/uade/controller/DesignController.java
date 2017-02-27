@@ -15,7 +15,7 @@ import edu.uade.service.DesignService;
 @Path("design")
 public class DesignController {
 	
-	@Inject 
+	@Inject
 	private DesignService designService;
 	
 	@GET
