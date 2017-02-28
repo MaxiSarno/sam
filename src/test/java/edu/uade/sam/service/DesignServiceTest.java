@@ -22,7 +22,7 @@ public class DesignServiceTest {
 	
 	@Test
 	public void testCreateTestDesign() {
-		TestDesign a = this.designService.createTestDesign(1, 10, Arrays.asList("a", "b", "c"));
+		TestDesign a = this.designService.createTestDesign("1", 10, Arrays.asList("a", "b", "c"));
 		Assert.assertNotNull(a);
 	}
 
