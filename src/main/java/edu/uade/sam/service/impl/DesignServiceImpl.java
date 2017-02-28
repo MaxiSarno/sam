@@ -21,12 +21,15 @@ public class DesignServiceImpl implements DesignService {
 	
 	@Inject
 	private LabelService labelService;
+	
 
-	public TestDesign createTestDesign(Integer testId, int judges, List<String> samples) {
-		TestDesign td = new TestDesign(testId);
+	public TestDesign createTestDesign(String testName, Integer judges, List<String> samples) {
+		//FIXME este id apesta
+		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
+		TestDesign td = new TestDesign(id, testName);
 		
 		for (int i=1; i<=judges; i++) {
-			List<Label> labels = labelService.createLabels(testId , samples);
+			List<Label> labels = labelService.createLabels(id , samples);
 			long seed = System.nanoTime();
 			Collections.shuffle(labels, new Random(seed));
 			
@@ -36,19 +39,9 @@ public class DesignServiceImpl implements DesignService {
 		return td;
 	}
 
-	@VisibleForTesting
-	public void setLabelService(LabelService labelService) {
-		this.labelService = labelService;
-	}
-
 	@Override
-	public String alala() {
-		return "alala";
-	}
-
-	@Override
-	public TestDesign createTestDesignRandom(Integer testId, int judges, List<String> samples) {
-		TestDesign design = this.createTestDesign(testId, judges, samples);
+	public TestDesign createTestDesignRandom(String testName, Integer judges, List<String> samples) {
+		TestDesign design = this.createTestDesign(testName, judges, samples);
 		
 		for(TestDesignSlot slot : design.getTestSlots()) {
 			long seed = System.nanoTime();
@@ -56,6 +49,18 @@ public class DesignServiceImpl implements DesignService {
 		}
 		
 		return design;
+	}
+	
+	@Override
+	public TestDesign getTestDesign(Integer testId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@VisibleForTesting
+	public void setLabelService(LabelService labelService) {
+		this.labelService = labelService;
 	}
 
 }

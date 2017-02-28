@@ -11,7 +11,14 @@ import java.util.ArrayList;
 public class TestDesign {
 
 	private Integer testId;
+	private String testName;
 	private ArrayList<TestDesignSlot> testSlots;
+
+	public TestDesign(Integer testId, String testName) {
+		this.testId = testId;
+		this.testName = testName;
+		this.testSlots = new ArrayList<TestDesignSlot>();
+	}
 
 	public Integer getTestId() {
 		return testId;
@@ -19,6 +26,14 @@ public class TestDesign {
 
 	public void setTestId(Integer testId) {
 		this.testId = testId;
+	}
+
+	public String getTestName() {
+		return testName;
+	}
+
+	public void setTestName(String testName) {
+		this.testName = testName;
 	}
 
 	public ArrayList<TestDesignSlot> getTestSlots() {
@@ -29,9 +44,10 @@ public class TestDesign {
 		this.testSlots = testSlots;
 	}
 
-	public TestDesign(Integer testId) {
-		this.testId = testId;
-		this.testSlots = new ArrayList<TestDesignSlot>();
+	@Override
+	public String toString() {
+		return "TestDesign [testId=" + testId + ", testName=" + testName
+				+ ", testSlots=" + testSlots + "]";
 	}
 
 }
