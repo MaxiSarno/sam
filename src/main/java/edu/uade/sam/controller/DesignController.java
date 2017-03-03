@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.uade.sam.model.TestDesign;
+import edu.uade.sam.model.Design;
 import edu.uade.sam.service.DesignService;
 
 @RestController
@@ -22,12 +22,14 @@ public class DesignController {
 	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public TestDesign getDesign(@PathVariable(value="id") Integer id) {
+	public Design getDesign(@PathVariable(value="id") Integer id) {
 		return designService.getTestDesign(id);
 	}
 	
+	//TODO algun metodo que devuelva el csv?
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public TestDesign createDesign(@PathVariable(value="id") String id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
+	public Design createDesign(@PathVariable(value="id") String id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
 		return this.designService.createTestDesign(id, judges, Arrays.asList(samples.split(",")));
 	}
 	

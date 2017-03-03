@@ -7,7 +7,7 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
-public class EvaluationHedonic extends Evaluation{
+public class HedonicAttributes extends Attributes{
 	
 	private int value;
 

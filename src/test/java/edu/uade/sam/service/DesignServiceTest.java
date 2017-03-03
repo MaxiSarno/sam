@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.uade.sam.model.TestDesign;
+import edu.uade.sam.model.Design;
 import edu.uade.sam.service.impl.DesignServiceImpl;
 import edu.uade.sam.service.impl.LabelServiceImpl;
 
@@ -22,7 +22,7 @@ public class DesignServiceTest {
 	
 	@Test
 	public void testCreateTestDesign() {
-		TestDesign a = this.designService.createTestDesign("1", 10, Arrays.asList("a", "b", "c"));
+		Design a = this.designService.createTestDesign("1", 10, Arrays.asList("a", "b", "c"));
 		Assert.assertNotNull(a);
 	}
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.annotations.VisibleForTesting;
 
 import edu.uade.sam.model.Label;
-import edu.uade.sam.model.TestDesign;
+import edu.uade.sam.model.Design;
 import edu.uade.sam.model.TestDesignSlot;
 import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.LabelService;
@@ -23,10 +23,10 @@ public class DesignServiceImpl implements DesignService {
 	private LabelService labelService;
 	
 
-	public TestDesign createTestDesign(String testName, Integer judges, List<String> samples) {
+	public Design createTestDesign(String testName, Integer judges, List<String> samples) {
 		//FIXME este id apesta
 		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
-		TestDesign td = new TestDesign(id, testName);
+		Design td = new Design();
 		
 		for (int i=1; i<=judges; i++) {
 			List<Label> labels = labelService.createLabels(id , samples);
@@ -40,8 +40,8 @@ public class DesignServiceImpl implements DesignService {
 	}
 
 	@Override
-	public TestDesign createTestDesignRandom(String testName, Integer judges, List<String> samples) {
-		TestDesign design = this.createTestDesign(testName, judges, samples);
+	public Design createTestDesignRandom(String testName, Integer judges, List<String> samples) {
+		Design design = this.createTestDesign(testName, judges, samples);
 		
 		for(TestDesignSlot slot : design.getTestSlots()) {
 			long seed = System.nanoTime();
@@ -52,7 +52,7 @@ public class DesignServiceImpl implements DesignService {
 	}
 	
 	@Override
-	public TestDesign getTestDesign(Integer testId) {
+	public Design getTestDesign(Integer testId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
