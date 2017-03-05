@@ -1,28 +1,38 @@
 package edu.uade.sam.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import edu.uade.sam.model.SAMEvaluation;
 import edu.uade.sam.service.EvaluationService;
 
-@Controller
-@Path("eval")
+@RestController
+@RequestMapping("/evaluation")
 public class EvaluationController {
 	
 	@Inject
 	private EvaluationService evaluationService;
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String postEval() {
-		return evaluationService.saveEvaluation();
+	@RequestMapping(method=RequestMethod.POST)
+	public Integer save(@RequestParam(value="name", required=true) String name) {
+		return evaluationService.save(name);
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public List<SAMEvaluation> getAll() {
+		return evaluationService.getAll();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public SAMEvaluation get(@PathVariable(value="{id}") Integer id) {
+		return evaluationService.get(id);
 	}
 
 }
