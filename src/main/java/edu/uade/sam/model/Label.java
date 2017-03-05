@@ -1,7 +1,7 @@
 package edu.uade.sam.model;
 
 /**
- * Etiqueta para una muestrade una prueba, se usa para ofuscar la muestra para los jueces.
+ * Etiqueta para una muestra de una prueba, se usa para ofuscar la muestra para los jueces.
  * 
  * @author maxi
  *

@@ -11,7 +11,7 @@ public class SAMEvaluation {
 	private Integer testId;
 	private String testName;
 	private Design design;
-	private Attributes attributes;
+	private Attribute attributes;
 	//TODO Segmentation
 	private TestResult result;
 
@@ -39,11 +39,11 @@ public class SAMEvaluation {
 		this.design = design;
 	}
 
-	public Attributes getAttributes() {
+	public Attribute getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(Attributes attributes) {
+	public void setAttributes(Attribute attributes) {
 		this.attributes = attributes;
 	}
 

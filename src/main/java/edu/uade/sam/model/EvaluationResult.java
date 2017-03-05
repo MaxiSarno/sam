@@ -4,7 +4,7 @@ public class EvaluationResult {
 
 	private Integer labelNumber;
 	private String comments;
-	private Attributes eval;
+	private Attribute eval;
 
 	public Integer getLabelNumber() {
 		return labelNumber;
@@ -22,11 +22,11 @@ public class EvaluationResult {
 		this.comments = comments;
 	}
 
-	public Attributes getEval() {
+	public Attribute getEval() {
 		return eval;
 	}
 
-	public void setEval(Attributes eval) {
+	public void setEval(Attribute eval) {
 		this.eval = eval;
 	}
 
