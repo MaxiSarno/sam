@@ -8,12 +8,12 @@ import java.util.List;
  * @author maxi
  *
  */
-public class TestDesignSlot {
+public class DesignSlot {
 
-	private int judge;
-	private List<Label> labels;
+	private final int judge;
+	private final List<Label> labels;
 
-	public TestDesignSlot(int i, List<Label> labels) {
+	public DesignSlot(int i, List<Label> labels) {
 		this.judge = i;
 		this.labels = labels;
 	}
@@ -22,16 +22,8 @@ public class TestDesignSlot {
 		return judge;
 	}
 
-	public void setJudge(int judge) {
-		this.judge = judge;
-	}
-
 	public List<Label> getLabels() {
 		return labels;
-	}
-
-	public void setLabels(List<Label> labels) {
-		this.labels = labels;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import edu.uade.sam.model.Label;
 import edu.uade.sam.model.Design;
-import edu.uade.sam.model.TestDesignSlot;
+import edu.uade.sam.model.DesignSlot;
 import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.LabelService;
 
@@ -23,7 +23,7 @@ public class DesignServiceImpl implements DesignService {
 	private LabelService labelService;
 	
 
-	public Design createTestDesign(String testName, Integer judges, List<String> samples) {
+	public Design generateDesign(String testName, Integer judges, List<String> samples) {
 		//FIXME este id apesta
 		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
 		Design td = new Design();
@@ -33,17 +33,17 @@ public class DesignServiceImpl implements DesignService {
 			long seed = System.nanoTime();
 			Collections.shuffle(labels, new Random(seed));
 			
-			td.getTestSlots().add(new TestDesignSlot(i, labels));
+			td.getDesignSlots().add(new DesignSlot(i, labels));
 		}
 		
 		return td;
 	}
 
 	@Override
-	public Design createTestDesignRandom(String testName, Integer judges, List<String> samples) {
-		Design design = this.createTestDesign(testName, judges, samples);
+	public Design generateDesignRandom(String testName, Integer judges, List<String> samples) {
+		Design design = this.generateDesign(testName, judges, samples);
 		
-		for(TestDesignSlot slot : design.getTestSlots()) {
+		for(DesignSlot slot : design.getDesignSlots()) {
 			long seed = System.nanoTime();
 			Collections.shuffle(slot.getLabels(), new Random(seed));
 		}

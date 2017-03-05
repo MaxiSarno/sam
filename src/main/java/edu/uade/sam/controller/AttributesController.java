@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.uade.sam.model.HedonicAttribute;
 import edu.uade.sam.service.AttributesService;
-import edu.uade.sam.utils.CSVUtils;
+import edu.uade.sam.service.CSVParser;
 
 @RestController
 @RequestMapping("/attributes")
@@ -20,16 +20,14 @@ public class AttributesController {
 	
 	@Inject
 	private AttributesService attributesService;
+	
+	@Inject
+	private CSVParser csvParser;
 
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
 	public void processUpload(@RequestParam MultipartFile file) {
-		CSVUtils util = new CSVUtils();
-		List<HedonicAttribute> attributes = util.readCSVHedonicAttribute(file);
+		List<HedonicAttribute> attributes = (List<HedonicAttribute>) csvParser.parse(file);
 		attributesService.save(0, attributes);
-		
-		for (HedonicAttribute a : attributes) {
-			System.out.println(a);
-		}
 		
 		// http://stackoverflow.com/questions/28277182/how-to-upload-csv-file-to-the-database-using-spring-hibernate-mvc
 	}

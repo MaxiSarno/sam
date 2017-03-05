@@ -16,4 +16,6 @@ import edu.uade.sam.model.Attribute;
 public interface AttributesService {
 
 	public void save(Integer evaluationId, List<? extends Attribute> attributes);
+	
+	public List<? extends Attribute> get(Integer evaluationId);
 }

@@ -23,7 +23,7 @@ public interface DesignService {
 	 * @param samples
 	 * @return
 	 */
-	public Design createTestDesign(String testName, Integer judges, List<String> samples);
+	public Design generateDesign(String testName, Integer judges, List<String> samples);
 	
 	/**
 	 * Crea el diseño de la prueba con etiquetas random, dando un orden aleatorio a las muestras.
@@ -33,7 +33,7 @@ public interface DesignService {
 	 * @param samples
 	 * @return
 	 */
-	public Design createTestDesignRandom(String testName, Integer judges, List<String> samples);
+	public Design generateDesignRandom(String testName, Integer judges, List<String> samples);
 	
 	public Design getTestDesign(Integer testId);
 

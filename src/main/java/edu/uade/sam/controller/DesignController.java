@@ -30,7 +30,7 @@ public class DesignController {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.POST)
 	public Design createDesign(@PathVariable(value="id") String id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
-		return this.designService.createTestDesign(id, judges, Arrays.asList(samples.split(",")));
+		return this.designService.generateDesign(id, judges, Arrays.asList(samples.split(",")));
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)

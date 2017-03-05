@@ -1,17 +1,17 @@
 package edu.uade.sam.model;
 
 /**
- * Etiqueta para una muestra de una prueba, se usa para ofuscar la muestra para los jueces.
+ * Etiqueta para una muestra de una prueba, se usa para ofuscar la muestra para
+ * los jueces.
  * 
  * @author maxi
  *
  */
 public class Label {
-	
-	private Integer id;
-	private Integer testId;
-	private Integer labelNumber;
-	private String description;
+
+	private final Integer testId;
+	private final Integer labelNumber;
+	private final String description;
 
 	public Label(Integer testId, Integer labelNumber, String desc) {
 		this.testId = testId;
@@ -19,42 +19,22 @@ public class Label {
 		this.description = desc;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public Integer getTestId() {
 		return testId;
-	}
-
-	public void setTestId(Integer testId) {
-		this.testId = testId;
 	}
 
 	public Integer getLabelNumber() {
 		return labelNumber;
 	}
 
-	public void setLabelNumber(Integer labelNumber) {
-		this.labelNumber = labelNumber;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	@Override
 	public String toString() {
-		return "Label [id=" + id + ", testId=" + testId + ", labelNumber="
-				+ labelNumber + ", description=" + description + "]";
+		return "Label [testId=" + testId + ", labelNumber=" + labelNumber
+				+ ", description=" + description + "]";
 	}
 
 	@Override
@@ -63,7 +43,6 @@ public class Label {
 		int result = 1;
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + id;
 		result = prime * result + labelNumber;
 		result = prime * result + testId;
 		return result;
@@ -82,8 +61,6 @@ public class Label {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
-			return false;
-		if (id != other.id)
 			return false;
 		if (labelNumber != other.labelNumber)
 			return false;

@@ -1,6 +1,7 @@
 package edu.uade.sam.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Diseño de una prueba con ciertas muestras para una poblacion especifica.
@@ -10,24 +11,19 @@ import java.util.ArrayList;
  */
 public class Design {
 
-	
-	private ArrayList<TestDesignSlot> testSlots;
+	private final List<DesignSlot> designSlots;
 
 	public Design() {
-		this.testSlots = new ArrayList<TestDesignSlot>();
+		this.designSlots = new ArrayList<DesignSlot>();
 	}
 
-	public ArrayList<TestDesignSlot> getTestSlots() {
-		return testSlots;
-	}
-
-	public void setTestSlots(ArrayList<TestDesignSlot> testSlots) {
-		this.testSlots = testSlots;
+	public List<DesignSlot> getDesignSlots() {
+		return designSlots;
 	}
 
 	@Override
 	public String toString() {
-		return "TestDesign [testSlots=" + testSlots + "]";
+		return "Design [designSlots=" + designSlots + "]";
 	}
 
 }
