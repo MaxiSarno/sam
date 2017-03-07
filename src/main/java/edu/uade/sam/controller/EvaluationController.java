@@ -34,5 +34,10 @@ public class EvaluationController {
 	public SAMEvaluation get(@PathVariable(value="{id}") Integer id) {
 		return evaluationService.get(id);
 	}
+	
+	@RequestMapping(value="/{id}/generate", method=RequestMethod.POST)
+	public SAMEvaluation generate(@PathVariable(value="{id}") Integer id) {
+		return evaluationService.generate(id);
+	}
 
 }

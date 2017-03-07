@@ -37,5 +37,12 @@ public interface EvaluationService {
 	 * @return Evaluacion con ese id
 	 */
 	public SAMEvaluation get(Integer id);
+	
+	/**
+	 * Cañlcula la evaluacion sensorial.
+	 * 
+	 * @param id
+	 */
+	public SAMEvaluation generate(Integer id);
 
 }
