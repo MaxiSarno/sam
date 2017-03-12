@@ -33,7 +33,7 @@ public class CSVParserImpl implements CSVParser {
 			String[] values = line.split(SEPARATOR);
 			if (isHeader) {
 				header = values;
-				// this.validateHeader(header);
+				this.validateHeader(header);
 				isHeader = false;
 			} else {
 				for (int i = 1; i < header.length; i++) {
@@ -46,6 +46,10 @@ public class CSVParserImpl implements CSVParser {
 		}
 		
 		return attributes;
+	}
+
+	private void validateHeader(String[] header) {
+		//FIXME validar posta
 	}
 
 	private List<String> readFileLines(MultipartFile file) {

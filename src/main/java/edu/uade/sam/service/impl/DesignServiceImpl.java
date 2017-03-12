@@ -1,7 +1,9 @@
 package edu.uade.sam.service.impl;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -22,11 +24,14 @@ public class DesignServiceImpl implements DesignService {
 	@Inject
 	private LabelService labelService;
 	
+	private Map<Integer, Design> designDAO = new HashMap<>();
+	
 
 	public Design generateDesign(String testName, Integer judges, List<String> samples) {
 		//FIXME este id apesta
 		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
 		Design td = new Design();
+		designDAO.put(id, td);
 		
 		for (int i=1; i<=judges; i++) {
 			List<Label> labels = labelService.createLabels(id , samples);
@@ -53,8 +58,7 @@ public class DesignServiceImpl implements DesignService {
 	
 	@Override
 	public Design getTestDesign(Integer testId) {
-		// TODO Auto-generated method stub
-		return null;
+		return designDAO.get(testId);
 	}
 	
 
