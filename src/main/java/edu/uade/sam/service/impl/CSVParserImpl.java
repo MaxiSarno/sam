@@ -1,4 +1,4 @@
-package edu.uade.sam.model;
+package edu.uade.sam.service.impl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.uade.sam.model.Attribute;
+import edu.uade.sam.model.HedonicAttribute;
 import edu.uade.sam.service.CSVParser;
 
 @Component
