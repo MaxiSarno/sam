@@ -6,6 +6,6 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
-public class TestResult {
+public class Result {
 
 }

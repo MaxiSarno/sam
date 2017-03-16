@@ -27,14 +27,12 @@ public class DesignServiceImpl implements DesignService {
 	private Map<Integer, Design> designDAO = new HashMap<>();
 	
 
-	public Design generateDesign(String testName, Integer judges, List<String> samples) {
-		//FIXME este id apesta
-		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
+	public Design generateDesign(Integer testId, Integer judges, List<String> samples) {
 		Design td = new Design();
-		designDAO.put(id, td);
+		designDAO.put(testId, td);
 		
 		for (int i=1; i<=judges; i++) {
-			List<Label> labels = labelService.createLabels(id , samples);
+			List<Label> labels = labelService.createLabels(testId , samples);
 			long seed = System.nanoTime();
 			Collections.shuffle(labels, new Random(seed));
 			
@@ -45,8 +43,8 @@ public class DesignServiceImpl implements DesignService {
 	}
 
 	@Override
-	public Design generateDesignRandom(String testName, Integer judges, List<String> samples) {
-		Design design = this.generateDesign(testName, judges, samples);
+	public Design generateDesignRandom(Integer testId, Integer judges, List<String> samples) {
+		Design design = this.generateDesign(testId, judges, samples);
 		
 		for(DesignSlot slot : design.getDesignSlots()) {
 			long seed = System.nanoTime();

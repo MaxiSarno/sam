@@ -2,7 +2,7 @@ package edu.uade.sam.service;
 
 import org.springframework.stereotype.Service;
 
-import edu.uade.sam.model.TestResult;
+import edu.uade.sam.model.Result;
 
 /**
  * Resultados calculados en base a los datos de cada prueba.
@@ -13,8 +13,8 @@ import edu.uade.sam.model.TestResult;
 @Service
 public interface ResultsService {
 	
-	public void calculateResults(int testId);
+	public Result getResult(int id);
 	
-	public TestResult getResult(int testId);
+	public void calculateResults(int id);
 
 }
