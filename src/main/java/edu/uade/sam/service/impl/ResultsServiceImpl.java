@@ -1,21 +1,26 @@
 package edu.uade.sam.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.uade.sam.model.TestResult;
+import edu.uade.sam.model.EvaluationResult;
+import edu.uade.sam.service.EvaluationService;
 import edu.uade.sam.service.ResultsService;
 
 @Component
 public class ResultsServiceImpl implements ResultsService {
 
-	@Override
-	public void calculateResults(int testId) {
-		// TODO Auto-generated method stub
+	@Autowired
+	private EvaluationService evaluationService;
 
+	@Override
+	public EvaluationResult generate(Integer testId) {
+		//if (null != this.evaluationService.get(testId))
+		return null;
 	}
 
 	@Override
-	public TestResult getResult(int testId) {
+	public EvaluationResult get(Integer testId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

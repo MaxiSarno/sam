@@ -26,18 +26,8 @@ public class EvaluationServiceImpl implements EvaluationService {
 	}
 
 	@Override
-	public SAMEvaluation get(Integer id) {
-		if (!dao.containsKey(id)) {
-			this.generate(id);
-		}
-		
+	public SAMEvaluation get(Integer id) {		
 		return dao.get(id);
-	}
-
-	@Override
-	public SAMEvaluation generate(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

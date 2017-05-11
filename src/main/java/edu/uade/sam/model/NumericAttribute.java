@@ -6,13 +6,13 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
-public class HedonicAttribute extends Attribute {
+public class NumericAttribute extends Attribute {
 
 	private String product;
 	private String attribute;
 	private Integer value;
 
-	public HedonicAttribute(String product, String attribute, Integer value) {
+	public NumericAttribute(String product, String attribute, Integer value) {
 		super();
 		this.product = product;
 		this.attribute = attribute;

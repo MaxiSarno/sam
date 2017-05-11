@@ -1,4 +1,4 @@
-package edu.uade.sam.model;
+package edu.uade.sam.utils.csv;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,37 +10,41 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.uade.sam.service.CSVParser;
+import edu.uade.sam.model.Attribute;
+import edu.uade.sam.model.NumericAttribute;
 
 @Component
 public class CSVParserImpl implements CSVParser {
 
 	public static final String SEPARATOR = ",";
-	public static final String HEADER_SEPARATOR = "-";
 
 	@Override
-	public List<? extends Attribute> parse(MultipartFile file) {
+	public List<NumericAttribute> parseNumeric(MultipartFile file) {
 
-		List<HedonicAttribute> attributes = new ArrayList<HedonicAttribute>();
+		List<NumericAttribute> attributes = new ArrayList<NumericAttribute>();
 
-		boolean isHeader = true;
-		String[] header = null;
+		int count = 0;
+		String[] headerAttribute = null;
+		String[] headerSample = null;
 
 		for (String line : this.readFileLines(file)) {
 
 			String[] values = line.split(SEPARATOR);
-			if (isHeader) {
-				header = values;
-				// this.validateHeader(header);
-				isHeader = false;
-			} else {
-				for (int i = 1; i < header.length; i++) {
-					String[] head = header[i].split(HEADER_SEPARATOR);
-					HedonicAttribute attribute = new HedonicAttribute(head[0],
-							head[1], Integer.parseInt(values[i]));
+			
+			if (0 == count) {
+				headerAttribute = values;
+				// FIXME this.validateHeader(header);
+			} else if (1 == count) {
+				headerSample = values;
+				// FIXME this.validateHeader(header);
+			}else {
+				for (int i = 1; i < headerAttribute.length; i++) {
+					NumericAttribute attribute = new NumericAttribute(headerAttribute[i],
+							headerSample[i], Integer.parseInt(values[i]));
 					attributes.add(attribute);
 				}
 			}
+			count++;
 		}
 		
 		return attributes;

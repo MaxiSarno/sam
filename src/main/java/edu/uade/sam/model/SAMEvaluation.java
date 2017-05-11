@@ -10,10 +10,11 @@ public class SAMEvaluation {
 	
 	private Integer testId;
 	private String testName;
-	private Design design;
-	private Attribute attributes;
-	//TODO Segmentation
-	private TestResult result;
+
+	// private Design design;
+	// private Attribute attributes;
+	// //TODO Segmentation
+	// private EvaluationResult result;
 
 	public Integer getTestId() {
 		return testId;
@@ -29,30 +30,6 @@ public class SAMEvaluation {
 
 	public void setTestName(String testName) {
 		this.testName = testName;
-	}
-
-	public Design getDesign() {
-		return design;
-	}
-
-	public void setDesign(Design design) {
-		this.design = design;
-	}
-
-	public Attribute getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(Attribute attributes) {
-		this.attributes = attributes;
-	}
-
-	public TestResult getResult() {
-		return result;
-	}
-
-	public void setResult(TestResult result) {
-		this.result = result;
 	}
 
 }
