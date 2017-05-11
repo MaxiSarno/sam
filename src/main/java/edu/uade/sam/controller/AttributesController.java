@@ -15,7 +15,7 @@ import edu.uade.sam.service.AttributesService;
 import edu.uade.sam.utils.csv.CSVParser;
 
 @RestController
-@RequestMapping("/attributes")
+@RequestMapping("/evaluation/{id}/attributes")
 public class AttributesController {
 	
 	@Inject

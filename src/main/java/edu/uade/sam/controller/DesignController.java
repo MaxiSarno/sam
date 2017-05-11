@@ -14,27 +14,27 @@ import edu.uade.sam.model.Design;
 import edu.uade.sam.service.DesignService;
 
 @RestController
-@RequestMapping("/design")
+@RequestMapping("/evaluation/{id}/design")
 public class DesignController {
 	
 	@Inject
 	private DesignService designService;
 	
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public Design getDesign(@PathVariable(value="id") Integer id) {
 		return designService.getTestDesign(id);
 	}
 	
 	//TODO algun metodo que devuelva el csv?
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
-	public Design createDesign(@PathVariable(value="id") String id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
+	@RequestMapping(method=RequestMethod.POST)
+	public Design createDesign(@PathVariable(value="id") Integer id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
 		return this.designService.generateDesign(id, judges, Arrays.asList(samples.split(",")));
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public String deleteDesign(@PathVariable(value="id") String id) {
+	@RequestMapping(method=RequestMethod.DELETE)
+	public String deleteDesign(@PathVariable(value="id") Integer id) {
 		return "delete design not implemented";
 	}
 

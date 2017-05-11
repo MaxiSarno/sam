@@ -9,8 +9,7 @@ package edu.uade.sam.model;
 public class SAMEvaluation {
 	
 	private Integer testId;
-	private String testName;
-
+	private String name;
 	// private Design design;
 	// private Attribute attributes;
 	// //TODO Segmentation
@@ -20,16 +19,16 @@ public class SAMEvaluation {
 		return testId;
 	}
 
-	public void setTestId(Integer testId) {
+	public void setId(Integer testId) {
 		this.testId = testId;
 	}
 
-	public String getTestName() {
-		return testName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTestName(String testName) {
-		this.testName = testName;
+	public void setName(String testName) {
+		this.name = testName;
 	}
 
 }

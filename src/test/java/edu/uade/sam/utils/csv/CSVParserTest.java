@@ -28,9 +28,14 @@ public class CSVParserTest {
 	
 	@Test
 	public void parse_checkValues_ok() throws IOException {
-		List<? extends Attribute> a = this.parser.parseNumeric(mockFile());
+		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		Integer[] values = {6,5,6,5,3,3,3,3,6,4,4,4,3,4,3,3};
+		// Panelista 1,6,5,6,5,3,3,3,3
+		// Panelista 2,6,4,4,4,3,4,3,3
 
-		Assert.assertEquals("Checkeo el valor del atributo", 35 * 8, a.get(0).);
+		for (int i = 0; i < values.length; i++) {
+			Assert.assertEquals("Checkeo el valor del atributo", values[i], a.get(i).getValue());
+		}
 	}
 
 	private MultipartFile mockFile() throws FileNotFoundException, IOException {

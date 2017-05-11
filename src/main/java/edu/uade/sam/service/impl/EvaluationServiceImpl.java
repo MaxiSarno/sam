@@ -15,8 +15,13 @@ public class EvaluationServiceImpl implements EvaluationService {
 
 	@Override
 	public Integer save(String testName) {
-		// TODO Auto-generated method stub
-		return 1;
+		//FIXME este id apesta
+		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
+		SAMEvaluation evaluation = new SAMEvaluation();
+		evaluation.setName(testName);
+		evaluation.setId(id);
+		
+		return id;
 	}
 
 	@Override
