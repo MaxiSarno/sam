@@ -11,6 +11,9 @@ public class NumericAttribute extends Attribute {
 	private String product;
 	private String attribute;
 	private Integer value;
+	//vincular el atributo con el producto 
+	//vincular el atributo el participante?
+	//mandarlo a la superclass
 
 	public NumericAttribute(String product, String attribute, Integer value) {
 		super();

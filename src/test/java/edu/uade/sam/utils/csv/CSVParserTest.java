@@ -21,9 +21,9 @@ public class CSVParserTest {
 
 	@Test
 	public void parse_all35x8attributes_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		List<NumericAttribute> a = this.parser.parseNumeric(this.mockFile());
 
-		Assert.assertEquals("Obtengo todos los atributos", 35 * 8, a.size());
+		Assert.assertEquals("Obtengo todos los atributos del csv", 35 * 8, a.size());
 	}
 	
 	@Test
@@ -34,7 +34,36 @@ public class CSVParserTest {
 		// Panelista 2,6,4,4,4,3,4,3,3
 
 		for (int i = 0; i < values.length; i++) {
-			Assert.assertEquals("Checkeo el valor del atributo", values[i], a.get(i).getValue());
+			Assert.assertEquals("Checkeo el valor de los atributos", values[i], a.get(i).getValue());
+		}
+	}
+	
+	@Test
+	public void parse_checkProduct_ok() throws IOException {
+		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		// Panelista 1,6,5,6,5,3,3,3,3
+		// Panelista 2,6,4,4,4,3,4,3,3
+
+		for (int i = 0; i < a.size(); i=i+2) {
+			Assert.assertEquals("Checkeo el producto de los atributos", "prod 1", a.get(i).getProduct());
+		}
+		
+		for (int i = 1; i < a.size(); i=i+2) {
+			Assert.assertEquals("Checkeo el producto de los atributos", "prod 2", a.get(i).getProduct());
+		}
+	}
+	
+	@Test
+	public void parse_checkAttribute_ok() throws IOException {
+		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		//agrado del sabor,agrado del sabor,agrado del sabor residual,agrado del sabor residual,intensidad del sabor,intensidad del sabor,intensidad del sabor residual,intensidad del sabor residual
+
+		for (int i = 0; i < a.size(); i=i+2) {
+			Assert.assertEquals("Checkeo el producto de los atributos", "prod 1", a.get(i).getAttribute());
+		}
+		
+		for (int i = 1; i < a.size(); i=i+2) {
+			Assert.assertEquals("Checkeo el producto de los atributos", "prod 2", a.get(i).getAttribute());
 		}
 	}
 

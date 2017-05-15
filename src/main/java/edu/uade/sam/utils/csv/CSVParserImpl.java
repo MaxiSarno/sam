@@ -25,28 +25,29 @@ public class CSVParserImpl implements CSVParser {
 
 		int count = 0;
 		String[] headerAttribute = null;
-		String[] headerSample = null;
+		String[] headerProduct = null;
 
 		for (String line : this.readFileLines(file)) {
 
 			String[] values = line.split(SEPARATOR);
-			
+
 			if (0 == count) {
 				headerAttribute = values;
 				// FIXME this.validateHeader(header);
 			} else if (1 == count) {
-				headerSample = values;
+				headerProduct = values;
 				// FIXME this.validateHeader(header);
-			}else {
+			} else {
 				for (int i = 1; i < headerAttribute.length; i++) {
-					NumericAttribute attribute = new NumericAttribute(headerAttribute[i],
-							headerSample[i], Integer.parseInt(values[i]));
+					NumericAttribute attribute = new NumericAttribute(
+							headerProduct[i], headerAttribute[i],
+							Integer.parseInt(values[i]));
 					attributes.add(attribute);
 				}
 			}
 			count++;
 		}
-		
+
 		return attributes;
 	}
 
@@ -56,7 +57,8 @@ public class CSVParserImpl implements CSVParser {
 		BufferedReader reader = null;
 
 		try {
-			reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
+			reader = new BufferedReader(new InputStreamReader(
+					file.getInputStream()));
 			String line;
 
 			while ((line = reader.readLine()) != null) {
