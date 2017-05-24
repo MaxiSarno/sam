@@ -11,7 +11,7 @@ public class ResultsServiceTest {
 	private ResultsService resultsService = new ResultsServiceImpl(); 
 	
 	@Test
-	public void generate_nivelDeAgrado_ok() {
+	public void generate_nivelDeAgradoDosProductos_ok() {
 		EvaluationResult result = resultsService.generate(1);
 		Assert.assertNotNull(result);
 	}
