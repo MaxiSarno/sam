@@ -1,10 +1,12 @@
 package edu.uade.sam.service;
 
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+import java.util.Collection;
+
+import edu.uade.sam.model.Result;
 
 
 public interface CalculatorService {
 
-	void performAnova(SummaryStatistics... s);
+	Result performAnova(Collection<double[]> data);
 
 }

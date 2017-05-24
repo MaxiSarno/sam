@@ -1,41 +1,35 @@
 package edu.uade.sam.service.impl;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.exception.MathIllegalArgumentException;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
-import org.apache.commons.math3.util.Pair;
 import org.springframework.stereotype.Component;
 
-import edu.uade.sam.model.NumericAttribute;
+import edu.uade.sam.model.Result;
 import edu.uade.sam.service.CalculatorService;
 
 @Component
 public class CalculatorServiceImpl implements CalculatorService {
 
-	private Map<Pair<String, String>, SummaryStatistics> collect(
-			List<NumericAttribute> attributes) {
-		Map<Pair<String, String>, SummaryStatistics> collection = new HashMap<>();
+	// one way anova
+	@Override
+	public Result performAnova(Collection<double[]> data) {
+		Result r = new Result();
+		OneWayAnova owa = new OneWayAnova();
 
-		for (NumericAttribute a : attributes) {
-			Pair<String, String> key = new Pair<>(a.getProduct(),
-					a.getAttribute());
+		r.setpValue(owa.anovaPValue(data));
+		r.setfValue(owa.anovaFValue(data));
+		//r.setfCritValue();
+		r.setTestValue(owa.anovaTest(data, 0.05));
 
-			if (!collection.containsKey(key)) {
-				collection.put(key, new SummaryStatistics());
-			}
-
-			collection.get(key).addValue(a.getValue());
-		}
-
-		return collection;
+		return r;
 	}
 
+	// Student T
 	private static double calculateXCrit1(SummaryStatistics stats, double alpha) {
 		return (stats.getMean() - calcMeanCI(stats, alpha));
 	}
@@ -59,28 +53,5 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return Double.NaN;
 		}
 	}
-
-	private void doStuff(List<NumericAttribute> attributes) {
-		Map<Pair<String, String>, SummaryStatistics> c = this
-				.collect(attributes);
-	}
-
-	@Override
-	public void performAnova(SummaryStatistics... a) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	// anova
-//	public double getAnovaPValue(Collection<double[]> categoryData) {
-//		OneWayAnova a = new OneWayAnova();
-//		a.anovaTest(categoryData, alpha);
-//		return a.anovaPValue(categoryData);
-//	}
-//
-//	public double getAnovaFValue() {
-//		OneWayAnova a = new OneWayAnova();
-//		return a.anovaFValue(categoryData)
-//	}
 
 }
