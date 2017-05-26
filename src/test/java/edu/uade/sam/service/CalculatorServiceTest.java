@@ -6,7 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import edu.uade.sam.model.Result;
+import Result.ResultStudent;
+import edu.uade.sam.model.ResultAnova;
 import edu.uade.sam.service.impl.CalculatorServiceImpl;
 import edu.uade.sam.utils.csv.CSVParser;
 
@@ -18,19 +19,19 @@ public class CalculatorServiceTest {
 	CalculatorService calculatorService = new CalculatorServiceImpl();
 
 	@Test
-	public void calculate_anovaPValue_ok() {
+	public void performOneWayAnova_pValue_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova p-value", 7.16E-5, r.getpValue(), 0.00001);
 	}
 
 	@Test
-	public void calculate_anovaFValue_ok() {
+	public void performOneWayAnova_fValue_ok() {
 
 		// List<Integer> valuesA = Arrays.asList(42, 53, 49, 53, 43, 44, 45, 52,
 		// 54);
@@ -59,44 +60,44 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
 
 	@Test
-	public void calculate_anovaFCritValue_ok() {
+	public void performOneWayAnova_fCritValue_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova fCritvalue", 3.443357, r.getfCritValue(),
 				0.00001);
 	}
 
 	@Test
-	public void calculate_anovaTestValue_ok() {
+	public void performOneWayAnova_testValue_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
-		Assert.assertEquals("anova test value", true, r.isTestValue());
+		Assert.assertEquals("anova test value", true, r.isRejectH0());
 	}
 
 	@Test
-	public void calculate_resultSummary_ok() {
+	public void performOneWayAnova_resultSummary_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertNotNull("anova result summaries", r.getSummaries());
 		Assert.assertEquals("anova result summaries", 3, r.getSummaries()
@@ -104,13 +105,13 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
-	public void calculate_resultSummaryCount_ok() {
+	public void performOneWayAnova_resultSummaryCount_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova result summary a class count", 9, r
 				.getSummaries().get(0).getCount());
@@ -121,13 +122,13 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
-	public void calculate_resultSummarySum_ok() {
+	public void performOneWayAnova_resultSummarySum_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova result summary a class sum", 435, r
 				.getSummaries().get(0).getSum(), 0.00001);
@@ -138,13 +139,13 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
-	public void calculate_resultSummaryAverage_ok() {
+	public void performOneWayAnova_resultSummaryAverage_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova result summary a class average", 48.33333, r
 				.getSummaries().get(0).getAverage(), 0.00001);
@@ -155,13 +156,13 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
-	public void calculate_resultSummaryVariance_ok() {
+	public void performOneWayAnova_resultSummaryVariance_ok() {
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova result summary a class variance", 23.5, r
 				.getSummaries().get(0).getVariance(), 0.00001);
@@ -169,6 +170,16 @@ public class CalculatorServiceTest {
 				r.getSummaries().get(1).getVariance(), 0.00001);
 		Assert.assertEquals("anova result summary a class variance", 50.5, r
 				.getSummaries().get(2).getVariance(), 0.00001);
+	}
+	
+	@Test
+	public void performStudentT_alala() {
+		double[] a = { 26, 25, 43, 34, 18, 52 };
+		double[] b = { 23, 30, 18, 25, 28 };
+		
+		ResultStudent r = calculatorService.PerformStudentT(Arrays.asList(a, b));
+		
+		
 	}
 
 	// @Test

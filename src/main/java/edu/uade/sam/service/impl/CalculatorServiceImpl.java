@@ -7,7 +7,9 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
 import org.springframework.stereotype.Component;
 
+import Result.ResultStudent;
 import edu.uade.sam.model.Result;
+import edu.uade.sam.model.ResultAnova;
 import edu.uade.sam.model.ResultSummary;
 import edu.uade.sam.service.CalculatorService;
 
@@ -15,14 +17,14 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
-	public Result performOneWayAnova(Collection<double[]> groups) {
-		Result r = new Result();
+	public ResultAnova performOneWayAnova(Collection<double[]> groups) {
+		ResultAnova r = new ResultAnova();
 		OneWayAnova owa = new OneWayAnova();
 
 		r.setpValue(owa.anovaPValue(groups));
 		r.setfValue(owa.anovaFValue(groups));
 		//r.setfCritValue();
-		r.setTestValue(owa.anovaTest(groups, 0.05));
+		r.setRejectH0(owa.anovaTest(groups, 0.05));
 		r.setSummaries(new ArrayList<>());
 		
 		for (double[] g : groups) {
@@ -34,6 +36,12 @@ public class CalculatorServiceImpl implements CalculatorService {
 		}
 		
 		return r;
+	}
+
+	@Override
+	public ResultStudent PerformStudentT(Collection<double[]> data) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// // Student T
