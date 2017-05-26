@@ -7,6 +7,6 @@ import edu.uade.sam.model.Result;
 
 public interface CalculatorService {
 
-	Result performAnova(Collection<double[]> data);
+	Result performOneWayAnova(Collection<double[]> data);
 
 }

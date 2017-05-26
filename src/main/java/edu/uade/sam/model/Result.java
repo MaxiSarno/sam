@@ -1,5 +1,7 @@
 package edu.uade.sam.model;
 
+import java.util.List;
+
 /**
  * Resultado de la prueba producto de de evaluar los datos.
  * 
@@ -12,6 +14,7 @@ public class Result {
 	private double fCritValue;
 	private double pValue;
 	private boolean testValue;
+	private List<ResultSummary> summary;
 
 	public double getfValue() {
 		return fValue;
@@ -43,5 +46,13 @@ public class Result {
 
 	public void setTestValue(boolean testValue) {
 		this.testValue = testValue;
+	}
+
+	public List<ResultSummary> getSummaries() {
+		return summary;
+	}
+
+	public void setSummaries(List<ResultSummary> summary) {
+		this.summary = summary;
 	}
 }

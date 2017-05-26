@@ -1,22 +1,11 @@
 package edu.uade.sam.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
-import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.Result;
 import edu.uade.sam.service.impl.CalculatorServiceImpl;
 import edu.uade.sam.utils.csv.CSVParser;
@@ -28,13 +17,6 @@ public class CalculatorServiceTest {
 
 	CalculatorService calculatorService = new CalculatorServiceImpl();
 
-	// @Test
-	public void calculate_tStudent_ok() throws FileNotFoundException,
-			IOException {
-		List<NumericAttribute> attributes = this.csvParser.parseNumeric(this
-				.mockFile());
-	}
-
 	@Test
 	public void calculate_anovaPValue_ok() {
 
@@ -42,7 +24,7 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performAnova(Arrays.asList(a, b, c));
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova p-value", 7.16E-5, r.getpValue(), 0.00001);
 	}
@@ -77,7 +59,7 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performAnova(Arrays.asList(a, b, c));
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
@@ -89,7 +71,7 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performAnova(Arrays.asList(a, b, c));
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova fCritvalue", 3.443357, r.getfCritValue(),
 				0.00001);
@@ -102,25 +84,115 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		Result r = calculatorService.performAnova(Arrays.asList(a, b, c));
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
 
 		Assert.assertEquals("anova test value", true, r.isTestValue());
 	}
 
-	private List<NumericAttribute> mockAttributes(String product,
-			List<Integer> values) {
-		String attribute = "attribute";
+	@Test
+	public void calculate_resultSummary_ok() {
 
-		return values.stream()
-				.map(v -> (new NumericAttribute(product, attribute, v)))
-				.collect(Collectors.toList());
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+
+		Assert.assertNotNull("anova result summaries", r.getSummaries());
+		Assert.assertEquals("anova result summaries", 3, r.getSummaries()
+				.size());
 	}
 
-	private MultipartFile mockFile() throws FileNotFoundException, IOException {
-		File f = new File("src/test/resources/hedonic-attributes-sample.csv");
-		InputStream in = new FileInputStream(f);
-		MultipartFile file = new MockMultipartFile("tuvieja", in);
-		return file;
+	@Test
+	public void calculate_resultSummaryCount_ok() {
+
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+
+		Assert.assertEquals("anova result summary a class count", 9, r
+				.getSummaries().get(0).getCount());
+		Assert.assertEquals("anova result summary a class count", 7, r
+				.getSummaries().get(1).getCount(), 0.00001);
+		Assert.assertEquals("anova result summary a class count", 9, r
+				.getSummaries().get(2).getCount(), 0.00001);
 	}
+
+	@Test
+	public void calculate_resultSummarySum_ok() {
+
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+
+		Assert.assertEquals("anova result summary a class sum", 435, r
+				.getSummaries().get(0).getSum(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 420, r
+				.getSummaries().get(1).getSum(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 393, r
+				.getSummaries().get(2).getSum(), 0.00001);
+	}
+
+	@Test
+	public void calculate_resultSummaryAverage_ok() {
+
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+
+		Assert.assertEquals("anova result summary a class average", 48.33333, r
+				.getSummaries().get(0).getAverage(), 0.00001);
+		Assert.assertEquals("anova result summary a class average", 60, r
+				.getSummaries().get(1).getAverage(), 0.00001);
+		Assert.assertEquals("anova result summary a class average", 43.66667, r
+				.getSummaries().get(2).getAverage(), 0.00001);
+	}
+
+	@Test
+	public void calculate_resultSummaryVariance_ok() {
+
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+
+		Result r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+
+		Assert.assertEquals("anova result summary a class variance", 23.5, r
+				.getSummaries().get(0).getVariance(), 0.00001);
+		Assert.assertEquals("anova result summary a class variance", 32.33333,
+				r.getSummaries().get(1).getVariance(), 0.00001);
+		Assert.assertEquals("anova result summary a class variance", 50.5, r
+				.getSummaries().get(2).getVariance(), 0.00001);
+	}
+
+	// @Test
+	// public void calculate_tStudent_ok() throws FileNotFoundException,
+	// IOException {
+	// List<NumericAttribute> attributes = this.csvParser.parseNumeric(this
+	// .mockFile());
+	// }
+	//
+	// private List<NumericAttribute> mockAttributes(String product,
+	// List<Integer> values) {
+	// String attribute = "attribute";
+	//
+	// return values.stream()
+	// .map(v -> (new NumericAttribute(product, attribute, v)))
+	// .collect(Collectors.toList());
+	// }
+	//
+	// private MultipartFile mockFile() throws FileNotFoundException,
+	// IOException {
+	// File f = new File("src/test/resources/hedonic-attributes-sample.csv");
+	// InputStream in = new FileInputStream(f);
+	// MultipartFile file = new MockMultipartFile("tuvieja", in);
+	// return file;
+	// }
 
 }
