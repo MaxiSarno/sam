@@ -13,10 +13,11 @@ public interface CalculatorService {
 	 * 
 	 * H0: μ1 = μ2 = μ3 H1: at least one of the means is different.
 	 * 
-	 * @param data
+	 * @param groups
+	 * @param alpha
 	 * @return
 	 */
-	ResultAnova performOneWayAnova(Map<String, double[]> groups);
+	ResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha);
 
 	/**
 	 * The t-Test is used to test the null hypothesis that the means of two
@@ -24,9 +25,10 @@ public interface CalculatorService {
 	 * 
 	 * H0: μ1 - μ2 = 0 H1: μ1 - μ2 ≠ 0
 	 * 
-	 * @param data
+	 * @param groups
+	 * @param alpha
 	 * @return
 	 */
-	ResultStudent performStudentT(Map<String, double[]> groups);
+	ResultStudent performStudentT(Map<String, double[]> groups, float alpha);
 
 }

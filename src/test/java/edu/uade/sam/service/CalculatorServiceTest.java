@@ -42,7 +42,7 @@ public class CalculatorServiceTest {
 	@Test(expected = RuntimeException.class)
 	public void performOneWayAnova_twogroups_error() {
 
-		calculatorService.performOneWayAnova(twoGroups);
+		calculatorService.performOneWayAnova(twoGroups, 0.05f);
 
 		Assert.fail();
 	}
@@ -50,7 +50,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_pValue_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova p-value", 7.16E-5, r.getpValue(), 0.00001);
 	}
@@ -68,7 +68,7 @@ public class CalculatorServiceTest {
 		// aAttributes.stream().map(a -> a.getValue().doubleValue()).forEach(v
 		// -> sA.addValue(v));
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
@@ -76,7 +76,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_fCritValue_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova fCritvalue", 3.443357, r.getfCritValue(),
 				0.00001);
@@ -85,7 +85,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_testValue_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova test value", true, r.isRejectH0());
 	}
@@ -93,7 +93,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummary_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertNotNull("anova result summaries", r.getSummaries());
 		Assert.assertEquals("anova result summaries", 3, r.getSummaries()
@@ -103,7 +103,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryName_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class count", "economics", r
 				.getSummaries().get(0).getName());
@@ -116,7 +116,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryCount_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class count", 9, r
 				.getSummaries().get(0).getCount());
@@ -129,7 +129,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummarySum_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class sum", 435, r
 				.getSummaries().get(0).getSum(), 0.00001);
@@ -142,7 +142,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryMax_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class sum", 54, r
 				.getSummaries().get(0).getMax(), 0.00001);
@@ -155,7 +155,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryMin_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class sum", 42, r
 				.getSummaries().get(0).getMin(), 0.00001);
@@ -168,7 +168,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryAverage_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class average", 48.33333, r
 				.getSummaries().get(0).getAverage(), 0.00001);
@@ -181,7 +181,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryVariance_ok() {
 
-		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups, 0.05f);
 
 		Assert.assertEquals("anova result summary a class variance", 23.5, r
 				.getSummaries().get(0).getVariance(), 0.00001);
@@ -194,7 +194,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performStudentT_alala() {
 
-		ResultStudent r = calculatorService.performStudentT(twoGroups);
+		ResultStudent r = calculatorService.performStudentT(twoGroups, 0.05f);
 		
 	}
 

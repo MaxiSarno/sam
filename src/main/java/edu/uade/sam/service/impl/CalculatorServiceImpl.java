@@ -20,7 +20,7 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
-	public ResultAnova performOneWayAnova(Map<String, double[]> groups) {
+	public ResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha) {
 
 		if (groups.size() < 3)
 			throw new RuntimeException();
@@ -31,14 +31,14 @@ public class CalculatorServiceImpl implements CalculatorService {
 		r.setpValue(owa.anovaPValue(groups.values()));
 		r.setfValue(owa.anovaFValue(groups.values()));
 		// r.setfCritValue();
-		r.setRejectH0(owa.anovaTest(groups.values(), 0.05));
+		r.setRejectH0(owa.anovaTest(groups.values(), alpha));
 		r.setSummaries(calculateSummaries(groups));
 
 		return r;
 	}
 
 	@Override
-	public ResultStudent performStudentT(Map<String, double[]> groups) {
+	public ResultStudent performStudentT(Map<String, double[]> groups, float alpha) {
 		ResultStudent r = new ResultStudent();
 		r.setSummaries(this.calculateSummaries(groups));
 		TTest t = new TTest();
@@ -49,10 +49,10 @@ public class CalculatorServiceImpl implements CalculatorService {
 	private List<ResultSummary> calculateSummaries(Map<String, double[]> groups) {
 		List<ResultSummary> summaries = new ArrayList<>();
 
-		for(Entry<String, double[]> e : groups.entrySet()) {
+		for(Entry<String, double[]> group : groups.entrySet()) {
 			SummaryStatistics s = new SummaryStatistics();
-			Arrays.stream(e.getValue()).forEach(v -> s.addValue(v));
-			summaries.add(new ResultSummary(e.getKey(), s.getN(), s.getSum(), s.getMin(), s.getMax(), s.getMean(), s.getVariance()));
+			Arrays.stream(group.getValue()).forEach(v -> s.addValue(v));
+			summaries.add(new ResultSummary(group.getKey(), s.getN(), s.getSum(), s.getMin(), s.getMax(), s.getMean(), s.getVariance()));
 		}
 		
 		return summaries;
