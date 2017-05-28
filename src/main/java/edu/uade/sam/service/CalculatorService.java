@@ -1,8 +1,7 @@
 package edu.uade.sam.service;
 
 import java.util.Collection;
-
-import javax.naming.OperationNotSupportedException;
+import java.util.Map;
 
 import Result.ResultStudent;
 import edu.uade.sam.model.ResultAnova;
@@ -18,7 +17,7 @@ public interface CalculatorService {
 	 * @param data
 	 * @return
 	 */
-	ResultAnova performOneWayAnova(Collection<double[]> data);
+	ResultAnova performOneWayAnova(Map<String, double[]> groups);
 
 	/**
 	 * The t-Test is used to test the null hypothesis that the means of two

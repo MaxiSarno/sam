@@ -1,8 +1,11 @@
 package edu.uade.sam.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,14 +20,30 @@ public class CalculatorServiceTest {
 	CSVParser csvParser;
 
 	CalculatorService calculatorService = new CalculatorServiceImpl();
-
-	@Test(expected = RuntimeException.class)
-	public void performOneWayAnova_twoClasses_error() {
-
+	
+	static Map<String, double[]> twoGroups;
+	static Map<String, double[]> threeGroups;
+	
+	@BeforeClass
+	public static void init() {
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
+		
+		twoGroups = new HashMap<>();
+		twoGroups.put("economics", a);
+		twoGroups.put("medicine", b);
+		
+		threeGroups = new HashMap<>();
+		threeGroups.put("economics", a);
+		threeGroups.put("medicine", b);
+		threeGroups.put("history", c);
+	}
 
-		calculatorService.performOneWayAnova(Arrays.asList(a, b));
+	@Test(expected = RuntimeException.class)
+	public void performOneWayAnova_twogroups_error() {
+
+		calculatorService.performOneWayAnova(twoGroups);
 
 		Assert.fail();
 	}
@@ -32,11 +51,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_pValue_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova p-value", 7.16E-5, r.getpValue(), 0.00001);
 	}
@@ -58,7 +73,7 @@ public class CalculatorServiceTest {
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
 		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
@@ -66,11 +81,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_fCritValue_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova fCritvalue", 3.443357, r.getfCritValue(),
 				0.00001);
@@ -79,11 +90,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_testValue_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova test value", true, r.isRejectH0());
 	}
@@ -91,11 +98,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummary_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertNotNull("anova result summaries", r.getSummaries());
 		Assert.assertEquals("anova result summaries", 3, r.getSummaries()
@@ -103,13 +106,22 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
+	public void performOneWayAnova_resultSummaryName_ok() {
+
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+
+		Assert.assertEquals("anova result summary a class count", "economics", r
+				.getSummaries().get(0).getName());
+		Assert.assertEquals("anova result summary a class count", "medicine", r
+				.getSummaries().get(1).getName());
+		Assert.assertEquals("anova result summary a class count", "history", r
+				.getSummaries().get(2).getName());
+	}
+
+	@Test
 	public void performOneWayAnova_resultSummaryCount_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova result summary a class count", 9, r
 				.getSummaries().get(0).getCount());
@@ -122,11 +134,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummarySum_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova result summary a class sum", 435, r
 				.getSummaries().get(0).getSum(), 0.00001);
@@ -137,13 +145,35 @@ public class CalculatorServiceTest {
 	}
 
 	@Test
+	public void performOneWayAnova_resultSummaryMax_ok() {
+
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+
+		Assert.assertEquals("anova result summary a class sum", 54, r
+				.getSummaries().get(0).getMax(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 69, r
+				.getSummaries().get(1).getMax(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 55, r
+				.getSummaries().get(2).getMax(), 0.00001);
+	}
+
+	@Test
+	public void performOneWayAnova_resultSummaryMin_ok() {
+
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
+
+		Assert.assertEquals("anova result summary a class sum", 42, r
+				.getSummaries().get(0).getMin(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 54, r
+				.getSummaries().get(1).getMin(), 0.00001);
+		Assert.assertEquals("anova result summary a class sum", 35, r
+				.getSummaries().get(2).getMin(), 0.00001);
+	}
+
+	@Test
 	public void performOneWayAnova_resultSummaryAverage_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova result summary a class average", 48.33333, r
 				.getSummaries().get(0).getAverage(), 0.00001);
@@ -156,11 +186,7 @@ public class CalculatorServiceTest {
 	@Test
 	public void performOneWayAnova_resultSummaryVariance_ok() {
 
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
-
-		ResultAnova r = calculatorService.performOneWayAnova(Arrays.asList(a, b, c));
+		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
 		Assert.assertEquals("anova result summary a class variance", 23.5, r
 				.getSummaries().get(0).getVariance(), 0.00001);

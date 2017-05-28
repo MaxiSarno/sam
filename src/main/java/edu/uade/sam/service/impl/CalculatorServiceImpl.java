@@ -1,8 +1,12 @@
 package edu.uade.sam.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
 import org.apache.commons.math3.stat.inference.TTest;
@@ -17,7 +21,7 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
-	public ResultAnova performOneWayAnova(Collection<double[]> groups) {
+	public ResultAnova performOneWayAnova(Map<String, double[]> groups) {
 
 		if (groups.size() < 3)
 			throw new RuntimeException();
@@ -25,18 +29,16 @@ public class CalculatorServiceImpl implements CalculatorService {
 		ResultAnova r = new ResultAnova();
 		OneWayAnova owa = new OneWayAnova();
 
-		r.setpValue(owa.anovaPValue(groups));
-		r.setfValue(owa.anovaFValue(groups));
+		r.setpValue(owa.anovaPValue(groups.values()));
+		r.setfValue(owa.anovaFValue(groups.values()));
 		// r.setfCritValue();
-		r.setRejectH0(owa.anovaTest(groups, 0.05));
+		r.setRejectH0(owa.anovaTest(groups.values(), 0.05));
 		r.setSummaries(new ArrayList<>());
 
-		for (double[] g : groups) {
+		for(Entry<String, double[]> e : groups.entrySet()) {
 			SummaryStatistics s = new SummaryStatistics();
-			for (int i = 0; i < g.length; i++) {
-				s.addValue(g[i]);
-			}
-			r.getSummaries().add(new ResultSummary(s.getN(), s.getSum(), s.getMean(), s.getVariance()));
+			Arrays.stream(e.getValue()).forEach(v -> s.addValue(v));
+			r.getSummaries().add(new ResultSummary(e.getKey(), s.getN(), s.getSum(), s.getMin(), s.getMax(), s.getMean(), s.getVariance()));
 		}
 
 		return r;

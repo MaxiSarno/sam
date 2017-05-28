@@ -1,7 +1,5 @@
 package edu.uade.sam.model;
 
-import java.util.List;
-
 /**
  * @author msarno
  *
@@ -12,7 +10,6 @@ public class ResultAnova extends Result {
 	private double fCritValue;
 	private double pValue;
 	private boolean rejectH0;
-	private List<ResultSummary> summary;
 
 	public double getfValue() {
 		return fValue;
@@ -44,14 +41,6 @@ public class ResultAnova extends Result {
 
 	public void setRejectH0(boolean rejectH0) {
 		this.rejectH0 = rejectH0;
-	}
-
-	public List<ResultSummary> getSummaries() {
-		return summary;
-	}
-
-	public void setSummaries(List<ResultSummary> summary) {
-		this.summary = summary;
 	}
 
 }
