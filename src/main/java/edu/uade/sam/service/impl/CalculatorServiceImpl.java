@@ -5,10 +5,10 @@ import java.util.Collection;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
+import org.apache.commons.math3.stat.inference.TTest;
 import org.springframework.stereotype.Component;
 
 import Result.ResultStudent;
-import edu.uade.sam.model.Result;
 import edu.uade.sam.model.ResultAnova;
 import edu.uade.sam.model.ResultSummary;
 import edu.uade.sam.service.CalculatorService;
@@ -18,29 +18,33 @@ public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
 	public ResultAnova performOneWayAnova(Collection<double[]> groups) {
+
+		if (groups.size() < 3)
+			throw new RuntimeException();
+
 		ResultAnova r = new ResultAnova();
 		OneWayAnova owa = new OneWayAnova();
 
 		r.setpValue(owa.anovaPValue(groups));
 		r.setfValue(owa.anovaFValue(groups));
-		//r.setfCritValue();
+		// r.setfCritValue();
 		r.setRejectH0(owa.anovaTest(groups, 0.05));
 		r.setSummaries(new ArrayList<>());
-		
+
 		for (double[] g : groups) {
 			SummaryStatistics s = new SummaryStatistics();
-			for (int i=0; i<g.length; i++) {
+			for (int i = 0; i < g.length; i++) {
 				s.addValue(g[i]);
 			}
 			r.getSummaries().add(new ResultSummary(s.getN(), s.getSum(), s.getMean(), s.getVariance()));
 		}
-		
+
 		return r;
 	}
 
 	@Override
 	public ResultStudent PerformStudentT(Collection<double[]> data) {
-		// TODO Auto-generated method stub
+		TTest t = new TTest();
 		return null;
 	}
 

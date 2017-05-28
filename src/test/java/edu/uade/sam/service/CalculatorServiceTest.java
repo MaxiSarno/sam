@@ -18,6 +18,17 @@ public class CalculatorServiceTest {
 
 	CalculatorService calculatorService = new CalculatorServiceImpl();
 
+	@Test(expected = RuntimeException.class)
+	public void performOneWayAnova_twoClasses_error() {
+
+		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
+		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
+
+		calculatorService.performOneWayAnova(Arrays.asList(a, b));
+
+		Assert.fail();
+	}
+	
 	@Test
 	public void performOneWayAnova_pValue_ok() {
 
@@ -35,26 +46,13 @@ public class CalculatorServiceTest {
 
 		// List<Integer> valuesA = Arrays.asList(42, 53, 49, 53, 43, 44, 45, 52,
 		// 54);
-		// List<Integer> valuesB = Arrays.asList(69, 54, 58, 64, 64, 55, 56);
-		// List<Integer> valuesC = Arrays.asList(35, 40, 53, 42, 50, 39, 55, 39,
-		// 40);
 		//
 		// List<NumericAttribute> aAttributes = this.mockAttributes("Economics",
 		// valuesA);
-		// List<NumericAttribute> bAttributes = this.mockAttributes("Medicime",
-		// valuesB);
-		// List<NumericAttribute> cAttributes = this.mockAttributes("History",
-		// valuesC);
 		//
 		// SummaryStatistics sA = new SummaryStatistics();
 		// aAttributes.stream().map(a -> a.getValue().doubleValue()).forEach(v
 		// -> sA.addValue(v));
-		// SummaryStatistics sB = new SummaryStatistics();
-		// bAttributes.stream().map(a -> a.getValue().doubleValue()).forEach(v
-		// -> sB.addValue(v));
-		// SummaryStatistics sC = new SummaryStatistics();
-		// cAttributes.stream().map(a -> a.getValue().doubleValue()).forEach(v
-		// -> sC.addValue(v));
 
 		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
 		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
