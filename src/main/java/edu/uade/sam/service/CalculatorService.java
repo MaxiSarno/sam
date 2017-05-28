@@ -1,6 +1,5 @@
 package edu.uade.sam.service;
 
-import java.util.Collection;
 import java.util.Map;
 
 import Result.ResultStudent;
@@ -28,6 +27,6 @@ public interface CalculatorService {
 	 * @param data
 	 * @return
 	 */
-	ResultStudent PerformStudentT(Collection<double[]> data);
+	ResultStudent performStudentT(Map<String, double[]> groups);
 
 }

@@ -1,6 +1,5 @@
 package edu.uade.sam.service;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,10 +67,6 @@ public class CalculatorServiceTest {
 		// SummaryStatistics sA = new SummaryStatistics();
 		// aAttributes.stream().map(a -> a.getValue().doubleValue()).forEach(v
 		// -> sA.addValue(v));
-
-		double[] a = { 42, 53, 49, 53, 43, 44, 45, 52, 54 };
-		double[] b = { 69, 54, 58, 64, 64, 55, 56 };
-		double[] c = { 35, 40, 53, 42, 50, 39, 55, 39, 40 };
 
 		ResultAnova r = calculatorService.performOneWayAnova(threeGroups);
 
@@ -198,11 +193,8 @@ public class CalculatorServiceTest {
 	
 	@Test
 	public void performStudentT_alala() {
-		double[] a = { 26, 25, 43, 34, 18, 52 };
-		double[] b = { 23, 30, 18, 25, 28 };
-		
-		ResultStudent r = calculatorService.PerformStudentT(Arrays.asList(a, b));
-		
+
+		ResultStudent r = calculatorService.performStudentT(twoGroups);
 		
 	}
 

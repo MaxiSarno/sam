@@ -2,11 +2,10 @@ package edu.uade.sam.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.math3.distribution.FDistribution;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.stat.inference.OneWayAnova;
 import org.apache.commons.math3.stat.inference.TTest;
@@ -33,21 +32,30 @@ public class CalculatorServiceImpl implements CalculatorService {
 		r.setfValue(owa.anovaFValue(groups.values()));
 		// r.setfCritValue();
 		r.setRejectH0(owa.anovaTest(groups.values(), 0.05));
-		r.setSummaries(new ArrayList<>());
-
-		for(Entry<String, double[]> e : groups.entrySet()) {
-			SummaryStatistics s = new SummaryStatistics();
-			Arrays.stream(e.getValue()).forEach(v -> s.addValue(v));
-			r.getSummaries().add(new ResultSummary(e.getKey(), s.getN(), s.getSum(), s.getMin(), s.getMax(), s.getMean(), s.getVariance()));
-		}
+		r.setSummaries(calculateSummaries(groups));
 
 		return r;
 	}
 
 	@Override
-	public ResultStudent PerformStudentT(Collection<double[]> data) {
+	public ResultStudent performStudentT(Map<String, double[]> groups) {
+		ResultStudent r = new ResultStudent();
+		r.setSummaries(this.calculateSummaries(groups));
 		TTest t = new TTest();
-		return null;
+		
+		return r;
+	}
+
+	private List<ResultSummary> calculateSummaries(Map<String, double[]> groups) {
+		List<ResultSummary> summaries = new ArrayList<>();
+
+		for(Entry<String, double[]> e : groups.entrySet()) {
+			SummaryStatistics s = new SummaryStatistics();
+			Arrays.stream(e.getValue()).forEach(v -> s.addValue(v));
+			summaries.add(new ResultSummary(e.getKey(), s.getN(), s.getSum(), s.getMin(), s.getMax(), s.getMean(), s.getVariance()));
+		}
+		
+		return summaries;
 	}
 
 	// // Student T
