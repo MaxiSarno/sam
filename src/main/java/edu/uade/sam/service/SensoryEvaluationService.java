@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.uade.sam.model.SAMEvaluation;
+import edu.uade.sam.model.SensoryEvaluation;
 
 /**
  * Evaluaciones realizadas por los jueces en base a las muesrtas recibidas.
@@ -13,22 +13,22 @@ import edu.uade.sam.model.SAMEvaluation;
  *
  */
 @Service
-public interface EvaluationService {
+public interface SensoryEvaluationService {
 
 	/**
 	 * Crea una nueva evaluacion sensorial.
 	 * 
-	 * @param testName
+	 * @param name
 	 * @return testId
 	 */
-	public Integer save(String testName);
+	public Integer save(String name);
 
 	/**
 	 * Devuelve todas las evaluaciones.
 	 * 
 	 * @return Lista de Evaluaciones
 	 */
-	public List<SAMEvaluation> getAll();
+	public List<SensoryEvaluation> getAll();
 
 	/**
 	 * Devuelve una evaluacion especifica.
@@ -36,6 +36,6 @@ public interface EvaluationService {
 	 * @param id
 	 * @return Evaluacion con ese id
 	 */
-	public SAMEvaluation get(Integer id);
+	public SensoryEvaluation get(Integer id);
 
 }

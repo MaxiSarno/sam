@@ -6,7 +6,7 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
-public class SAMEvaluation {
+public class SensoryEvaluation {
 	
 	private Integer testId;
 	private String name;

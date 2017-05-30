@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.uade.sam.model.SAMEvaluation;
-import edu.uade.sam.service.EvaluationService;
+import edu.uade.sam.model.SensoryEvaluation;
+import edu.uade.sam.service.SensoryEvaluationService;
 
 @RestController
 @RequestMapping("/evaluation")
-public class EvaluationController {
+public class SAMEvaluationController {
 	
 	@Inject
-	private EvaluationService evaluationService;
+	private SensoryEvaluationService evaluationService;
 
 	@RequestMapping(method=RequestMethod.POST)
 	public Integer save(@RequestParam(value="name", required=true) String name) {
@@ -26,12 +26,12 @@ public class EvaluationController {
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<SAMEvaluation> getAll() {
+	public List<SensoryEvaluation> getAll() {
 		return evaluationService.getAll();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public SAMEvaluation get(@PathVariable(value="{id}") Integer id) {
+	public SensoryEvaluation get(@PathVariable(value="{id}") Integer id) {
 		return evaluationService.get(id);
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import edu.uade.sam.model.EvaluationResult;
 import edu.uade.sam.model.Result;
-import edu.uade.sam.service.EvaluationService;
+import edu.uade.sam.service.SensoryEvaluationService;
 import edu.uade.sam.service.ResultsService;
 
 @Component
@@ -16,7 +16,7 @@ public class ResultsServiceImpl implements ResultsService {
 	private Map<Integer, Result> resultsDao;
 
 	@Autowired
-	private EvaluationService evaluationService;
+	private SensoryEvaluationService evaluationService;
 
 	@Override
 	public EvaluationResult generate(Integer testId) {
