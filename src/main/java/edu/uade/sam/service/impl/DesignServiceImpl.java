@@ -28,18 +28,17 @@ public class DesignServiceImpl implements DesignService {
 	
 
 	public Design generateDesign(Integer testId, Integer judges, List<String> samples) {
-		Design td = new Design();
-		designDAO.put(testId, td);
+		Design d = new Design();
+		designDAO.put(testId, d);
 		
 		for (int i=1; i<=judges; i++) {
 			List<Label> labels = labelService.createLabels(testId , samples);
-			long seed = System.nanoTime();
-			Collections.shuffle(labels, new Random(seed));
+			Collections.shuffle(labels, new Random(System.nanoTime()));
 			
-			td.getDesignSlots().add(new DesignSlot(i, labels));
+			d.getDesignSlots().add(new DesignSlot(i, labels));
 		}
 		
-		return td;
+		return d;
 	}
 
 	@Override

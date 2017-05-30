@@ -30,6 +30,7 @@ public class DesignController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public Design createDesign(@PathVariable(value="id") Integer id, @RequestParam(value="judges", required=true) Integer judges, @RequestParam(value="samples", required=true) String samples) {
+		// validar que exista la SensoryEvaluation
 		return this.designService.generateDesign(id, judges, Arrays.asList(samples.split(",")));
 	}
 	

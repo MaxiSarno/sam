@@ -15,7 +15,7 @@ import edu.uade.sam.service.SensoryEvaluationService;
 
 @RestController
 @RequestMapping("/evaluation")
-public class SAMEvaluationController {
+public class SensoryEvaluationController {
 	
 	@Inject
 	private SensoryEvaluationService evaluationService;
