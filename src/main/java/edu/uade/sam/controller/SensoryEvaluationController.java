@@ -31,7 +31,7 @@ public class SensoryEvaluationController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public SensoryEvaluation get(@PathVariable(value="{id}") Integer id) {
+	public SensoryEvaluation get(@PathVariable(value="id") Integer id) {
 		return evaluationService.get(id);
 	}
 
