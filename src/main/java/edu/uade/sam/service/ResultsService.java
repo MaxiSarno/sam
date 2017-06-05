@@ -1,11 +1,11 @@
 package edu.uade.sam.service;
 
-import edu.uade.sam.model.EvaluationResult;
+import edu.uade.sam.model.Result;
 
 public interface ResultsService {
 	
-	EvaluationResult generate(Integer testId);
+	Result generate(Integer testId);
 	
-	EvaluationResult get(Integer testId);
+	Result get(Integer testId);
 
 }

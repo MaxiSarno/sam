@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.service.DesignService;
 
+/**
+ * @author msarno
+ *
+ */
 @RestController
 @RequestMapping("/evaluation/{id}/design")
 public class DesignController {

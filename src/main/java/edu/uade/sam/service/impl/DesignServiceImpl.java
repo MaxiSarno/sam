@@ -18,6 +18,10 @@ import edu.uade.sam.model.DesignSlot;
 import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.LabelService;
 
+/**
+ * @author msarno
+ *
+ */
 @Component
 public class DesignServiceImpl implements DesignService {
 	
