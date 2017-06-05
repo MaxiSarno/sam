@@ -1,7 +1,10 @@
 package edu.uade.sam.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -11,7 +14,7 @@ import edu.uade.sam.service.SensoryEvaluationService;
 @Component
 public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	
-	private Map<Integer, SensoryEvaluation> dao;
+	private Map<Integer, SensoryEvaluation> dao = new HashMap<>();
 
 	@Override
 	public Integer save(String name) {
@@ -21,13 +24,14 @@ public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 		evaluation.setName(name);
 		evaluation.setId(id);
 		
+		dao.put(id, evaluation);
+		
 		return id;
 	}
 
 	@Override
 	public List<SensoryEvaluation> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.values().stream().collect(Collectors.toCollection(ArrayList::new));
 	}
 
 	@Override
