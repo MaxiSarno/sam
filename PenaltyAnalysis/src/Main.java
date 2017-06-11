@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import resultados.*;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -95,6 +97,24 @@ public class Main {
 		int valorJar = 3;
 		PenaltyAnalysis p = new PenaltyAnalysis(d,valorJar);
 		p.calcular();
+//		ArrayList<FrecuenciaNivel> frecuencias = p.getFrecuenciasVariosNiveles();
+//		for (FrecuenciaNivel f : frecuencias){
+//			System.out.println("Categoria: " + f.getCategoria() + " Nivel: " + f.getNivel() +  " Valor: " + f.getValor());
+//		}
+//		ArrayList<FrecuenciaNivel> frecuencias = p.getFrecuenciasVariosNivelesAgregados();
+//		for (FrecuenciaNivel f : frecuencias){
+//			System.out.println("Categoria: " + f.getCategoria() + " Nivel: " + f.getNivel() +  " Valor: " + f.getValor());
+//		}
+//		ArrayList<Penalidad> penalidades = p.getPenalidades();
+//		for (Penalidad p1 : penalidades){
+//			System.out.println("Categoria: " + p1.getCategoria() + " Nivel: " + p1.getNivel() +  " Frecuencia: " + p1.getFrecuencia()
+//			+  " Porcentaje: " + p1.getPorcentaje() +  " sumOpinion: " + p1.getSumOpinionGeneral()
+//			+  " MediaOpinion: " + p1.getMediaOpinionGeneral() +  " OpinionSobreLaMedia: " + p1.getOpinionSobreLaMedia());
+//		}
+		ArrayList<Penalidad> penalidades = p.getPenalidades();
+		for (Penalidad p1 : penalidades){
+			System.out.println("Categoria: " + p1.getCategoria() + " Nivel: " + p1.getNivel() +  " Porcentaje: " + p1.getPorcentaje() + p1.getOpinionSobreLaMedia());
+		}
 	}
 
 }
