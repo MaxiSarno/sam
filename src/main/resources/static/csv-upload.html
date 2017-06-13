@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <!-- <script>
+      function rocanroll(){
+          var action_src = "http://localhost:8080/sam/evaluation/" + document.getElementsByName("sam_id")[0].value + ""/attributes/fileupload";
+          var your_form = document.getElementById('fileuploadForm');
+          your_form.action = action_src ;
+      }
+   </script> -->
 </head>
 <body>
-	<form id="fileuploadForm" action="http://localhost:8080/sam/attributes/fileupload" method="POST" enctype="multipart/form-data">
+	<form id="fileuploadForm" action="http://localhost:8080/sam/evaluation/123/attributes/fileupload" method="POST" enctype="multipart/form-data">
+	<!-- <form id="fileuploadForm" onsubmit="rocanroll()"  method="POST" enctype="multipart/form-data"> -->
+    	<label for="sam_id">SAM ID</label>
+    	<input id="sam_id" type="number" name="sam_id" />
+    	
     	<label for="file">File</label>
     	<input id="file" type="file" name="file" />
     	<p><button type="submit">Upload</button></p>        
