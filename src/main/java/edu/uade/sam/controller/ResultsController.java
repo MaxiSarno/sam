@@ -18,7 +18,7 @@ public class ResultsController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public void get(@PathVariable(value="{id}") Integer id) {
-//		resultsService.getResult(id);
+		resultsService.get(id);
 	}
 
 }
