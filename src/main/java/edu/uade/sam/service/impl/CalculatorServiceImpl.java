@@ -14,8 +14,8 @@ import org.apache.commons.math3.stat.inference.OneWayAnova;
 import org.apache.commons.math3.stat.inference.TTest;
 import org.springframework.stereotype.Component;
 
-import Result.ResultStudent;
 import edu.uade.sam.model.ResultAnova;
+import edu.uade.sam.model.ResultStudent;
 import edu.uade.sam.model.ResultSummary;
 import edu.uade.sam.service.CalculatorService;
 

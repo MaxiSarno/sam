@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.uade.sam.model.Attribute;
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.service.AttributesService;
 import edu.uade.sam.utils.csv.CSVParser;
@@ -34,7 +33,7 @@ public class AttributesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<? extends Attribute> getAttributes(@PathVariable(value = "id") Integer id) {
+	public List<NumericAttribute> getAttributes(@PathVariable(value = "id") Integer id) {
 		return attributesService.get(id);
 	}
 

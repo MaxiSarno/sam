@@ -4,7 +4,7 @@ package edu.uade.sam.model;
  * @author msarno
  *
  */
-public class ResultAnova extends Result {
+public class ResultAnova extends PartialResult {
 
 	private double fValue;
 	private double fCritValue;

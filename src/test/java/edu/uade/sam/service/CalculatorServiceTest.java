@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import Result.ResultStudent;
 import edu.uade.sam.model.ResultAnova;
+import edu.uade.sam.model.ResultStudent;
 import edu.uade.sam.service.impl.CalculatorServiceImpl;
 import edu.uade.sam.utils.csv.CSVParser;
 

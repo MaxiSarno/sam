@@ -8,13 +8,13 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import edu.uade.sam.model.Attribute;
+import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.service.AttributesService;
 
 @Component
 public class AttributesServiceImpl implements AttributesService {
 	
-	private Map<Integer, List<? extends Attribute>> dao;
+	private Map<Integer, List<NumericAttribute>> dao;
 	
 	@PostConstruct
 	public void init() {
@@ -22,12 +22,12 @@ public class AttributesServiceImpl implements AttributesService {
 	}
 	
 	@Override
-	public void save(Integer evaluationId, List<? extends Attribute> attributes) {
+	public void save(Integer evaluationId, List<NumericAttribute> attributes) {
 		dao.put(evaluationId, attributes);
 	}
 
 	@Override
-	public List<? extends Attribute> get(Integer evaluationId) {
+	public List<NumericAttribute> get(Integer evaluationId) {
 		return dao.get(evaluationId);
 	}
 

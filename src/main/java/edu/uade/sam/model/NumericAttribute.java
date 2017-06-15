@@ -6,7 +6,7 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
-public class NumericAttribute extends Attribute {
+public class NumericAttribute implements Attribute {
 
 	private String product;
 	private String attribute;

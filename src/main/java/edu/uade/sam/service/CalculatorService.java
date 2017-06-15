@@ -2,8 +2,8 @@ package edu.uade.sam.service;
 
 import java.util.Map;
 
-import Result.ResultStudent;
 import edu.uade.sam.model.ResultAnova;
+import edu.uade.sam.model.ResultStudent;
 
 public interface CalculatorService {
 

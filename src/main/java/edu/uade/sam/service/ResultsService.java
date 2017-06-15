@@ -4,7 +4,7 @@ import edu.uade.sam.model.Result;
 
 public interface ResultsService {
 	
-	Result generate(Integer testId);
+	Result generate(Integer testId, float alpha);
 	
 	Result get(Integer testId);
 

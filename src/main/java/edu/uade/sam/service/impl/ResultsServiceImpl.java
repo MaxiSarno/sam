@@ -11,11 +11,13 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
 import edu.uade.sam.model.Distribution;
 import edu.uade.sam.model.NumericAttribute;
+import edu.uade.sam.model.PartialResult;
 import edu.uade.sam.model.Result;
 import edu.uade.sam.service.AttributesService;
 import edu.uade.sam.service.CalculatorService;
@@ -24,8 +26,6 @@ import edu.uade.sam.service.ResultsService;
 @Component
 public class ResultsServiceImpl implements ResultsService {
 	
-	private static final float ALPHA = 0.05f;
-
 	private Map<Integer, Result> resultsDao;
 	
 	@Autowired
@@ -33,6 +33,7 @@ public class ResultsServiceImpl implements ResultsService {
 	
 	@Autowired
 	private CalculatorService calculatorService;
+	
 	
 	@PostConstruct
 	public void init() {
@@ -43,14 +44,15 @@ public class ResultsServiceImpl implements ResultsService {
 	@Override
 	public Result get(Integer testId) {
 		if (!resultsDao.containsKey(testId)) {
-			this.generate(testId);
+			return null;
 		}
 		
 		return resultsDao.get(testId);
 	}
 
 	@Override
-	public Result generate(Integer testId) {
+	public Result generate(Integer testId, float alpha) {
+		Result r = new Result();
 		//FIXME validar que exista test
 		
 		//FIXME no castear
@@ -65,18 +67,16 @@ public class ResultsServiceImpl implements ResultsService {
 				groups.put(e.getKey(), e.getValue().stream().mapToDouble(d->d).toArray());
 			}
 
-			Result r = this.getResult(groups, ALPHA);
+			r.getPartialResults().add(this.getResult(groups, alpha));
 		}
 		
 		
-		return null;
+		return r;
 	}
 
 
-	private Result getResult(Map<String, double[]> groups, float alpha) {
-		Distribution d = this.chooseDistribution(groups);
-		
-		if (Distribution.ANOVA == d) {
+	private PartialResult getResult(Map<String, double[]> groups, float alpha) {
+		if (Distribution.ANOVA == this.chooseDistribution(groups)) {
 			return this.calculatorService.performOneWayAnova(groups, alpha);
 		}
 		
@@ -84,7 +84,8 @@ public class ResultsServiceImpl implements ResultsService {
 	}
 
 
-	private Distribution chooseDistribution(Map<String, double[]> groups) {
+	@VisibleForTesting
+	public Distribution chooseDistribution(Map<String, double[]> groups) {
 		if (2 == groups.entrySet().size()) {
 			return Distribution.STUDENT_T;
 		}
@@ -106,5 +107,15 @@ public class ResultsServiceImpl implements ResultsService {
 		
 		return groups;
 	}
-
+	
+	
+	@VisibleForTesting
+	public void setAttributesService(AttributesService a) {
+		this.attributesService = a;
+	}
+	
+	@VisibleForTesting
+	public void setCalculatorService(CalculatorService c) {
+		this.calculatorService = c;
+	}
 }

@@ -1,5 +1,6 @@
 package edu.uade.sam.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,15 +10,15 @@ import java.util.List;
  *
  */
 public class Result {
-
-	private List<ResultSummary> summaries;
-
-	public List<ResultSummary> getSummaries() {
-		return summaries;
+	
+	private final List<PartialResult> partialResults;
+	
+	public Result() {
+		this.partialResults = new ArrayList<>();
 	}
 
-	public void setSummaries(List<ResultSummary> summaries) {
-		this.summaries = summaries;
+	public List<PartialResult> getPartialResults() {
+		return partialResults;
 	}
 
 }
