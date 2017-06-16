@@ -1,37 +1,35 @@
 package edu.uade.sam.model;
 
+import java.util.List;
+
 /**
  * @author msarno
  *
  */
 public class PartialResultAnova extends PartialResult {
 
-	private double fValue;
-	private double fCritValue;
-	private double pValue;
+	private final double fValue;
+	private final double fCritValue;
+	private final double pValue;
+
+	
+	public PartialResultAnova(boolean areDifferent, List<ResultSummary> summaries, double fValue, double fCritValue, double pValue) {
+		super(areDifferent, summaries);
+		this.fValue = fValue;
+		this.fCritValue = fCritValue;
+		this.pValue = pValue;
+	}
 
 	public double getfValue() {
 		return fValue;
-	}
-
-	public void setfValue(double fValue) {
-		this.fValue = fValue;
 	}
 
 	public double getfCritValue() {
 		return fCritValue;
 	}
 
-	public void setfCritValue(double fCritValue) {
-		this.fCritValue = fCritValue;
-	}
-
 	public double getpValue() {
 		return pValue;
-	}
-
-	public void setpValue(double pValue) {
-		this.pValue = pValue;
 	}
 
 }

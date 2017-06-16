@@ -24,44 +24,43 @@ public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
 	public PartialResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha) {
-
-		if (groups.size() < 3)
+		if (groups.size() == 2) {
 			throw new RuntimeException();
+		}
 
-		PartialResultAnova r = new PartialResultAnova();
 		OneWayAnova owa = new OneWayAnova();
 
-		r.setpValue(owa.anovaPValue(groups.values()));
-		r.setfValue(owa.anovaFValue(groups.values()));
-		// r.setfCritValue();
-		r.setAreDifferent(owa.anovaTest(groups.values(), alpha));
-		r.setSummaries(calculateSummaries(groups));
+		boolean areDifferent = owa.anovaTest(groups.values(), alpha);
+		List<ResultSummary> summaries = calculateSummaries(groups);
+		double fValue = owa.anovaFValue(groups.values());
+		double fCritValue = 0;
+		double pValue = owa.anovaPValue(groups.values());
 
-		return r;
+		return new PartialResultAnova(areDifferent, summaries, fValue, fCritValue, pValue);
 	}
 
 	@Override
 	public PartialResultStudent performStudentT(Map<String, double[]> groups, float alpha) {
-		PartialResultStudent r = new PartialResultStudent();
-		r.setSummaries(this.calculateSummaries(groups));
 		TTest t = new TTest();
+
+		List<ResultSummary> summaries = calculateSummaries(groups);
 		Iterator<double[]> i = groups.values().iterator();
 		double[] sample1 = i.next();
 		double[] sample2 = i.next();
 
-//		double t1 = t.pairedT(sample1, sample2);
-//		System.out.println(t1);
-//		double t2 = t.pairedTTest(sample1, sample2);
-//		System.out.println(t2);
-//		boolean t3 = t.pairedTTest(sample1, sample2, 0.05);
-//		System.out.println(t3);
-		
+		// double t1 = t.pairedT(sample1, sample2);
+		// System.out.println(t1);
+		// double t2 = t.pairedTTest(sample1, sample2);
+		// System.out.println(t2);
+		// boolean t3 = t.pairedTTest(sample1, sample2, 0.05);
+		// System.out.println(t3);
+
 		SummaryStatistics stats = new SummaryStatistics();
 		Arrays.stream(sample1).forEach(v -> stats.addValue(v));
 		Arrays.stream(sample2).forEach(v -> stats.addValue(v));
 		System.out.println(calcMeanCI(stats, alpha));
 
-		return r;
+		return new PartialResultStudent(false, summaries);
 	}
 
 	private List<ResultSummary> calculateSummaries(Map<String, double[]> groups) {

@@ -10,23 +10,20 @@ import java.util.List;
  */
 public class PartialResult {
 	
-	private List<ResultSummary> summaries;
-	private boolean areDifferent;
+	private final List<ResultSummary> summaries;
+	private final boolean areDifferent;
+	
+	public PartialResult(boolean areDifferent, List<ResultSummary> summaries) {
+		this.areDifferent = areDifferent;
+		this.summaries = summaries;
+	}
 
 	public List<ResultSummary> getSummaries() {
 		return summaries;
 	}
 
-	public void setSummaries(List<ResultSummary> summaries) {
-		this.summaries = summaries;
-	}
-
 	public boolean areDifferent() {
 		return areDifferent;
-	}
-
-	public void setAreDifferent(boolean areDifferent) {
-		this.areDifferent = areDifferent;
 	}
 
 }

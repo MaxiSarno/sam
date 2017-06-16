@@ -44,7 +44,6 @@ public class CalculatorServiceTest {
 
 	@Test(expected = RuntimeException.class)
 	public void performOneWayAnova_twogroups_error() {
-
 		calculatorService.performOneWayAnova(twoGroups, 0.05f);
 		Assert.fail();
 	}
