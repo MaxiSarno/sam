@@ -3,6 +3,8 @@ package edu.uade.sam.model;
 import java.util.List;
 
 /**
+ * Representa el resultado parcial de la prueba sobre un atributo determinado
+ * 
  * @author msarno
  *
  */
