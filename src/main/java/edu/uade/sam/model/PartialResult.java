@@ -11,6 +11,7 @@ import java.util.List;
 public class PartialResult {
 	
 	private List<ResultSummary> summaries;
+	private boolean areDifferent;
 
 	public List<ResultSummary> getSummaries() {
 		return summaries;
@@ -18,6 +19,14 @@ public class PartialResult {
 
 	public void setSummaries(List<ResultSummary> summaries) {
 		this.summaries = summaries;
+	}
+
+	public boolean areDifferent() {
+		return areDifferent;
+	}
+
+	public void setAreDifferent(boolean areDifferent) {
+		this.areDifferent = areDifferent;
 	}
 
 }

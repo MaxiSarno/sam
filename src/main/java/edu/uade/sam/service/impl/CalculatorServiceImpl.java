@@ -14,8 +14,8 @@ import org.apache.commons.math3.stat.inference.OneWayAnova;
 import org.apache.commons.math3.stat.inference.TTest;
 import org.springframework.stereotype.Component;
 
-import edu.uade.sam.model.ResultAnova;
-import edu.uade.sam.model.ResultStudent;
+import edu.uade.sam.model.PartialResultAnova;
+import edu.uade.sam.model.PartialResultStudent;
 import edu.uade.sam.model.ResultSummary;
 import edu.uade.sam.service.CalculatorService;
 
@@ -23,26 +23,26 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceImpl implements CalculatorService {
 
 	@Override
-	public ResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha) {
+	public PartialResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha) {
 
 		if (groups.size() < 3)
 			throw new RuntimeException();
 
-		ResultAnova r = new ResultAnova();
+		PartialResultAnova r = new PartialResultAnova();
 		OneWayAnova owa = new OneWayAnova();
 
 		r.setpValue(owa.anovaPValue(groups.values()));
 		r.setfValue(owa.anovaFValue(groups.values()));
 		// r.setfCritValue();
-		r.setRejectH0(owa.anovaTest(groups.values(), alpha));
+		r.setAreDifferent(owa.anovaTest(groups.values(), alpha));
 		r.setSummaries(calculateSummaries(groups));
 
 		return r;
 	}
 
 	@Override
-	public ResultStudent performStudentT(Map<String, double[]> groups, float alpha) {
-		ResultStudent r = new ResultStudent();
+	public PartialResultStudent performStudentT(Map<String, double[]> groups, float alpha) {
+		PartialResultStudent r = new PartialResultStudent();
 		r.setSummaries(this.calculateSummaries(groups));
 		TTest t = new TTest();
 		Iterator<double[]> i = groups.values().iterator();

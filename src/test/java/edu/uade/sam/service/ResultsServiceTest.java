@@ -101,7 +101,6 @@ public class ResultsServiceTest {
 	@Test
 	public void generate_anovaOneGroup_ok() {
 		Mockito.when(attributesService.get(Mockito.anyInt())).thenReturn(GROUP1);
-
 		Result r = resultsService.generate(1, 0.05f);
 
 		Assert.assertEquals("Al testear un atributo tengo un solo PartialResult", 1, r.getPartialResults().size());
@@ -109,13 +108,11 @@ public class ResultsServiceTest {
 	
 	@Test
 	public void generate_anovaTwoGroups_ok() {
-
 		List<NumericAttribute> values = new LinkedList<>();
 		values.addAll(GROUP1);
 		values.addAll(GROUP2);
 		
 		Mockito.when(attributesService.get(Mockito.anyInt())).thenReturn(values);
-
 		Result r = resultsService.generate(1, 0.05f);
 
 		Assert.assertEquals("Al testear un atributo tengo un solo PartialResult", 2, r.getPartialResults().size());
@@ -123,14 +120,12 @@ public class ResultsServiceTest {
 
 	@Test
 	public void generate_anovaThreeGroups_ok() {
-
 		List<NumericAttribute> values = new LinkedList<>();
 		values.addAll(GROUP1);
 		values.addAll(GROUP2);
 		values.addAll(GROUP3);
 		
 		Mockito.when(attributesService.get(Mockito.anyInt())).thenReturn(values);
-
 		Result r = resultsService.generate(1, 0.05f);
 
 		Assert.assertEquals("Al testear un atributo tengo un solo PartialResult", 3, r.getPartialResults().size());

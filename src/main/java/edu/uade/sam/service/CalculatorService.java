@@ -2,8 +2,8 @@ package edu.uade.sam.service;
 
 import java.util.Map;
 
-import edu.uade.sam.model.ResultAnova;
-import edu.uade.sam.model.ResultStudent;
+import edu.uade.sam.model.PartialResultAnova;
+import edu.uade.sam.model.PartialResultStudent;
 
 public interface CalculatorService {
 
@@ -17,7 +17,7 @@ public interface CalculatorService {
 	 * @param alpha
 	 * @return
 	 */
-	ResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha);
+	PartialResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha);
 
 	/**
 	 * The t-Test is used to test the null hypothesis that the means of two
@@ -29,6 +29,6 @@ public interface CalculatorService {
 	 * @param alpha
 	 * @return
 	 */
-	ResultStudent performStudentT(Map<String, double[]> groups, float alpha);
+	PartialResultStudent performStudentT(Map<String, double[]> groups, float alpha);
 
 }
