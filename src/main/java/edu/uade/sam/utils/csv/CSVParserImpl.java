@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.uade.sam.model.Attribute;
 import edu.uade.sam.model.NumericAttribute;
 
 @Component

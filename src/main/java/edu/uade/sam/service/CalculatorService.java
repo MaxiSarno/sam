@@ -13,6 +13,11 @@ import edu.uade.sam.model.ResultSummary;
 
 public interface CalculatorService {
 	
+	/**
+	 * @param groups
+	 * @param alpha
+	 * @return
+	 */
 	PartialResult calculate(Map<String, double[]> groups, float alpha);
 	
 	default List<ResultSummary> calculateSummaries(Map<String, double[]> groups) {
@@ -32,7 +37,8 @@ public interface CalculatorService {
 	 * A single factor or one-way ANOVA is used to test the null hypothesis that
 	 * the means of several populations are all equal.
 	 * 
-	 * H0: μ1 = μ2 = μ3 H1: at least one of the means is different.
+	 * H0: μ1 = μ2 = μ3 = ... = μn
+	 * H1: at least one of the means is different.
 	 * 
 	 * @param groups
 	 * @param alpha
@@ -44,7 +50,8 @@ public interface CalculatorService {
 	 * The t-Test is used to test the null hypothesis that the means of two
 	 * populations are equal.
 	 * 
-	 * H0: μ1 - μ2 = 0 H1: μ1 - μ2 ≠ 0
+	 * H0: μ1 - μ2 = 0 
+	 * H1: μ1 - μ2 ≠ 0
 	 * 
 	 * @param groups
 	 * @param alpha

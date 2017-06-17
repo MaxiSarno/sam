@@ -17,6 +17,10 @@ import edu.uade.sam.service.impl.CalculatorServiceSelector;
 import edu.uade.sam.service.impl.CalculatorServiceStudentT;
 import edu.uade.sam.service.impl.ResultsServiceImpl;
 
+/**
+ * @author msarno
+ *
+ */
 public class ResultsServiceTest {
 
 	private ResultsServiceImpl resultsService;
@@ -67,39 +71,6 @@ public class ResultsServiceTest {
 		resultsService.setCalculatorService(calculator );
 		resultsService.init();
 	}
-
-//	@Test
-//	public void chooseDistribution_oneSample() {
-//		Map<String, double[]> groups = new HashMap<String, double[]>();
-//		groups.put("one", new double[] { 1, 2, 3 });
-//
-//		Distribution d = resultsService.chooseDistribution(groups);
-//
-//		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
-//	}
-//
-//	@Test
-//	public void chooseDistribution_twoSample() {
-//		Map<String, double[]> groups = new HashMap<String, double[]>();
-//		groups.put("one", new double[] { 1, 2, 3 });
-//		groups.put("two", new double[] { 1, 2, 3 });
-//
-//		Distribution d = resultsService.chooseDistribution(groups);
-//
-//		Assert.assertEquals("selected distribution does not match", Distribution.STUDENT_T, d);
-//	}
-//
-//	@Test
-//	public void chooseDistribution_threeSample() {
-//		Map<String, double[]> groups = new HashMap<String, double[]>();
-//		groups.put("one", new double[] { 1, 2, 3 });
-//		groups.put("two", new double[] { 1, 2, 3 });
-//		groups.put("three", new double[] { 1, 2, 3 });
-//
-//		Distribution d = resultsService.chooseDistribution(groups);
-//
-//		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
-//	}
 
 	@Test
 	public void generate_anovaOneGroup_ok() {
