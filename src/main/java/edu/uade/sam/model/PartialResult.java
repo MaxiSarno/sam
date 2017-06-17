@@ -8,14 +8,20 @@ import java.util.List;
  * @author msarno
  *
  */
-public class PartialResult {
+public abstract class PartialResult {
 	
 	private final List<ResultSummary> summaries;
 	private final boolean areDifferent;
+	private final Distribution distribution;
 	
-	public PartialResult(boolean areDifferent, List<ResultSummary> summaries) {
+	public PartialResult(Distribution distribution, boolean areDifferent, List<ResultSummary> summaries) {
+		this.distribution = distribution;
 		this.areDifferent = areDifferent;
 		this.summaries = summaries;
+	}
+
+	public Distribution getDistribution() {
+		return distribution;
 	}
 
 	public List<ResultSummary> getSummaries() {

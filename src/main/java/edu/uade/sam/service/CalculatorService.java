@@ -11,9 +11,15 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import edu.uade.sam.model.PartialResult;
 import edu.uade.sam.model.ResultSummary;
 
+/**
+ * @author msarno
+ *
+ */
 public interface CalculatorService {
 	
 	/**
+	 * Calculates the result of the test given n groups and an error tolerance
+	 * 
 	 * @param groups
 	 * @param alpha
 	 * @return
@@ -32,31 +38,5 @@ public interface CalculatorService {
 
 		return summaries;
 	}
-
-	/**
-	 * A single factor or one-way ANOVA is used to test the null hypothesis that
-	 * the means of several populations are all equal.
-	 * 
-	 * H0: μ1 = μ2 = μ3 = ... = μn
-	 * H1: at least one of the means is different.
-	 * 
-	 * @param groups
-	 * @param alpha
-	 * @return
-	 */
-//	PartialResultAnova performOneWayAnova(Map<String, double[]> groups, float alpha);
-
-	/**
-	 * The t-Test is used to test the null hypothesis that the means of two
-	 * populations are equal.
-	 * 
-	 * H0: μ1 - μ2 = 0 
-	 * H1: μ1 - μ2 ≠ 0
-	 * 
-	 * @param groups
-	 * @param alpha
-	 * @return
-	 */
-//	PartialResultStudent performStudentT(Map<String, double[]> groups, float alpha);
 
 }

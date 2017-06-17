@@ -13,7 +13,7 @@ public class PartialResultAnova extends PartialResult {
 	private final double pValue;
 	
 	public PartialResultAnova(boolean areDifferent, List<ResultSummary> summaries, double fValue, double fCritValue, double pValue) {
-		super(areDifferent, summaries);
+		super(Distribution.ANOVA, areDifferent, summaries);
 		this.fValue = fValue;
 		this.fCritValue = fCritValue;
 		this.pValue = pValue;
