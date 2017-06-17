@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -25,7 +23,7 @@ import edu.uade.sam.service.ResultsService;
 @Component
 public class ResultsServiceImpl implements ResultsService {
 	
-	private Map<Integer, Result> resultsDao;
+	private Map<Integer, Result> resultsDao = new HashMap<>();
 	
 	@Autowired
 	private AttributesService attributesService;
@@ -34,12 +32,6 @@ public class ResultsServiceImpl implements ResultsService {
 	@Qualifier("CalculatorServiceSelector")
 	private CalculatorService calculatorService;
 	
-	
-	@PostConstruct
-	public void init() {
-		resultsDao = new HashMap<>();
-	}
-
 	
 	@Override
 	public Result get(Integer testId) {
@@ -52,11 +44,10 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Override
 	public Result generate(Integer testId, float alpha) {
-		Result r = new Result();
 		//FIXME validar que exista test
+		Result r = new Result();
 		
-		//FIXME no castear
-		List<NumericAttribute> attributes = (List<NumericAttribute>) attributesService.get(testId);
+		List<NumericAttribute> attributes = attributesService.get(testId);
 		
 		Table<String, String, List<Double>> groupsD = this.groupAttributes(attributes);
 		

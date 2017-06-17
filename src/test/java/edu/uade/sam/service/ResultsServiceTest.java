@@ -8,21 +8,25 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.Result;
-import edu.uade.sam.service.impl.CalculatorServiceAnova;
-import edu.uade.sam.service.impl.CalculatorServiceSelector;
-import edu.uade.sam.service.impl.CalculatorServiceStudentT;
 import edu.uade.sam.service.impl.ResultsServiceImpl;
 
 /**
  * @author msarno
  *
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ResultsServiceTest {
 
+	@Autowired
 	private ResultsServiceImpl resultsService;
 	private AttributesService attributesService;
 	
@@ -58,22 +62,12 @@ public class ResultsServiceTest {
 
 	@Before
 	public void initTest() {
-		resultsService = new ResultsServiceImpl();
 		attributesService = Mockito.mock(AttributesService.class);
-
 		resultsService.setAttributesService(attributesService);
-
-		// cuando configure el contexto de test no tengo que hacer esta negrada
-		
-		CalculatorServiceSelector calculator = new CalculatorServiceSelector();
-		calculator.setAnova(new CalculatorServiceAnova());
-		calculator.setStudentT(new CalculatorServiceStudentT());
-		resultsService.setCalculatorService(calculator );
-		resultsService.init();
 	}
 
 	@Test
-	public void generate_anovaOneGroup_ok() {
+	public void generate_oneGroup_ok() {
 		Mockito.when(attributesService.get(Mockito.anyInt())).thenReturn(GROUP1);
 		Result r = resultsService.generate(1, 0.05f);
 
@@ -81,7 +75,7 @@ public class ResultsServiceTest {
 	}
 	
 	@Test
-	public void generate_anovaTwoGroups_ok() {
+	public void generate_twoGroups_ok() {
 		List<NumericAttribute> values = new LinkedList<>();
 		values.addAll(GROUP1);
 		values.addAll(GROUP2);
@@ -93,7 +87,7 @@ public class ResultsServiceTest {
 	}
 
 	@Test
-	public void generate_anovaThreeGroups_ok() {
+	public void generate_threeGroups_ok() {
 		List<NumericAttribute> values = new LinkedList<>();
 		values.addAll(GROUP1);
 		values.addAll(GROUP2);
