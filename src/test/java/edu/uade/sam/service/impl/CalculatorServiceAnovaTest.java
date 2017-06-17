@@ -24,7 +24,6 @@ public class CalculatorServiceAnovaTest {
 	@Qualifier("CalculatorServiceAnova")
 	CalculatorService calculatorService;
 
-	static Map<String, double[]> twoGroups;
 	static Map<String, double[]> threeGroups;
 
 	@BeforeClass

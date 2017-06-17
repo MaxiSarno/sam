@@ -21,7 +21,7 @@ import edu.uade.sam.service.CalculatorService;
  * @author msarno
  *
  */
-@Component
+@Component("CalculatorServiceAnova")
 public class CalculatorServiceAnova implements CalculatorService {
 
 	@Override

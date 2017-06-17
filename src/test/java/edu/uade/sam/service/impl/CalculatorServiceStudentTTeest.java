@@ -1,5 +1,6 @@
 package edu.uade.sam.service.impl;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,11 @@ public class CalculatorServiceStudentTTeest {
 	@Autowired
 	@Qualifier("CalculatorServiceStudentT")
 	private CalculatorService calculatorService;
+	
+	@Test
+	public void test() {
+		
+	}
 
 	// @Test
 	// public void calculate_tStudent_ok() throws FileNotFoundException,

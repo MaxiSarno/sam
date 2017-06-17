@@ -123,7 +123,6 @@ public class CalculatorServiceSelectorTest {
 		Assert.assertEquals("anova result summary variance", 50.5, r.getSummaries().get(2).getVariance(), 0.00001);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void calculate_oneGroup_anova() {
 		CalculatorServiceSelector c = new CalculatorServiceSelector();
@@ -134,11 +133,9 @@ public class CalculatorServiceSelectorTest {
 		
 		c.calculate(oneGroup, 0.05f);
 		
-		Mockito.verify(anova).calculate(Mockito.anyMap(), Mockito.anyFloat());
-		
+		Mockito.verify(anova).calculate(oneGroup, 0.05f);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void calculate_twoGroups_studentT() {
 		CalculatorServiceSelector c = new CalculatorServiceSelector();
@@ -149,11 +146,9 @@ public class CalculatorServiceSelectorTest {
 		
 		c.calculate(twoGroups, 0.05f);
 		
-		Mockito.verify(studentT).calculate(Mockito.anyMap(), Mockito.anyFloat());
-
+		Mockito.verify(studentT).calculate(twoGroups, 0.05f);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void calculate_threeGroups_anova() {
 		CalculatorServiceSelector c = new CalculatorServiceSelector();
@@ -164,7 +159,7 @@ public class CalculatorServiceSelectorTest {
 		
 		c.calculate(threeGroups, 0.05f);
 		
-		Mockito.verify(anova).calculate(Mockito.anyMap(), Mockito.anyFloat());
+		Mockito.verify(anova).calculate(threeGroups, 0.05f);
 	}
 
 }
