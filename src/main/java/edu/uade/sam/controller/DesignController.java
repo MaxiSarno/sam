@@ -34,12 +34,15 @@ public class DesignController {
 	@RequestMapping(method = RequestMethod.POST)
 	public Design createDesign(@PathVariable(value = "id") Integer id,
 			@RequestParam(value = "judges", required = true) Integer judges,
-			@RequestParam(value = "samples", required = true) String samples) {
+			@RequestParam(value = "samples", required = true) String samples,
+			@RequestParam(value = "random", required = false, defaultValue = "true") boolean random) {
 		// FIXME validar que exista la SensoryEvaluation
-		
-		
-		return this.designService.generateDesign(id, judges,
-				Arrays.asList(samples.split(",")));
+
+		if (random) {
+			return this.designService.generateDesignRandom(id, judges, Arrays.asList(samples.split(",")));
+		}
+
+		return this.designService.generateDesign(id, judges, Arrays.asList(samples.split(",")));
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
@@ -48,25 +51,22 @@ public class DesignController {
 	}
 
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
-	public String getDesignCsv(@PathVariable(value = "id") Integer id, @RequestParam(name="type", defaultValue="csv")String type) {
+	public String getDesignCsv(@PathVariable(value = "id") Integer id,
+			@RequestParam(name = "type", defaultValue = "csv") String type) {
 		Design design = designService.getTestDesign(id);
 		return this.writeDesign(design, type);
 	}
 
 	private String writeDesign(Design design, String type) {
-		return design
-				.getDesignSlots()
-				.stream()
+		return design.getDesignSlots().stream()
 				.map(s -> "judge:" + s.getJudge() + writeLabels(s.getLabels(), type) + "\n")
 				.reduce(new String(), (a, b) -> a + b);
 	}
 
 	private String writeLabels(List<Label> labels, String type) {
 		String separator = type.equals("csv") ? "," : "\t";
-		
-		return labels
-				.stream()
-				.map(l -> separator + l.getLabelNumber() + "(" + l.getDescription()+ ") ")
+
+		return labels.stream().map(l -> separator + l.getLabelNumber() + "(" + l.getDescription() + ") ")
 				.reduce(new String(), (a, b) -> a + b);
 	}
 

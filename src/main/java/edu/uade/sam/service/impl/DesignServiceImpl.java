@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import edu.uade.sam.model.Label;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.DesignSlot;
+import edu.uade.sam.model.Label;
 import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.LabelService;
 
@@ -37,8 +37,6 @@ public class DesignServiceImpl implements DesignService {
 		
 		for (int i=1; i<=judges; i++) {
 			List<Label> labels = labelService.createLabels(testId , samples);
-			Collections.shuffle(labels, new Random(System.nanoTime()));
-			
 			d.getDesignSlots().add(new DesignSlot(i, labels));
 		}
 		
@@ -50,8 +48,7 @@ public class DesignServiceImpl implements DesignService {
 		Design design = this.generateDesign(testId, judges, samples);
 		
 		for(DesignSlot slot : design.getDesignSlots()) {
-			long seed = System.nanoTime();
-			Collections.shuffle(slot.getLabels(), new Random(seed));
+			Collections.shuffle(slot.getLabels(), new Random(System.nanoTime()));
 		}
 		
 		return design;
