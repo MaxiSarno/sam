@@ -1,10 +1,8 @@
 package edu.uade.sam.service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,10 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import edu.uade.sam.model.Distribution;
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.Result;
-import edu.uade.sam.service.impl.CalculatorServiceImpl;
+import edu.uade.sam.service.impl.CalculatorServiceAnova;
+import edu.uade.sam.service.impl.CalculatorServiceSelector;
+import edu.uade.sam.service.impl.CalculatorServiceStudentT;
 import edu.uade.sam.service.impl.ResultsServiceImpl;
 
 public class ResultsServiceTest {
@@ -61,42 +60,46 @@ public class ResultsServiceTest {
 		resultsService.setAttributesService(attributesService);
 
 		// cuando configure el contexto de test no tengo que hacer esta negrada
-		resultsService.setCalculatorService(new CalculatorServiceImpl());
+		
+		CalculatorServiceSelector calculator = new CalculatorServiceSelector();
+		calculator.setAnova(new CalculatorServiceAnova());
+		calculator.setStudentT(new CalculatorServiceStudentT());
+		resultsService.setCalculatorService(calculator );
 		resultsService.init();
 	}
 
-	@Test
-	public void chooseDistribution_oneSample() {
-		Map<String, double[]> groups = new HashMap<String, double[]>();
-		groups.put("one", new double[] { 1, 2, 3 });
-
-		Distribution d = resultsService.chooseDistribution(groups);
-
-		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
-	}
-
-	@Test
-	public void chooseDistribution_twoSample() {
-		Map<String, double[]> groups = new HashMap<String, double[]>();
-		groups.put("one", new double[] { 1, 2, 3 });
-		groups.put("two", new double[] { 1, 2, 3 });
-
-		Distribution d = resultsService.chooseDistribution(groups);
-
-		Assert.assertEquals("selected distribution does not match", Distribution.STUDENT_T, d);
-	}
-
-	@Test
-	public void chooseDistribution_threeSample() {
-		Map<String, double[]> groups = new HashMap<String, double[]>();
-		groups.put("one", new double[] { 1, 2, 3 });
-		groups.put("two", new double[] { 1, 2, 3 });
-		groups.put("three", new double[] { 1, 2, 3 });
-
-		Distribution d = resultsService.chooseDistribution(groups);
-
-		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
-	}
+//	@Test
+//	public void chooseDistribution_oneSample() {
+//		Map<String, double[]> groups = new HashMap<String, double[]>();
+//		groups.put("one", new double[] { 1, 2, 3 });
+//
+//		Distribution d = resultsService.chooseDistribution(groups);
+//
+//		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
+//	}
+//
+//	@Test
+//	public void chooseDistribution_twoSample() {
+//		Map<String, double[]> groups = new HashMap<String, double[]>();
+//		groups.put("one", new double[] { 1, 2, 3 });
+//		groups.put("two", new double[] { 1, 2, 3 });
+//
+//		Distribution d = resultsService.chooseDistribution(groups);
+//
+//		Assert.assertEquals("selected distribution does not match", Distribution.STUDENT_T, d);
+//	}
+//
+//	@Test
+//	public void chooseDistribution_threeSample() {
+//		Map<String, double[]> groups = new HashMap<String, double[]>();
+//		groups.put("one", new double[] { 1, 2, 3 });
+//		groups.put("two", new double[] { 1, 2, 3 });
+//		groups.put("three", new double[] { 1, 2, 3 });
+//
+//		Distribution d = resultsService.chooseDistribution(groups);
+//
+//		Assert.assertEquals("selected distribution does not match", Distribution.ANOVA, d);
+//	}
 
 	@Test
 	public void generate_anovaOneGroup_ok() {

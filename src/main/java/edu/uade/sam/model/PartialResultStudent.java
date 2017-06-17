@@ -7,7 +7,7 @@ import java.util.List;
  *
  */
 public class PartialResultStudent extends PartialResult {
-
+	
 	public PartialResultStudent(boolean areDifferent, List<ResultSummary> summaries) {
 		super(areDifferent, summaries);
 	}

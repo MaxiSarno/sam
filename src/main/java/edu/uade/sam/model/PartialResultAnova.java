@@ -11,7 +11,6 @@ public class PartialResultAnova extends PartialResult {
 	private final double fValue;
 	private final double fCritValue;
 	private final double pValue;
-
 	
 	public PartialResultAnova(boolean areDifferent, List<ResultSummary> summaries, double fValue, double fCritValue, double pValue) {
 		super(areDifferent, summaries);

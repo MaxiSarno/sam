@@ -9,15 +9,14 @@ import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
-import edu.uade.sam.model.Distribution;
 import edu.uade.sam.model.NumericAttribute;
-import edu.uade.sam.model.PartialResult;
 import edu.uade.sam.model.Result;
 import edu.uade.sam.service.AttributesService;
 import edu.uade.sam.service.CalculatorService;
@@ -32,6 +31,7 @@ public class ResultsServiceImpl implements ResultsService {
 	private AttributesService attributesService;
 	
 	@Autowired
+	@Qualifier("CalculatorServiceSelector")
 	private CalculatorService calculatorService;
 	
 	
@@ -67,30 +67,11 @@ public class ResultsServiceImpl implements ResultsService {
 				groups.put(e.getKey(), e.getValue().stream().mapToDouble(d->d).toArray());
 			}
 
-			r.getPartialResults().add(this.getResult(groups, alpha));
+			r.getPartialResults().add(this.calculatorService.calculate(groups, alpha));
 		}
 		
 		
 		return r;
-	}
-
-
-	private PartialResult getResult(Map<String, double[]> groups, float alpha) {
-		if (Distribution.ANOVA == this.chooseDistribution(groups)) {
-			return this.calculatorService.performOneWayAnova(groups, alpha);
-		}
-		
-		return this.calculatorService.performStudentT(groups, alpha);
-	}
-
-
-	@VisibleForTesting
-	public Distribution chooseDistribution(Map<String, double[]> groups) {
-		if (2 == groups.entrySet().size()) {
-			return Distribution.STUDENT_T;
-		}
-		
-		return Distribution.ANOVA;
 	}
 
 
