@@ -19,12 +19,12 @@ public class ResultsController {
 	private ResultsService resultsService;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public Result generate(@PathVariable(value="{id}") Integer id, @RequestParam(name="alpha", required=true) float alpha) {
+	public Result generate(@PathVariable(value="id") Integer id, @RequestParam(name="alpha", required=true) float alpha) {
 		return resultsService.generate(id, alpha);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public Result get(@PathVariable(value="{id}") Integer id) {
+	public Result get(@PathVariable(value="	id") Integer id) {
 		return resultsService.get(id);
 	}
 
