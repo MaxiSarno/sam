@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.DesignSlot;
+import edu.uade.sam.model.SensoryEvaluation;
+import edu.uade.sam.service.impl.DesignServiceImpl;
 
 /**
  * @author msarno
@@ -26,7 +30,14 @@ public class DesignServiceTest {
 	private static final int JUDGES = 10;
 	
 	@Autowired
-	private DesignService designService;
+	private DesignServiceImpl designService;
+	
+	@Before
+	public void init() {
+		SensoryEvaluationService sensoryEvaluationService = Mockito.mock(SensoryEvaluationService.class);
+		Mockito.when(sensoryEvaluationService.get(Mockito.anyInt())).thenReturn(new SensoryEvaluation());
+		designService.setSensoryEvaluationService(sensoryEvaluationService);
+	}
 
 	@Test
 	public void generateDesign_slotsAmount() {

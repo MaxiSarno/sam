@@ -11,10 +11,16 @@ import java.util.List;
  */
 public class Result {
 	
+	private final float alpha;
 	private final List<PartialResult> partialResults;
 	
-	public Result() {
+	public Result(float alpha) {
+		this.alpha = alpha;
 		this.partialResults = new ArrayList<>();
+	}
+
+	public float getAlpha() {
+		return alpha;
 	}
 
 	public List<PartialResult> getPartialResults() {

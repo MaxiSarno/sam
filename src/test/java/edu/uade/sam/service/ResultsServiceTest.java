@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.Result;
+import edu.uade.sam.model.SensoryEvaluation;
 import edu.uade.sam.service.impl.ResultsServiceImpl;
 
 /**
@@ -64,6 +65,10 @@ public class ResultsServiceTest {
 	public void initTest() {
 		attributesService = Mockito.mock(AttributesService.class);
 		resultsService.setAttributesService(attributesService);
+		
+		SensoryEvaluationService sensoryEvaluationService = Mockito.mock(SensoryEvaluationService.class);
+		Mockito.when(sensoryEvaluationService.get(Mockito.anyInt())).thenReturn(new SensoryEvaluation());
+		resultsService.setSensoryEvaluationService(sensoryEvaluationService);
 	}
 
 	@Test

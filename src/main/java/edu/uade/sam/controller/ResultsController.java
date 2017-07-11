@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.uade.sam.model.Result;
 import edu.uade.sam.service.ResultsService;
 
 @RestController
@@ -18,13 +19,13 @@ public class ResultsController {
 	private ResultsService resultsService;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public void generate(@PathVariable(value="{id}") Integer id, @RequestParam(name="alpha", required=true) float alpha) {
-		resultsService.generate(id, alpha);
+	public Result generate(@PathVariable(value="{id}") Integer id, @RequestParam(name="alpha", required=true) float alpha) {
+		return resultsService.generate(id, alpha);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public void get(@PathVariable(value="{id}") Integer id) {
-		resultsService.get(id);
+	public Result get(@PathVariable(value="{id}") Integer id) {
+		return resultsService.get(id);
 	}
 
 }

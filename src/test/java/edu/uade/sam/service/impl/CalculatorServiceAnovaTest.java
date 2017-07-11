@@ -49,14 +49,6 @@ public class CalculatorServiceAnovaTest {
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
 
-	// @Test
-	// public void calculate_fCritValue_ok() {
-	//
-	// ResultAnova r = calculatorService.calculate(threeGroups, 0.05f);
-	// Assert.assertEquals("anova fCritvalue", 3.443357, r.getfCritValue(),
-	// 0.00001);
-	// }
-
 	@Test
 	public void calculate_testValue_ok() {
 

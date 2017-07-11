@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -17,6 +18,7 @@ import edu.uade.sam.model.DesignSlot;
 import edu.uade.sam.model.Label;
 import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.LabelService;
+import edu.uade.sam.service.SensoryEvaluationService;
 
 /**
  * @author msarno
@@ -27,11 +29,18 @@ public class DesignServiceImpl implements DesignService {
 	
 	@Inject
 	private LabelService labelService;
+
+	@Autowired
+	private SensoryEvaluationService sensoryEvaluationService;
 	
 	private Map<Integer, Design> designDAO = new HashMap<>();
 	
 
 	public Design generateDesign(Integer testId, Integer judges, List<String> samples) {
+		if (null == this.sensoryEvaluationService.get(testId)) {
+			return null;
+		}
+		
 		Design d = new Design();
 		designDAO.put(testId, d);
 		
@@ -63,6 +72,10 @@ public class DesignServiceImpl implements DesignService {
 	@VisibleForTesting
 	public void setLabelService(LabelService labelService) {
 		this.labelService = labelService;
+	}
+
+	public void setSensoryEvaluationService(SensoryEvaluationService sensoryEvaluationService) {
+		this.sensoryEvaluationService = sensoryEvaluationService;
 	}
 
 }
