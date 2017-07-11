@@ -53,7 +53,7 @@ public class CalculatorServiceAnovaTest {
 	public void calculate_testValue_ok() {
 
 		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(threeGroups, 0.05f);
-		Assert.assertEquals("anova test value", true, r.areDifferent());
+		Assert.assertEquals("anova test value", true, r.getAreDifferent());
 	}
 	
 	//TODO test one group

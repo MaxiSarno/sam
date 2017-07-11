@@ -47,9 +47,9 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Override
 	public Result generate(Integer testId, float alpha) {
-		if (null == this.sensoryEvaluationService.get(testId)) {
-			return null;
-		}
+//		if (null == this.sensoryEvaluationService.get(testId)) {
+//			return null;
+//		}
 
 		Result r = new Result(alpha);
 
