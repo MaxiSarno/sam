@@ -28,7 +28,7 @@ public abstract class PartialResult {
 		return summaries;
 	}
 
-	public boolean areDifferent() {
+	public boolean getAreDifferent() {
 		return areDifferent;
 	}
 
