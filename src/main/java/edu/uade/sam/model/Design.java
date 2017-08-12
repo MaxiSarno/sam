@@ -3,6 +3,8 @@ package edu.uade.sam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+
 /**
  * Diseño de una prueba con ciertas muestras para una poblacion especifica.
  * 

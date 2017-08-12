@@ -27,10 +27,15 @@ public class CalculatorServiceSelector implements CalculatorService {
 
 	@Autowired
 	private CalculatorServiceStudentT studentT;
+	
+	@Autowired
+	private CalculatorServiceBasic basic;
 
 	@Override
 	public PartialResult calculate(Map<String, double[]> groups, float alpha) {
-		if (2 == groups.entrySet().size()) {
+		if (1 == groups.entrySet().size()) {
+			return basic.calculate(groups, alpha);
+		} else if (2 == groups.entrySet().size()) {
 			return studentT.calculate(groups, alpha);
 		}
 
@@ -45,6 +50,11 @@ public class CalculatorServiceSelector implements CalculatorService {
 	@VisibleForTesting
 	public void setStudentT(CalculatorServiceStudentT studentT) {
 		this.studentT = studentT;
+	}
+
+	@VisibleForTesting
+	public void setBasic(CalculatorServiceBasic basic) {
+		this.basic = basic;
 	}
 
 }

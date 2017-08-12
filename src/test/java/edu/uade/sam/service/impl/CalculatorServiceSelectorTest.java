@@ -16,9 +16,6 @@ import com.google.common.collect.ImmutableMap;
 
 import edu.uade.sam.model.PartialResult;
 import edu.uade.sam.service.CalculatorService;
-import edu.uade.sam.service.impl.CalculatorServiceAnova;
-import edu.uade.sam.service.impl.CalculatorServiceSelector;
-import edu.uade.sam.service.impl.CalculatorServiceStudentT;
 
 /**
  * @author msarno
@@ -126,16 +123,16 @@ public class CalculatorServiceSelectorTest {
 	}
 
 	@Test
-	public void calculate_oneGroup_anova() {
+	public void calculate_oneGroup_basic() {
 		CalculatorServiceSelector c = new CalculatorServiceSelector();
-		CalculatorServiceAnova anova = Mockito.mock(CalculatorServiceAnova.class);
+		CalculatorServiceBasic basic = Mockito.mock(CalculatorServiceBasic.class);
 		CalculatorServiceStudentT studentT = Mockito.mock(CalculatorServiceStudentT.class);
-		c.setAnova(anova);
+		c.setBasic(basic);
 		c.setStudentT(studentT);
 		
 		c.calculate(oneGroup, ALPHA);
 		
-		Mockito.verify(anova).calculate(oneGroup, ALPHA);
+		Mockito.verify(basic).calculate(oneGroup, ALPHA);
 	}
 
 	@Test

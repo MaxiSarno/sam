@@ -8,7 +8,7 @@ import java.util.List;
  * @author msarno
  *
  */
-public abstract class PartialResult {
+public class PartialResult {
 	
 	private final List<ResultSummary> summaries;
 	private final boolean areDifferent;

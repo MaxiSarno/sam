@@ -5,5 +5,5 @@ package edu.uade.sam.model;
  *
  */
 public enum Distribution {
-	STUDENT_T, ANOVA;
+	ANOVA, STUDENT_T, NONE;
 }
