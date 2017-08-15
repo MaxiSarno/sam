@@ -21,7 +21,7 @@ public class SensoryEvaluationController {
 	private SensoryEvaluationService evaluationService;
 
 	@RequestMapping(method=RequestMethod.POST)
-	public Integer save(@RequestParam(value="name", required=true) String name) {
+	public Long save(@RequestParam(value="name", required=true) String name) {
 		return evaluationService.save(name);
 	}
 	
@@ -31,7 +31,7 @@ public class SensoryEvaluationController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public SensoryEvaluation get(@PathVariable(value="id") Integer id) {
+	public SensoryEvaluation get(@PathVariable(value="id") Long id) {
 		return evaluationService.get(id);
 	}
 

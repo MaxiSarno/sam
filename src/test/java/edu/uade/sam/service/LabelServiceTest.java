@@ -31,7 +31,7 @@ public class LabelServiceTest {
 
 	@Test
 	public void testCreateLabels() {
-		Integer testId = 1;
+		Long testId = 1l;
 		List<Label> labels = labelService.createLabels(testId, LabelServiceTest.descriptions);
 
 		for (Label l : labels) {
@@ -41,7 +41,7 @@ public class LabelServiceTest {
 
 	@Test
 	public void testAmountOfLabelsGenerated() {
-		List<Label> labels = labelService.createLabels(2, LabelServiceTest.descriptions);
+		List<Label> labels = labelService.createLabels(2l, LabelServiceTest.descriptions);
 		Assert.assertEquals("Same amount of labels as descriptions", LabelServiceTest.descriptions.size(),
 				labels.size());
 	}
@@ -53,7 +53,7 @@ public class LabelServiceTest {
 		int limit = LabelServiceImpl.LABEL_MAX_VALUE / LabelServiceTest.descriptions.size();
 
 		for (int i = 0; i < limit; i++) {
-			List<Label> labels = labelService.createLabels(3, LabelServiceTest.descriptions);
+			List<Label> labels = labelService.createLabels(3l, LabelServiceTest.descriptions);
 			for (Label l : labels) {
 				Assert.assertFalse(labelNumbers.contains(l.getLabelNumber()));
 				labelNumbers.add(l.getLabelNumber());

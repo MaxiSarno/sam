@@ -9,17 +9,17 @@ package edu.uade.sam.model;
  */
 public class Label {
 
-	private final Integer testId;
+	private final Long testId;
 	private final Integer labelNumber;
 	private final String description;
 
-	public Label(Integer testId, Integer labelNumber, String desc) {
+	public Label(Long testId, Integer labelNumber, String desc) {
 		this.testId = testId;
 		this.labelNumber = labelNumber;
 		this.description = desc;
 	}
 
-	public Integer getTestId() {
+	public Long getTestId() {
 		return testId;
 	}
 
@@ -41,10 +41,9 @@ public class Label {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + labelNumber;
-		result = prime * result + testId;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((labelNumber == null) ? 0 : labelNumber.hashCode());
+		result = prime * result + ((testId == null) ? 0 : testId.hashCode());
 		return result;
 	}
 
@@ -62,9 +61,15 @@ public class Label {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (labelNumber != other.labelNumber)
+		if (labelNumber == null) {
+			if (other.labelNumber != null)
+				return false;
+		} else if (!labelNumber.equals(other.labelNumber))
 			return false;
-		if (testId != other.testId)
+		if (testId == null) {
+			if (other.testId != null)
+				return false;
+		} else if (!testId.equals(other.testId))
 			return false;
 		return true;
 	}

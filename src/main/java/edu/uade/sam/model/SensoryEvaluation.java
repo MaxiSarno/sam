@@ -8,18 +8,18 @@ package edu.uade.sam.model;
  */
 public class SensoryEvaluation {
 	
-	private Integer testId;
+	private Long testId;
 	private String name;
 	// private Design design;
 	// private Attribute attributes;
 	// //TODO Segmentation
 	// private EvaluationResult result;
 
-	public Integer getTestId() {
+	public Long getTestId() {
 		return testId;
 	}
 
-	public void setId(Integer testId) {
+	public void setId(Long testId) {
 		this.testId = testId;
 	}
 

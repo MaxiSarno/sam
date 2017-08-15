@@ -27,12 +27,12 @@ public class DesignController {
 	private DesignService designService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Design getDesign(@PathVariable(value = "id") Integer id) {
+	public Design getDesign(@PathVariable(value = "id") Long id) {
 		return designService.getTestDesign(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Design createDesign(@PathVariable(value = "id") Integer id,
+	public Design createDesign(@PathVariable(value = "id") Long id,
 			@RequestParam(value = "judges", required = true) Integer judges,
 			@RequestParam(value = "samples", required = true) String samples,
 			@RequestParam(value = "random", required = false, defaultValue = "true") boolean random) {
@@ -51,7 +51,7 @@ public class DesignController {
 	}
 
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
-	public String getDesignCsv(@PathVariable(value = "id") Integer id,
+	public String getDesignCsv(@PathVariable(value = "id") Long id,
 			@RequestParam(name = "type", defaultValue = "csv") String type) {
 		Design design = designService.getTestDesign(id);
 		return this.writeDesign(design, type);

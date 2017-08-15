@@ -14,12 +14,12 @@ import edu.uade.sam.service.SensoryEvaluationService;
 @Component
 public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	
-	private Map<Integer, SensoryEvaluation> dao = new HashMap<>();
+	private Map<Long, SensoryEvaluation> dao = new HashMap<>();
 
 	@Override
-	public Integer save(String name) {
+	public Long save(String name) {
 		//FIXME este id apesta
-		Integer id= (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
+		Long id= (System.currentTimeMillis() % Long.MAX_VALUE);
 		SensoryEvaluation evaluation = new SensoryEvaluation();
 		evaluation.setName(name);
 		evaluation.setId(id);
@@ -35,7 +35,7 @@ public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	}
 
 	@Override
-	public SensoryEvaluation get(Integer id) {		
+	public SensoryEvaluation get(Long id) {		
 		return dao.get(id);
 	}
 

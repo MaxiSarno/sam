@@ -2,6 +2,8 @@ package edu.uade.sam.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * Diseño de una prueba, solo la parte que aplica a un juez en particular.
  * 
@@ -10,6 +12,7 @@ import java.util.List;
  */
 public class DesignSlot {
 
+	@Id
 	private final int judge;
 	private final List<Label> labels;
 

@@ -22,6 +22,6 @@ public interface LabelService {
 	 * @param descriptions
 	 * @return
 	 */
-	public List<Label> createLabels(Integer testId, List<String> descriptions);
+	public List<Label> createLabels(Long testId, List<String> descriptions);
 
 }

@@ -15,7 +15,7 @@ public class LabelServiceImpl implements LabelService {
 	
 	public static final int LABEL_MAX_VALUE = 999;
 	
-	private static Map<Integer, List<Integer>> cache = new HashMap<Integer, List<Integer>>();
+	private static Map<Long, List<Integer>> cache = new HashMap<Long, List<Integer>>();
 	private static final List<Integer> numbers = LabelServiceImpl.setupNumbers();
 	
 	private static List<Integer> setupNumbers() {
@@ -26,7 +26,7 @@ public class LabelServiceImpl implements LabelService {
 		return numbers;
 	}
 
-	public List<Label> createLabels(Integer testId, List<String> descriptions) {
+	public List<Label> createLabels(Long testId, List<String> descriptions) {
 		List<Label> labels = new ArrayList<Label>();
 		
 		for(String desc : descriptions) {
@@ -38,7 +38,7 @@ public class LabelServiceImpl implements LabelService {
 		return labels;
 	}
 
-	private Integer getLabelNumber(Integer testId) {
+	private Integer getLabelNumber(Long testId) {
 		List<Integer> availableNumbers = this.getAvailableNumbers(testId);
 		int index = this.randomBetween(availableNumbers.size());
 		
@@ -48,7 +48,7 @@ public class LabelServiceImpl implements LabelService {
 		return labelNumber;
 	}
 
-	private List<Integer> getAvailableNumbers(Integer testId) {
+	private List<Integer> getAvailableNumbers(Long testId) {
 		if (!cache.containsKey(testId)) {
 			cache.put(testId, new ArrayList<Integer>(numbers));
 		}

@@ -33,10 +33,10 @@ public class DesignServiceImpl implements DesignService {
 	@Autowired
 	private SensoryEvaluationService sensoryEvaluationService;
 	
-	private Map<Integer, Design> designDAO = new HashMap<>();
+	private Map<Long, Design> designDAO = new HashMap<>();
 	
 
-	public Design generateDesign(Integer testId, Integer judges, List<String> samples) {
+	public Design generateDesign(Long testId, Integer judges, List<String> samples) {
 		if (null == this.sensoryEvaluationService.get(testId)) {
 			return null;
 		}
@@ -53,7 +53,7 @@ public class DesignServiceImpl implements DesignService {
 	}
 
 	@Override
-	public Design generateDesignRandom(Integer testId, Integer judges, List<String> samples) {
+	public Design generateDesignRandom(Long testId, Integer judges, List<String> samples) {
 		Design design = this.generateDesign(testId, judges, samples);
 		
 		for(DesignSlot slot : design.getDesignSlots()) {
@@ -64,7 +64,7 @@ public class DesignServiceImpl implements DesignService {
 	}
 	
 	@Override
-	public Design getTestDesign(Integer testId) {
+	public Design getTestDesign(Long testId) {
 		return designDAO.get(testId);
 	}
 	

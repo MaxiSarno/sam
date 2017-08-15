@@ -21,7 +21,7 @@ public interface SensoryEvaluationService {
 	 * @param name
 	 * @return testId
 	 */
-	public Integer save(String name);
+	public Long save(String name);
 
 	/**
 	 * Devuelve todas las evaluaciones.
@@ -36,6 +36,6 @@ public interface SensoryEvaluationService {
 	 * @param id
 	 * @return Evaluacion con ese id
 	 */
-	public SensoryEvaluation get(Integer id);
+	public SensoryEvaluation get(Long id);
 
 }
