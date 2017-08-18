@@ -2,6 +2,7 @@ package edu.uade.sam.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class DesignSlot {
 	private long id;
 	@Column
 	private final int judge;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private final List<Label> labels;
 
 	public DesignSlot(int i, List<Label> labels) {

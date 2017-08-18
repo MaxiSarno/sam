@@ -2,6 +2,7 @@ package edu.uade.sam.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,13 +24,14 @@ public class Design {
 
 	private final long sensoryEvaluationId;
 
+	@OneToMany(cascade=CascadeType.ALL)
+	private final List<DesignSlot> designSlots;
+	
+	
 	public Design(long sensoryEvaluationId, List<DesignSlot> designSlots) {
 		this.sensoryEvaluationId = sensoryEvaluationId;
 		this.designSlots = designSlots;
 	}
-	
-	@OneToMany
-	private final List<DesignSlot> designSlots;
 
 	public long getId() {
 		return id;

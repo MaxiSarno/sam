@@ -18,9 +18,11 @@ import javax.persistence.Transient;
 public class Label {
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	@Column
 	private final Integer labelNumber;
 	//FIXME sacar el test id
-	@Column
+	@Transient
 	private final Long testId;
 	@Column
 	private final String description;
