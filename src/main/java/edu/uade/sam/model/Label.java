@@ -20,13 +20,16 @@ public class Label {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@Column
-	private final Integer labelNumber;
+	private Integer labelNumber;
 	//FIXME sacar el test id
 	@Transient
-	private final Long testId;
+	private Long testId;
 	@Column
-	private final String description;
+	private String description;
 
+	
+	public Label() {}
+	
 	public Label(Long testId, Integer labelNumber, String desc) {
 		this.testId = testId;
 		this.labelNumber = labelNumber;
@@ -45,10 +48,30 @@ public class Label {
 		return description;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setLabelNumber(Integer labelNumber) {
+		this.labelNumber = labelNumber;
+	}
+
+	public void setTestId(Long testId) {
+		this.testId = testId;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
-		return "Label [testId=" + testId + ", labelNumber=" + labelNumber
-				+ ", description=" + description + "]";
+		return "Label [id=" + id + ", labelNumber=" + labelNumber + ", testId=" + testId + ", description="
+				+ description + "]";
 	}
 
 	@Override
@@ -56,6 +79,7 @@ public class Label {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((labelNumber == null) ? 0 : labelNumber.hashCode());
 		result = prime * result + ((testId == null) ? 0 : testId.hashCode());
 		return result;
@@ -74,6 +98,8 @@ public class Label {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
+			return false;
+		if (id != other.id)
 			return false;
 		if (labelNumber == null) {
 			if (other.labelNumber != null)

@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -19,26 +17,18 @@ import javax.persistence.OneToMany;
 public class Design {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-
-	private final long sensoryEvaluationId;
+	private long sensoryEvaluationId;
 
 	@OneToMany(cascade=CascadeType.ALL)
-	private final List<DesignSlot> designSlots;
+	private List<DesignSlot> designSlots;
 	
+	
+	//for hibernate
+	public Design() {}
 	
 	public Design(long sensoryEvaluationId, List<DesignSlot> designSlots) {
 		this.sensoryEvaluationId = sensoryEvaluationId;
 		this.designSlots = designSlots;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public long getSensoryEvaluationId() {
@@ -49,10 +39,17 @@ public class Design {
 		return designSlots;
 	}
 
+	public void setSensoryEvaluationId(long sensoryEvaluationId) {
+		this.sensoryEvaluationId = sensoryEvaluationId;
+	}
+
+	public void setDesignSlots(List<DesignSlot> designSlots) {
+		this.designSlots = designSlots;
+	}
+
 	@Override
 	public String toString() {
-		return "Design [id=" + id + ", sensoryEvaluationId=" + sensoryEvaluationId + ", designSlots=" + designSlots
-				+ "]";
+		return "Design [sensoryEvaluationId=" + sensoryEvaluationId + ", designSlots=" + designSlots + "]";
 	}
 
 	@Override
@@ -60,7 +57,6 @@ public class Design {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((designSlots == null) ? 0 : designSlots.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (int) (sensoryEvaluationId ^ (sensoryEvaluationId >>> 32));
 		return result;
 	}
@@ -78,8 +74,6 @@ public class Design {
 			if (other.designSlots != null)
 				return false;
 		} else if (!designSlots.equals(other.designSlots))
-			return false;
-		if (id != other.id)
 			return false;
 		if (sensoryEvaluationId != other.sensoryEvaluationId)
 			return false;

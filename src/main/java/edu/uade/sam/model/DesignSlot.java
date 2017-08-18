@@ -23,12 +23,15 @@ public class DesignSlot {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@Column
-	private final int judge;
+	private int judge;
 	@OneToMany(cascade=CascadeType.ALL)
-	private final List<Label> labels;
+	private List<Label> labels;
 
-	public DesignSlot(int i, List<Label> labels) {
-		this.judge = i;
+	
+	public DesignSlot() {}
+	
+	public DesignSlot(int judge, List<Label> labels) {
+		this.judge = judge;
 		this.labels = labels;
 	}
 
@@ -40,9 +43,56 @@ public class DesignSlot {
 		return labels;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setJudge(int judge) {
+		this.judge = judge;
+	}
+
+	public void setLabels(List<Label> labels) {
+		this.labels = labels;
+	}
+
 	@Override
 	public String toString() {
 		return "TestDesignSlot [judge=" + judge + ", labels=" + labels + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + judge;
+		result = prime * result + ((labels == null) ? 0 : labels.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DesignSlot other = (DesignSlot) obj;
+		if (id != other.id)
+			return false;
+		if (judge != other.judge)
+			return false;
+		if (labels == null) {
+			if (other.labels != null)
+				return false;
+		} else if (!labels.equals(other.labels))
+			return false;
+		return true;
 	}
 
 }
