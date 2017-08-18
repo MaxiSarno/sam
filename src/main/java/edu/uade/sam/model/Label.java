@@ -1,5 +1,12 @@
 package edu.uade.sam.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 /**
  * Etiqueta para una muestra de una prueba, se usa para ofuscar la muestra para
  * los jueces.
@@ -7,10 +14,15 @@ package edu.uade.sam.model;
  * @author maxi
  *
  */
+@Entity
 public class Label {
 
-	private final Long testId;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private final Integer labelNumber;
+	//FIXME sacar el test id
+	@Column
+	private final Long testId;
+	@Column
 	private final String description;
 
 	public Label(Long testId, Integer labelNumber, String desc) {

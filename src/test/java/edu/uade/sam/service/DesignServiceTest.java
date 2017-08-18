@@ -8,11 +8,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import edu.uade.sam.dao.DesignRepository;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.DesignSlot;
 import edu.uade.sam.model.SensoryEvaluation;
@@ -37,6 +41,14 @@ public class DesignServiceTest {
 		SensoryEvaluationService sensoryEvaluationService = Mockito.mock(SensoryEvaluationService.class);
 		Mockito.when(sensoryEvaluationService.get(Mockito.anyLong())).thenReturn(new SensoryEvaluation());
 		designService.setSensoryEvaluationService(sensoryEvaluationService);
+		
+		DesignRepository designDao = Mockito.mock(DesignRepository.class);
+		Mockito.when(designDao.save(Matchers.any(Design.class))).thenAnswer(new Answer<Object>() {
+		    public Object answer(InvocationOnMock invocation) {
+		        return invocation.getArguments()[0];
+		    }
+		});
+		designService.setDesignDao(designDao);
 	}
 
 	@Test

@@ -1,9 +1,8 @@
 package edu.uade.sam.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import edu.uade.sam.dao.DesignRepository;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.DesignSlot;
 import edu.uade.sam.model.Label;
@@ -33,7 +33,8 @@ public class DesignServiceImpl implements DesignService {
 	@Autowired
 	private SensoryEvaluationService sensoryEvaluationService;
 	
-	private Map<Long, Design> designDAO = new HashMap<>();
+	@Autowired
+	private DesignRepository designDao;
 	
 
 	public Design generateDesign(Long testId, Integer judges, List<String> samples) {
@@ -41,15 +42,16 @@ public class DesignServiceImpl implements DesignService {
 			return null;
 		}
 		
-		Design d = new Design();
-		designDAO.put(testId, d);
+		List<DesignSlot> designSlots = new ArrayList<>();
 		
 		for (int i=1; i<=judges; i++) {
 			List<Label> labels = labelService.createLabels(testId , samples);
-			d.getDesignSlots().add(new DesignSlot(i, labels));
+			designSlots.add(new DesignSlot(i, labels));
 		}
+
+		Design d = new Design(testId, designSlots);
 		
-		return d;
+		return designDao.save(d);
 	}
 
 	@Override
@@ -65,17 +67,23 @@ public class DesignServiceImpl implements DesignService {
 	
 	@Override
 	public Design getTestDesign(Long testId) {
-		return designDAO.get(testId);
+		return designDao.findBySensoryEvaluationId(testId);
 	}
-	
 
+	
 	@VisibleForTesting
 	public void setLabelService(LabelService labelService) {
 		this.labelService = labelService;
 	}
 
+	@VisibleForTesting
 	public void setSensoryEvaluationService(SensoryEvaluationService sensoryEvaluationService) {
 		this.sensoryEvaluationService = sensoryEvaluationService;
+	}
+	
+	@VisibleForTesting
+	public void setDesignDao(DesignRepository designDao) {
+		this.designDao = designDao;
 	}
 
 }

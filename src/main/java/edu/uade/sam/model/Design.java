@@ -1,7 +1,12 @@
 package edu.uade.sam.model;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Diseño de una prueba con ciertas muestras para una poblacion especifica.
@@ -9,11 +14,23 @@ import java.util.List;
  * @author maxi
  *
  */
+@Entity
 public class Design {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private final List<DesignSlot> designSlots;
+
+	private final long sensoryEvaluationId;
+
+	public Design(long sensoryEvaluationId, List<DesignSlot> designSlots) {
+		this.sensoryEvaluationId = sensoryEvaluationId;
+		this.designSlots = designSlots;
+	}
 	
+	@OneToMany
+	private final List<DesignSlot> designSlots;
+
 	public long getId() {
 		return id;
 	}
@@ -22,20 +39,27 @@ public class Design {
 		this.id = id;
 	}
 
-	public Design() {
-		this.designSlots = new ArrayList<DesignSlot>();
+	public long getSensoryEvaluationId() {
+		return sensoryEvaluationId;
 	}
 
 	public List<DesignSlot> getDesignSlots() {
 		return designSlots;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Design [id=" + id + ", sensoryEvaluationId=" + sensoryEvaluationId + ", designSlots=" + designSlots
+				+ "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((designSlots == null) ? 0 : designSlots.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (sensoryEvaluationId ^ (sensoryEvaluationId >>> 32));
 		return result;
 	}
 
@@ -55,12 +79,9 @@ public class Design {
 			return false;
 		if (id != other.id)
 			return false;
+		if (sensoryEvaluationId != other.sensoryEvaluationId)
+			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Design [id=" + id + ", designSlots=" + designSlots + "]";
 	}
 
 }
