@@ -10,6 +10,4 @@ import edu.uade.sam.model.Design;
  */
 public interface DesignRepository extends JpaRepository<Design, Long> {
 
-	public Design findBySensoryEvaluationId(long sensoryEvaluationId);
-	
 }

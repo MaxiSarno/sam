@@ -31,7 +31,7 @@ public class LabelServiceImpl implements LabelService {
 		
 		for(String desc : descriptions) {
 			Integer labelNumber = this.getLabelNumber(testId);
-			Label label = new Label(testId, labelNumber, desc);
+			Label label = new Label(labelNumber, desc);
 			labels.add(label);
 		}
 		

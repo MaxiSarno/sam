@@ -34,9 +34,7 @@ public class LabelServiceTest {
 		Long testId = 1l;
 		List<Label> labels = labelService.createLabels(testId, LabelServiceTest.descriptions);
 
-		for (Label l : labels) {
-			Assert.assertEquals("TestId", testId, l.getTestId());
-		}
+		Assert.assertEquals("Amount of labels", descriptions.size(), labels.size());
 	}
 
 	@Test

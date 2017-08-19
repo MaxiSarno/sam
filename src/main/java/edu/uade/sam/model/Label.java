@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 /**
  * Etiqueta para una muestra de una prueba, se usa para ofuscar la muestra para
@@ -17,27 +16,21 @@ import javax.persistence.Transient;
 @Entity
 public class Label {
 
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column
 	private Integer labelNumber;
-	//FIXME sacar el test id
-	@Transient
-	private Long testId;
 	@Column
 	private String description;
 
 	
-	public Label() {}
-	
-	public Label(Long testId, Integer labelNumber, String desc) {
-		this.testId = testId;
-		this.labelNumber = labelNumber;
-		this.description = desc;
+	public Label() {
 	}
 
-	public Long getTestId() {
-		return testId;
+	public Label(Integer labelNumber, String desc) {
+		this.labelNumber = labelNumber;
+		this.description = desc;
 	}
 
 	public Integer getLabelNumber() {
@@ -60,18 +53,13 @@ public class Label {
 		this.labelNumber = labelNumber;
 	}
 
-	public void setTestId(Long testId) {
-		this.testId = testId;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@Override
 	public String toString() {
-		return "Label [id=" + id + ", labelNumber=" + labelNumber + ", testId=" + testId + ", description="
-				+ description + "]";
+		return "Label [id=" + id + ", labelNumber=" + labelNumber + ", description=" + description + "]";
 	}
 
 	@Override
@@ -81,7 +69,6 @@ public class Label {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((labelNumber == null) ? 0 : labelNumber.hashCode());
-		result = prime * result + ((testId == null) ? 0 : testId.hashCode());
 		return result;
 	}
 
@@ -105,11 +92,6 @@ public class Label {
 			if (other.labelNumber != null)
 				return false;
 		} else if (!labelNumber.equals(other.labelNumber))
-			return false;
-		if (testId == null) {
-			if (other.testId != null)
-				return false;
-		} else if (!testId.equals(other.testId))
 			return false;
 		return true;
 	}
