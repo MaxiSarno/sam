@@ -66,8 +66,8 @@ public class DesignServiceImpl implements DesignService {
 	}
 	
 	@Override
-	public Design getTestDesign(Long testId) {
-		return designDao.findBySensoryEvaluationId(testId);
+	public Design getTestDesign(Long samId) {
+		return designDao.findOne(samId);
 	}
 
 	

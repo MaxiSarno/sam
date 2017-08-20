@@ -20,14 +20,14 @@ public class CSVParserTest {
 
 	@Test
 	public void parse_all35x8attributes_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(this.mockFile());
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, this.mockFile());
 
 		Assert.assertEquals("Obtengo todos los atributos del csv", 35 * 8, a.size());
 	}
 	
 	@Test
 	public void parse_checkValues_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, mockFile());
 		Integer[] values = {6,5,6,5,3,3,3,3,6,4,4,4,3,4,3,3};
 		// Panelista 1,6,5,6,5,3,3,3,3
 		// Panelista 2,6,4,4,4,3,4,3,3
@@ -39,7 +39,7 @@ public class CSVParserTest {
 	
 	@Test
 	public void parse_checkProduct_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(mockFile());
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, mockFile());
 		// Panelista 1,6,5,6,5,3,3,3,3
 		// Panelista 2,6,4,4,4,3,4,3,3
 

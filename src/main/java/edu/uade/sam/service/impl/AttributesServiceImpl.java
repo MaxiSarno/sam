@@ -14,7 +14,7 @@ import edu.uade.sam.service.AttributesService;
 @Component
 public class AttributesServiceImpl implements AttributesService {
 	
-	private Map<Integer, List<NumericAttribute>> dao;
+	private Map<Long, List<NumericAttribute>> dao;
 	
 	@PostConstruct
 	public void init() {
@@ -22,12 +22,12 @@ public class AttributesServiceImpl implements AttributesService {
 	}
 	
 	@Override
-	public void save(Integer evaluationId, List<NumericAttribute> attributes) {
-		dao.put(evaluationId, attributes);
+	public void save(long samId, List<NumericAttribute> attributes) {
+		dao.put(samId, attributes);
 	}
 
 	@Override
-	public List<NumericAttribute> get(Integer evaluationId) {
+	public List<NumericAttribute> get(long evaluationId) {
 		return dao.get(evaluationId);
 	}
 

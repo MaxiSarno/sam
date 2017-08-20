@@ -15,7 +15,7 @@ import edu.uade.sam.model.NumericAttribute;
 @Service
 public interface AttributesService {
 
-	public void save(Integer evaluationId, List<NumericAttribute> attributes);
+	public void save(long evaluationId, List<NumericAttribute> attributes);
 	
-	public List<NumericAttribute> get(Integer evaluationId);
+	public List<NumericAttribute> get(long evaluationId);
 }

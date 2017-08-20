@@ -18,7 +18,7 @@ public class CSVParserImpl implements CSVParser {
 	public static final String SEPARATOR = ",";
 
 	@Override
-	public List<NumericAttribute> parseNumeric(MultipartFile file) {
+	public List<NumericAttribute> parseNumeric(long samId, MultipartFile file) {
 
 		List<NumericAttribute> attributes = new ArrayList<NumericAttribute>();
 
@@ -38,7 +38,7 @@ public class CSVParserImpl implements CSVParser {
 				// FIXME this.validateHeader(header);
 			} else {
 				for (int i = 1; i < headerAttribute.length; i++) {
-					NumericAttribute attribute = new NumericAttribute(
+					NumericAttribute attribute = new NumericAttribute(samId, 
 							headerProduct[i], headerAttribute[i],
 							Integer.parseInt(values[i]));
 					attributes.add(attribute);

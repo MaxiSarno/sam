@@ -26,9 +26,9 @@ public class AttributesController {
 	private CSVParser csvParser;
 
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
-	public void processUpload(@PathVariable(value = "id") Integer id, @RequestParam MultipartFile file) {
-		List<NumericAttribute> attributes = csvParser.parseNumeric(file);
-		attributesService.save(id, attributes);
+	public void processUpload(@PathVariable(value = "id") long samId, @RequestParam MultipartFile file) {
+		List<NumericAttribute> attributes = csvParser.parseNumeric(samId, file);
+		attributesService.save(samId, attributes);
 		// http://stackoverflow.com/questions/28277182/how-to-upload-csv-file-to-the-database-using-spring-hibernate-mvc
 	}
 	

@@ -10,6 +10,6 @@ import edu.uade.sam.model.NumericAttribute;
 @Service
 public interface CSVParser {
 
-	public List<NumericAttribute> parseNumeric(MultipartFile file);
+	public List<NumericAttribute> parseNumeric(long samId, MultipartFile file);
 
 }
