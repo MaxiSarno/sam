@@ -25,6 +25,7 @@ public class NumericAttribute implements Attribute {
 	// vincular el atributo el participante?
 	// mandarlo a la superclass
 
+	
 	public NumericAttribute() {
 	}
 
