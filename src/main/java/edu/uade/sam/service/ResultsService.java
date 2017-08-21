@@ -18,13 +18,13 @@ public interface ResultsService {
 	 * @param alpha
 	 * @return
 	 */
-	Result generate(Integer testId, float alpha);
+	Result generate(long samId, float alpha);
 	
 	/**
 	 * 
 	 * @param testId
 	 * @return
 	 */
-	Result get(Integer testId);
+	Result get(long samId);
 
 }

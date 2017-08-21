@@ -19,41 +19,37 @@ import edu.uade.sam.model.Result;
 import edu.uade.sam.service.AttributesService;
 import edu.uade.sam.service.CalculatorService;
 import edu.uade.sam.service.ResultsService;
-import edu.uade.sam.service.SensoryEvaluationService;
 
 @Component
 public class ResultsServiceImpl implements ResultsService {
 
 	private Map<Integer, Result> resultsDao = new HashMap<>();
-
+	
 	@Autowired
 	private AttributesService attributesService;
-
-	@Autowired
-	private SensoryEvaluationService sensoryEvaluationService;
 
 	@Autowired
 	@Qualifier("CalculatorServiceSelector")
 	private CalculatorService calculatorService;
 
 	@Override
-	public Result get(Integer testId) {
-		if (!resultsDao.containsKey(testId)) {
+	public Result get(long samId) {
+		if (!resultsDao.containsKey(samId)) {
 			return null;
 		}
 
-		return resultsDao.get(testId);
+		return resultsDao.get(samId);
 	}
 
 	@Override
-	public Result generate(Integer testId, float alpha) {
-//		if (null == this.sensoryEvaluationService.get(testId)) {
-//			return null;
-//		}
+	public Result generate(long samId, float alpha) {
+		List<NumericAttribute> attributes = attributesService.get(samId);
+
+		if (null == attributes) {
+			return null;
+		}
 
 		Result r = new Result(alpha);
-
-		List<NumericAttribute> attributes = attributesService.get(testId);
 
 		Table<String, String, List<Double>> groupsD = this.groupAttributes(attributes);
 
@@ -92,10 +88,5 @@ public class ResultsServiceImpl implements ResultsService {
 	@VisibleForTesting
 	public void setCalculatorService(CalculatorService c) {
 		this.calculatorService = c;
-	}
-
-	@VisibleForTesting
-	public void setSensoryEvaluationService(SensoryEvaluationService sensoryEvaluationService) {
-		this.sensoryEvaluationService = sensoryEvaluationService;
 	}
 }

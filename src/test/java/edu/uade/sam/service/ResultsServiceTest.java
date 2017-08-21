@@ -68,7 +68,6 @@ public class ResultsServiceTest {
 		
 		SensoryEvaluationService sensoryEvaluationService = Mockito.mock(SensoryEvaluationService.class);
 		Mockito.when(sensoryEvaluationService.get(Mockito.anyLong())).thenReturn(new SensoryEvaluation());
-		resultsService.setSensoryEvaluationService(sensoryEvaluationService);
 	}
 
 	@Test
