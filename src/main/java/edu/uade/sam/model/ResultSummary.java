@@ -1,18 +1,28 @@
 package edu.uade.sam.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * @author msarno
  *
  */
+@Entity
 public class ResultSummary {
 
-	private final String name;
-	private final long count;
-	private final double sum;
-	private final double min;
-	private final double max;
-	private final double average;
-	private final double variance;
+	@Id
+	@GeneratedValue
+	private String name;
+	private long count;
+	private double sum;
+	private double min;
+	private double max;
+	private double average;
+	private double variance;
+
+	public ResultSummary() {
+	}
 
 	public ResultSummary(String name, long count, double sum, double min, double max, double average, double variance) {
 		this.name = name;
@@ -52,4 +62,10 @@ public class ResultSummary {
 		return variance;
 	}
 
+	@Override
+	public String toString() {
+		return "ResultSummary [name=" + name + ", count=" + count + ", sum=" + sum + ", min=" + min + ", max=" + max
+				+ ", average=" + average + ", variance=" + variance + "]";
+	}
+	
 }

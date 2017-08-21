@@ -49,7 +49,7 @@ public class ResultsServiceImpl implements ResultsService {
 			return null;
 		}
 
-		Result r = new Result(alpha);
+		Result r = new Result(samId, alpha);
 
 		Table<String, String, List<Double>> groupsD = this.groupAttributes(attributes);
 
