@@ -14,10 +14,10 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceBasic implements CalculatorService {
 
 	@Override
-	public PartialResult calculate(Map<String, double[]> groups, float alpha) {
+	public PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha) {
 		List<ResultSummary> summaries = calculateSummaries(groups);
 		
-		return new PartialResult(Distribution.NONE, false, summaries);
+		return new PartialResult(attributeName, Distribution.NONE, false, summaries);
 	}
 
 }

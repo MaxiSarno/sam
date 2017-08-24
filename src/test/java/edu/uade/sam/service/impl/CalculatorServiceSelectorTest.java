@@ -26,6 +26,7 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceSelectorTest {
 
 	private static final float ALPHA = 0.05f;
+	private static final String ATTRIBUTE_NAME = "Careers";
 
 	@Autowired
 	@Qualifier("CalculatorServiceSelector")
@@ -46,7 +47,7 @@ public class CalculatorServiceSelectorTest {
 
 	@Test
 	public void calculate_resultSummary_ok() {
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertNotNull("anova result summaries", r.getSummaries());
 		Assert.assertEquals("anova result summaries", 3, r.getSummaries().size());
@@ -55,17 +56,17 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummaryName_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
-		Assert.assertEquals("anova result summary count", "economics", r.getSummaries().get(0).getName());
-		Assert.assertEquals("anova result summary count", "medicine", r.getSummaries().get(1).getName());
-		Assert.assertEquals("anova result summary count", "history", r.getSummaries().get(2).getName());
+		Assert.assertEquals("anova result summary count", "economics", r.getSummaries().get(0).getSampleName());
+		Assert.assertEquals("anova result summary count", "medicine", r.getSummaries().get(1).getSampleName());
+		Assert.assertEquals("anova result summary count", "history", r.getSummaries().get(2).getSampleName());
 	}
 
 	@Test
 	public void calculate_resultSummaryCount_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary count", 9, r.getSummaries().get(0).getCount());
 		Assert.assertEquals("anova result summary count", 7, r.getSummaries().get(1).getCount(), 0.00001);
@@ -75,7 +76,7 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummarySum_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary sum", 435, r.getSummaries().get(0).getSum(), 0.00001);
 		Assert.assertEquals("anova result summary sum", 420, r.getSummaries().get(1).getSum(), 0.00001);
@@ -85,7 +86,7 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummaryMax_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary sum", 54, r.getSummaries().get(0).getMax(), 0.00001);
 		Assert.assertEquals("anova result summary sum", 69, r.getSummaries().get(1).getMax(), 0.00001);
@@ -95,7 +96,7 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummaryMin_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary sum", 42, r.getSummaries().get(0).getMin(), 0.00001);
 		Assert.assertEquals("anova result summary sum", 54, r.getSummaries().get(1).getMin(), 0.00001);
@@ -105,7 +106,7 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummaryAverage_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary average", 48.33333, r.getSummaries().get(0).getAverage(), 0.00001);
 		Assert.assertEquals("anova result summary average", 60, r.getSummaries().get(1).getAverage(), 0.00001);
@@ -115,7 +116,7 @@ public class CalculatorServiceSelectorTest {
 	@Test
 	public void calculate_resultSummaryVariance_ok() {
 
-		PartialResult r = calculatorService.calculate(threeGroups, ALPHA);
+		PartialResult r = calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 
 		Assert.assertEquals("anova result summary variance", 23.5, r.getSummaries().get(0).getVariance(), 0.00001);
 		Assert.assertEquals("anova result summary variance", 32.33333, r.getSummaries().get(1).getVariance(), 0.00001);
@@ -130,9 +131,9 @@ public class CalculatorServiceSelectorTest {
 		c.setBasic(basic);
 		c.setStudentT(studentT);
 		
-		c.calculate(oneGroup, ALPHA);
+		c.calculate(ATTRIBUTE_NAME, oneGroup, ALPHA);
 		
-		Mockito.verify(basic).calculate(oneGroup, ALPHA);
+		Mockito.verify(basic).calculate(ATTRIBUTE_NAME, oneGroup, ALPHA);
 	}
 
 	@Test
@@ -143,9 +144,9 @@ public class CalculatorServiceSelectorTest {
 		c.setAnova(anova);
 		c.setStudentT(studentT);
 		
-		c.calculate(twoGroups, ALPHA);
+		c.calculate(ATTRIBUTE_NAME, twoGroups, ALPHA);
 		
-		Mockito.verify(studentT).calculate(twoGroups, ALPHA);
+		Mockito.verify(studentT).calculate(ATTRIBUTE_NAME, twoGroups, ALPHA);
 	}
 
 	@Test
@@ -156,9 +157,9 @@ public class CalculatorServiceSelectorTest {
 		c.setAnova(anova);
 		c.setStudentT(studentT);
 		
-		c.calculate(threeGroups, ALPHA);
+		c.calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 		
-		Mockito.verify(anova).calculate(threeGroups, ALPHA);
+		Mockito.verify(anova).calculate(ATTRIBUTE_NAME, threeGroups, ALPHA);
 	}
 
 }

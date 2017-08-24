@@ -19,6 +19,7 @@ public class PartialResult {
 	@Id
 	@GeneratedValue
 	private long id;
+	private String attributeName;
 	private boolean areDifferent;
 	private Distribution distribution;
 	@OneToMany
@@ -27,22 +28,58 @@ public class PartialResult {
 	public PartialResult() {
 	}
 
-	public PartialResult(Distribution distribution, boolean areDifferent, List<ResultSummary> summaries) {
+	public PartialResult(String attributeName, Distribution distribution, boolean areDifferent,
+			List<ResultSummary> summaries) {
+		this.attributeName = attributeName;
 		this.distribution = distribution;
 		this.areDifferent = areDifferent;
 		this.summaries = summaries;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
+	}
+
+	public boolean getAreDifferent() {
+		return areDifferent;
+	}
+
+	public void setAreDifferent(boolean areDifferent) {
+		this.areDifferent = areDifferent;
 	}
 
 	public Distribution getDistribution() {
 		return distribution;
 	}
 
+	public void setDistribution(Distribution distribution) {
+		this.distribution = distribution;
+	}
+
 	public List<ResultSummary> getSummaries() {
 		return summaries;
 	}
 
-	public boolean getAreDifferent() {
-		return areDifferent;
+	public void setSummaries(List<ResultSummary> summaries) {
+		this.summaries = summaries;
+	}
+
+	@Override
+	public String toString() {
+		return "PartialResult [id=" + id + ", attributeName=" + attributeName + ", areDifferent=" + areDifferent
+				+ ", distribution=" + distribution + ", summaries=" + summaries + "]";
 	}
 
 }

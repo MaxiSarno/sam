@@ -53,14 +53,14 @@ public class ResultsServiceImpl implements ResultsService {
 
 		Table<String, String, List<Double>> groupsD = this.groupAttributes(attributes);
 
-		for (String rowKey : groupsD.rowKeySet()) {
+		for (String attributeName : groupsD.rowKeySet()) {
 
 			Map<String, double[]> groups = new HashMap<>();
-			for (Entry<String, List<Double>> e : groupsD.row(rowKey).entrySet()) {
+			for (Entry<String, List<Double>> e : groupsD.row(attributeName).entrySet()) {
 				groups.put(e.getKey(), e.getValue().stream().mapToDouble(d -> d).toArray());
 			}
 
-			r.getPartialResults().add(this.calculatorService.calculate(groups, alpha));
+			r.getPartialResults().add(this.calculatorService.calculate(attributeName, groups, alpha));
 		}
 
 		return r;

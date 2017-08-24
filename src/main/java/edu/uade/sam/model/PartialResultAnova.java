@@ -12,8 +12,8 @@ public class PartialResultAnova extends PartialResult {
 	private final double fCritValue;
 	private final double pValue;
 	
-	public PartialResultAnova(boolean areDifferent, List<ResultSummary> summaries, double fValue, double fCritValue, double pValue) {
-		super(Distribution.ANOVA, areDifferent, summaries);
+	public PartialResultAnova(String attributeName, boolean areDifferent, List<ResultSummary> summaries, double fValue, double fCritValue, double pValue) {
+		super(attributeName, Distribution.ANOVA, areDifferent, summaries);
 		this.fValue = fValue;
 		this.fCritValue = fCritValue;
 		this.pValue = pValue;

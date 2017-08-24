@@ -19,6 +19,8 @@ import edu.uade.sam.service.CalculatorService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CalculatorServiceAnovaTest {
+	
+	private static final String ATTRIBUTE_NAME = "Careers";
 
 	@Autowired
 	@Qualifier("CalculatorServiceAnova")
@@ -38,21 +40,21 @@ public class CalculatorServiceAnovaTest {
 	@Test
 	public void calculate_pValue_ok() {
 
-		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(threeGroups, 0.05f);
+		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, 0.05f);
 		Assert.assertEquals("anova p-value", 7.16E-5, r.getpValue(), 0.00001);
 	}
 
 	@Test
 	public void calculate_fValue_ok() {
 
-		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(threeGroups, 0.05f);
+		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, 0.05f);
 		Assert.assertEquals("anova Fvalue", 15.19623, r.getfValue(), 0.00001);
 	}
 
 	@Test
 	public void calculate_testValue_ok() {
 
-		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(threeGroups, 0.05f);
+		PartialResultAnova r = (PartialResultAnova) calculatorService.calculate(ATTRIBUTE_NAME, threeGroups, 0.05f);
 		Assert.assertEquals("anova test value", true, r.getAreDifferent());
 	}
 	

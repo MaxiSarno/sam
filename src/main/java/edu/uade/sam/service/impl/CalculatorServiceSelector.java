@@ -32,14 +32,14 @@ public class CalculatorServiceSelector implements CalculatorService {
 	private CalculatorServiceBasic basic;
 
 	@Override
-	public PartialResult calculate(Map<String, double[]> groups, float alpha) {
+	public PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha) {
 		if (1 == groups.entrySet().size()) {
-			return basic.calculate(groups, alpha);
+			return basic.calculate(attributeName, groups, alpha);
 		} else if (2 == groups.entrySet().size()) {
-			return studentT.calculate(groups, alpha);
+			return studentT.calculate(attributeName, groups, alpha);
 		}
 
-		return anova.calculate(groups, alpha);
+		return anova.calculate(attributeName, groups, alpha);
 	}
 
 	@VisibleForTesting

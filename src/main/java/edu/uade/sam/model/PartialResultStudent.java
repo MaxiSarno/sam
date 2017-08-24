@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class PartialResultStudent extends PartialResult {
 	
-	public PartialResultStudent(boolean areDifferent, List<ResultSummary> summaries) {
-		super(Distribution.STUDENT_T, areDifferent, summaries);
+	public PartialResultStudent(String attributeName, boolean areDifferent, List<ResultSummary> summaries) {
+		super(attributeName, Distribution.STUDENT_T, areDifferent, summaries);
 	}
 
 }

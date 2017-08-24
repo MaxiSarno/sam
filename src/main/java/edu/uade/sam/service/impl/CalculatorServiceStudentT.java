@@ -24,7 +24,7 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceStudentT implements CalculatorService {
 
 	@Override
-	public PartialResult calculate(Map<String, double[]> groups, float alpha) {
+	public PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha) {
 		TTest t = new TTest();
 
 		Iterator<double[]> i = groups.values().iterator();
@@ -32,7 +32,7 @@ public class CalculatorServiceStudentT implements CalculatorService {
 		double[] sample2 = i.next();
 		boolean areDifferent = t.pairedTTest(sample1, sample2, 0.05);
 
-		return new PartialResultStudent(areDifferent, calculateSummaries(groups));
+		return new PartialResultStudent(attributeName, areDifferent, calculateSummaries(groups));
 		
 		// double t1 = t.pairedT(sample1, sample2);
 		// System.out.println(t1);

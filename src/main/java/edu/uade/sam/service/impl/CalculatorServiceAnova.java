@@ -25,7 +25,7 @@ import edu.uade.sam.service.CalculatorService;
 public class CalculatorServiceAnova implements CalculatorService {
 
 	@Override
-	public PartialResult calculate(Map<String, double[]> groups, float alpha) {
+	public PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha) {
 		if (groups.size() == 2) {
 			throw new RuntimeException();
 		}
@@ -38,7 +38,7 @@ public class CalculatorServiceAnova implements CalculatorService {
 		double fCritValue = 0;
 		double pValue = owa.anovaPValue(groups.values());
 
-		return new PartialResultAnova(areDifferent, summaries, fValue, fCritValue, pValue);
+		return new PartialResultAnova(attributeName, areDifferent, summaries, fValue, fCritValue, pValue);
 	}
 
 }

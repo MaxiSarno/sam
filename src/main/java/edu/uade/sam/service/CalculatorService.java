@@ -24,7 +24,7 @@ public interface CalculatorService {
 	 * @param alpha
 	 * @return
 	 */
-	PartialResult calculate(Map<String, double[]> groups, float alpha);
+	PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha);
 	
 	default List<ResultSummary> calculateSummaries(Map<String, double[]> groups) {
 		List<ResultSummary> summaries = new ArrayList<>();
