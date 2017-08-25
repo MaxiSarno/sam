@@ -3,6 +3,8 @@ package edu.uade.sam.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 /**
  * @author msarno
@@ -11,9 +13,9 @@ import javax.persistence.Entity;
 @Entity
 public class PartialResultAnova extends PartialResult {
 
-	private double fValue;
-	private double fCritValue;
-	private double pValue;
+	private Double fValue;
+	private Double fCritValue;
+	private Double pValue;
 
 	public PartialResultAnova() {
 	}
@@ -24,6 +26,29 @@ public class PartialResultAnova extends PartialResult {
 		this.fValue = fValue;
 		this.fCritValue = fCritValue;
 		this.pValue = pValue;
+	}
+
+	@PrePersist
+	@PreUpdate
+	private void prePersist() {
+		if (isFuckedUp(fValue))
+			fValue = null;
+
+		if (isFuckedUp(fCritValue))
+			fCritValue = null;
+
+		if (isFuckedUp(pValue))
+			pValue = null;
+	}
+
+	private boolean isFuckedUp(Double value) {
+		if (value == null || value.equals(Double.NaN) || value.equals(Double.POSITIVE_INFINITY)
+				|| value.equals(Double.NEGATIVE_INFINITY)) {
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public double getfValue() {
