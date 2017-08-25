@@ -2,6 +2,7 @@ package edu.uade.sam.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ public class PartialResult {
 	private String attributeName;
 	private boolean areDifferent;
 	private Distribution distribution;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<ResultSummary> summaries;
 
 	public PartialResult() {

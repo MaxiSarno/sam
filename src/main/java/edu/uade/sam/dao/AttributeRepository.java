@@ -6,6 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 
 import edu.uade.sam.model.NumericAttribute;
 
+/**
+ * @author msarno
+ *
+ */
 public interface AttributeRepository extends CrudRepository<NumericAttribute, Long> {
 
 	public List<NumericAttribute> findBySamId(long samId);

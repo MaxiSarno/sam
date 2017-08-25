@@ -3,6 +3,7 @@ package edu.uade.sam.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -15,16 +16,16 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Result {
-	
+
 	@Id
 	private long samId;
 	private float alpha;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<PartialResult> partialResults;
-	
-	
-	public Result() {}
-	
+
+	public Result() {
+	}
+
 	public Result(long samid, float alpha) {
 		this.samId = samid;
 		this.alpha = alpha;
@@ -42,7 +43,6 @@ public class Result {
 	public float getAlpha() {
 		return alpha;
 	}
-
 
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
@@ -91,5 +91,5 @@ public class Result {
 			return false;
 		return true;
 	}
-	
+
 }

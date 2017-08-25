@@ -14,6 +14,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 
+import edu.uade.sam.dao.ResultRepository;
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.Result;
 import edu.uade.sam.service.AttributesService;
@@ -23,7 +24,8 @@ import edu.uade.sam.service.ResultsService;
 @Component
 public class ResultsServiceImpl implements ResultsService {
 
-	private Map<Integer, Result> resultsDao = new HashMap<>();
+	@Autowired
+	private ResultRepository resultsDao;
 	
 	@Autowired
 	private AttributesService attributesService;
@@ -34,11 +36,7 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Override
 	public Result get(long samId) {
-		if (!resultsDao.containsKey(samId)) {
-			return null;
-		}
-
-		return resultsDao.get(samId);
+		return resultsDao.findOne(samId);
 	}
 
 	@Override
@@ -62,6 +60,8 @@ public class ResultsServiceImpl implements ResultsService {
 
 			r.getPartialResults().add(this.calculatorService.calculate(attributeName, groups, alpha));
 		}
+		
+		this.resultsDao.save(r);
 
 		return r;
 	}
