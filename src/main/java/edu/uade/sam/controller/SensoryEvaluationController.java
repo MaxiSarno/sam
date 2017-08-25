@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uade.sam.model.SensoryEvaluation;
+import edu.uade.sam.model.SensoryEvaluationType;
 import edu.uade.sam.service.SensoryEvaluationService;
 
 @RestController
@@ -21,8 +22,9 @@ public class SensoryEvaluationController {
 	private SensoryEvaluationService evaluationService;
 
 	@RequestMapping(method=RequestMethod.POST)
-	public Long save(@RequestParam(value="name", required=true) String name) {
-		return evaluationService.save(name);
+	public Long save(@RequestParam(value="name", required=true) String name, 
+			@RequestParam(value="type", required=true)String type) {
+		return evaluationService.save(name, SensoryEvaluationType.fromString(type));
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
