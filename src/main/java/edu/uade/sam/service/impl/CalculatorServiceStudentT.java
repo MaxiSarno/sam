@@ -30,7 +30,7 @@ public class CalculatorServiceStudentT implements CalculatorService {
 		Iterator<double[]> i = groups.values().iterator();
 		double[] sample1 = i.next();
 		double[] sample2 = i.next();
-		boolean areDifferent = t.pairedTTest(sample1, sample2, 0.05);
+		boolean areDifferent = t.pairedTTest(sample1, sample2, alpha);
 
 		return new PartialResultStudent(attributeName, areDifferent, calculateSummaries(groups));
 		
