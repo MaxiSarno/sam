@@ -18,6 +18,9 @@ import edu.uade.sam.service.AttributesService;
 @Component
 public class AttributesServiceImpl implements AttributesService {
 
+	private static final String PANELISTA = "panelista ";
+	private static final String AGRADO = "Nivel de agrado";
+
 	@Inject
 	private AttributeRepository dao;
 
@@ -48,8 +51,8 @@ public class AttributesServiceImpl implements AttributesService {
 	private String getPreferenceTemplate(int judges, List<String> products) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(this.productsTemplate(products)).append("\n");
-		sb.append(this.judgesTemplate(judges));
+		sb.append(this.templateHeaderProducts(products)).append("\n");
+		sb.append(this.templateHeaderJudges(judges));
 
 		return sb.toString();
 	}
@@ -68,7 +71,7 @@ public class AttributesServiceImpl implements AttributesService {
 
 		sb.append(aHeader).append("\n");
 		sb.append(pHeader).append("\n");
-		sb.append(this.judgesTemplate(judges));
+		sb.append(this.templateHeaderJudges(judges));
 
 		return sb.toString();
 	}
@@ -76,13 +79,24 @@ public class AttributesServiceImpl implements AttributesService {
 	private String getConsumerTemplate(int judges, List<String> products) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(this.productsTemplate(products)).append("\n");
-		sb.append(this.judgesTemplate(judges));
+		sb.append(this.templateHeaderConsumer(products.size())).append("\n");
+		sb.append(this.templateHeaderProducts(products)).append("\n");
+		sb.append(this.templateHeaderJudges(judges));
 
 		return sb.toString();
 	}
 
-	private String productsTemplate(List<String> products) {
+	private String templateHeaderConsumer(int size) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < size; i++) {
+			sb.append(",").append(AGRADO);
+		}
+
+		return sb.toString();
+	}
+
+	private String templateHeaderProducts(List<String> products) {
 		StringBuilder sb = new StringBuilder();
 
 		for (String p : products) {
@@ -92,11 +106,11 @@ public class AttributesServiceImpl implements AttributesService {
 		return sb.toString();
 	}
 
-	private String judgesTemplate(int judges) {
+	private String templateHeaderJudges(int judges) {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 1; i <= judges; i++) {
-			sb.append("judge " + i).append(",").append("\n");
+			sb.append(PANELISTA + i).append(",").append("\n");
 		}
 
 		return sb.toString();
