@@ -16,24 +16,15 @@ import edu.uade.sam.model.Design;
 public interface DesignService {
 	
 	/**
-	 * Crea el diseño de la prueba con etiquetas random, manteniendo el orden de las muestras.
+	 * Crea el diseño de la prueba con etiquetas random, manteniendo el orden o dando un orden aleatorio a las muestras.
 	 * 
 	 * @param testId
 	 * @param judges
 	 * @param samples
+	 * @param random
 	 * @return
 	 */
-	public Design generateDesign(Long testId, Integer judges, List<String> samples);
-	
-	/**
-	 * Crea el diseño de la prueba con etiquetas random, dando un orden aleatorio a las muestras.
-	 * 
-	 * @param testId
-	 * @param judges
-	 * @param samples
-	 * @return
-	 */
-	public Design generateDesignRandom(Long testId, Integer judges, List<String> samples);
+	public Design generateDesign(Long testId, Integer judges, List<String> samples, boolean random);
 	
 	public Design getTestDesign(Long testId);
 

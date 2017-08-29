@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.Label;
 import edu.uade.sam.service.DesignService;
+import edu.uade.sam.service.impl.LabelServiceImpl;
 
 /**
  * @author msarno
@@ -33,17 +35,21 @@ public class DesignController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Design createDesign(@PathVariable(value = "id") Long id,
+	public ResponseEntity<Design> createDesign(@PathVariable(value = "id") Long id,
 			@RequestParam(value = "judges", required = true) Integer judges,
 			@RequestParam(value = "samples", required = true) String samples,
 			@RequestParam(value = "random", required = false, defaultValue = "true") boolean random) {
 		// FIXME validar que exista la SensoryEvaluation
-
-		if (random) {
-			return this.designService.generateDesignRandom(id, judges, Arrays.asList(samples.split(",")));
+		// TODO devolver mensaje de error
+		List<String> sampleList = Arrays.asList(samples.split(","));
+		
+		if (LabelServiceImpl.LABEL_MAX_VALUE < judges*sampleList.size() ) {
+			return ResponseEntity.badRequest().build();
 		}
-
-		return this.designService.generateDesign(id, judges, Arrays.asList(samples.split(",")));
+		
+		Design d = this.designService.generateDesign(id, judges, sampleList, random);
+		
+		return ResponseEntity.ok().body(d);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)

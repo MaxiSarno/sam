@@ -53,13 +53,13 @@ public class DesignServiceTest {
 
 	@Test
 	public void generateDesign_slotsAmount() {
-		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES);
+		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES, false);
 		Assert.assertEquals("Cantidad de DesignSlots generados", JUDGES, d.getDesignSlots().size());
 	}
 
 	@Test
 	public void generateDesign_samplesInEachSlot() {
-		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES);
+		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES, false);
 
 		for (DesignSlot slot : d.getDesignSlots()) {
 			Assert.assertEquals("Cantidad de samples en cada DesignSlots", SAMPLES.size(), slot.getLabels().size());
@@ -68,7 +68,7 @@ public class DesignServiceTest {
 
 	@Test
 	public void generateDesign_orderedSamples() {
-		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES);
+		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES, false);
 
 		for (DesignSlot slot : d.getDesignSlots()) {
 			List<String> samples = slot.getLabels().stream().map(l -> l.getDescription()).collect(Collectors.toList());
@@ -78,7 +78,7 @@ public class DesignServiceTest {
 	
 	@Test
 	public void generateDesignRandom_atLeastSomeDifferent() {
-		Design d = this.designService.generateDesignRandom(1l, JUDGES, SAMPLES);
+		Design d = this.designService.generateDesign(1l, JUDGES, SAMPLES, true);
 		
 		int unalteredSlots = 0;
 		
