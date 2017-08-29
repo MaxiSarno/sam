@@ -2,8 +2,6 @@ package edu.uade.sam.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import edu.uade.sam.model.Label;
 
 /**
@@ -12,7 +10,6 @@ import edu.uade.sam.model.Label;
  * @author maxi
  *
  */
-@Service
 public interface LabelService {
 	
 	/**
@@ -22,6 +19,6 @@ public interface LabelService {
 	 * @param descriptions
 	 * @return
 	 */
-	public List<Label> createLabels(Long testId, List<String> descriptions);
+	public List<Label> createLabels(List<String> descriptions);
 
 }

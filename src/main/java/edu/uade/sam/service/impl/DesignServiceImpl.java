@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +24,6 @@ import edu.uade.sam.service.SensoryEvaluationService;
  */
 @Component
 public class DesignServiceImpl implements DesignService {
-	
-	@Inject
-	private LabelService labelService;
 
 	@Autowired
 	private SensoryEvaluationService sensoryEvaluationService;
@@ -42,10 +37,11 @@ public class DesignServiceImpl implements DesignService {
 			return null;
 		}
 		
+		LabelService labelService = new LabelServiceImpl();
 		List<DesignSlot> designSlots = new ArrayList<>();
 		
 		for (int i=1; i<=judges; i++) {
-			List<Label> labels = labelService.createLabels(testId , samples);
+			List<Label> labels = labelService.createLabels(samples);
 			designSlots.add(new DesignSlot(i, labels));
 		}
 
@@ -68,12 +64,6 @@ public class DesignServiceImpl implements DesignService {
 	@Override
 	public Design getTestDesign(Long samId) {
 		return designDao.findOne(samId);
-	}
-
-	
-	@VisibleForTesting
-	public void setLabelService(LabelService labelService) {
-		this.labelService = labelService;
 	}
 
 	@VisibleForTesting
