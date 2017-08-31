@@ -1,4 +1,4 @@
-package edu.uade.sam;
+package edu.uade.sam.messaging;
 
 /**
  * @author msarno

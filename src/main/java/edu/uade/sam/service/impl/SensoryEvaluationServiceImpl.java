@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import edu.uade.sam.dao.SensoryEvaluationRepository;
 import edu.uade.sam.model.SensoryEvaluation;
+import edu.uade.sam.model.SensoryEvaluationScale;
 import edu.uade.sam.model.SensoryEvaluationType;
 import edu.uade.sam.service.SensoryEvaluationService;
 
@@ -17,10 +18,8 @@ public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	private SensoryEvaluationRepository dao;
 
 	@Override
-	public Long save(String name, SensoryEvaluationType type) {
-		SensoryEvaluation e = new SensoryEvaluation();
-		e.setName(name);
-		e.setType(type);
+	public Long save(String name, SensoryEvaluationType type, SensoryEvaluationScale scale, String author) {
+		SensoryEvaluation e = new SensoryEvaluation(name, type, scale, author);
 		
 		return dao.save(e).getSamId();
 	}

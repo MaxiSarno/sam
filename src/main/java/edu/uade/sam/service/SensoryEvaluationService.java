@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import edu.uade.sam.model.SensoryEvaluation;
+import edu.uade.sam.model.SensoryEvaluationScale;
 import edu.uade.sam.model.SensoryEvaluationType;
 
 /**
@@ -20,10 +21,13 @@ public interface SensoryEvaluationService {
 	 * Crea una nueva evaluacion sensorial.
 	 * 
 	 * @param name
-	 * @param type 
-	 * @return testId
+	 * @param type
+	 * @param scale
+	 * @param author
+	 * @return
 	 */
-	public Long save(String name, SensoryEvaluationType type);
+	public Long save(String name, SensoryEvaluationType type, SensoryEvaluationScale scale, String author);
+	
 
 	/**
 	 * Devuelve todas las evaluaciones.
