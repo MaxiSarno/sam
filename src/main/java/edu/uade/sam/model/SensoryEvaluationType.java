@@ -5,7 +5,7 @@ package edu.uade.sam.model;
  *
  */
 public enum SensoryEvaluationType {
-	CONSUMER("consumer"), HEDONIC("hedonic"), PREFERENCE("preference");
+	CONSUMER("consumer"), HEDONIC("hedonic"), DESCRIPTIVE("descriptive");
 
 	private String value;
 
@@ -17,17 +17,13 @@ public enum SensoryEvaluationType {
 		return value;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	static public SensoryEvaluationType fromString(String value) {
 		if (CONSUMER.value.equals(value)) {
 			return CONSUMER;
 		} else if (HEDONIC.value.equals(value)) {
 			return HEDONIC;
-		} else if (PREFERENCE.value.equals(value)) {
-			return PREFERENCE;
+		} else if (DESCRIPTIVE.value.equals(value)) {
+			return DESCRIPTIVE;
 		}
 		return null;
 	}

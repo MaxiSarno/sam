@@ -2,7 +2,7 @@ package edu.uade.sam.service.impl;
 
 import static edu.uade.sam.model.SensoryEvaluationType.CONSUMER;
 import static edu.uade.sam.model.SensoryEvaluationType.HEDONIC;
-import static edu.uade.sam.model.SensoryEvaluationType.PREFERENCE;
+import static edu.uade.sam.model.SensoryEvaluationType.DESCRIPTIVE;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class AttributesServiceImpl implements AttributesService {
 			return this.getConsumerTemplate(judges, products);
 		} else if (HEDONIC.equals(type)) {
 			return this.getHedonicTemplate(judges, products, attributes);
-		} else if (PREFERENCE.equals(type)) {
+		} else if (DESCRIPTIVE.equals(type)) {
 			return this.getPreferenceTemplate(judges, products);
 		}
 
