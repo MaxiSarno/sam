@@ -15,8 +15,8 @@ public enum SensoryEvaluationScale {
 		this.upperLimit = upperLimit;
 	}
 
-	public boolean belongs(Integer number) {
-		if (lowerLimit <= number && number <= upperLimit)
+	public boolean contains(Integer number) {
+		if (number != null && lowerLimit <= number && number <= upperLimit)
 			return true;
 		else
 			return false;
@@ -26,16 +26,8 @@ public enum SensoryEvaluationScale {
 		return lowerLimit;
 	}
 
-	public void setLowerLimit(Integer lowerLimit) {
-		this.lowerLimit = lowerLimit;
-	}
-
 	public Integer getUpperLimit() {
 		return upperLimit;
-	}
-
-	public void setUpperLimit(Integer upperLimit) {
-		this.upperLimit = upperLimit;
 	}
 
 	public static SensoryEvaluationScale fromString(String scale) {

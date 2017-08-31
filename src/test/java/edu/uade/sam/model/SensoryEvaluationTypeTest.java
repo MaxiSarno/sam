@@ -22,6 +22,15 @@ public class SensoryEvaluationTypeTest {
 	}
 	
 	@Test
+	public void fromString_null() {
+		assertEquals(null, SensoryEvaluationType.fromString(null));
+		assertEquals(null, SensoryEvaluationType.fromString("tuvieja"));
+		assertEquals(null, SensoryEvaluationType.fromString("hedonico"));
+		assertEquals(null, SensoryEvaluationType.fromString("consumidor"));
+		assertEquals(null, SensoryEvaluationType.fromString("descriptiva"));
+	}
+	
+	@Test
 	public void fromString_descriptive() {
 		String value = "descriptive";
 		SensoryEvaluationType t = SensoryEvaluationType.fromString(value);
