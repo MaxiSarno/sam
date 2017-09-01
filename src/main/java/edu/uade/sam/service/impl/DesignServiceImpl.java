@@ -33,10 +33,15 @@ public class DesignServiceImpl implements DesignService {
 	
 
 	public Design generateDesign(Long testId, Integer judges, List<String> samples, boolean random) {
+		Design d = this.generateDesign(testId, judges, samples);
+		
 		if (random) {
-			return this.generateDesignRandom(testId, judges, samples);
+			for (DesignSlot slot : d.getDesignSlots()) {
+				Collections.shuffle(slot.getLabels(), new Random(System.nanoTime()));
+			}
 		}
-		return this.generateDesign(testId, judges, samples);
+		
+		return designDao.save(d);
 	}
 	
 	private Design generateDesign(Long testId, Integer judges, List<String> samples) {
@@ -52,19 +57,7 @@ public class DesignServiceImpl implements DesignService {
 			designSlots.add(new DesignSlot(i, labels));
 		}
 
-		Design d = new Design(testId, designSlots);
-		
-		return designDao.save(d);
-	}
-
-	private Design generateDesignRandom(Long testId, Integer judges, List<String> samples) {
-		Design design = this.generateDesign(testId, judges, samples);
-		
-		for(DesignSlot slot : design.getDesignSlots()) {
-			Collections.shuffle(slot.getLabels(), new Random(System.nanoTime()));
-		}
-		
-		return design;
+		return new Design(testId, designSlots);
 	}
 	
 	@Override

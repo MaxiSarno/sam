@@ -26,6 +26,10 @@ public interface DesignService {
 	 */
 	public Design generateDesign(Long testId, Integer judges, List<String> samples, boolean random);
 	
+	/**
+	 * @param testId
+	 * @return
+	 */
 	public Design getTestDesign(Long testId);
 
 }
