@@ -40,14 +40,6 @@ public class SensoryEvaluationController {
 			return ResponseEntity.badRequest().body(new SamResponse(null, notification));
 		}
 
-		
-		if (samType == null) {
-			return ResponseEntity.badRequest().build();
-		}
-		if (samScale == null) {
-			return ResponseEntity.badRequest().build();
-		}
-
 		Long samId = evaluationService.save(name, samType, samScale, "tuvieja");
 		return ResponseEntity.ok().body(SamResponse.data(samId));
 	}
@@ -62,6 +54,7 @@ public class SensoryEvaluationController {
 		return evaluationService.get(id);
 	}
 
+	// TODO sacar a una clase
 	private SamNotification validateSensoryEvaluationCreation(String name, SensoryEvaluationType samType,
 			SensoryEvaluationScale samScale) {
 		
