@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uade.sam.messaging.SamNotification;
+import edu.uade.sam.messaging.SamNotificationCatalog;
 import edu.uade.sam.messaging.SamResponse;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.Label;
@@ -26,8 +27,6 @@ import edu.uade.sam.service.impl.LabelServiceImpl;
 @RestController
 @RequestMapping("/evaluation/{id}/design")
 public class DesignController {
-	// FIXME que los controllers devuelvan response para setear errores y http
-	// codes
 
 	@Inject
 	private DesignService designService;
@@ -57,7 +56,7 @@ public class DesignController {
 
 	private SamNotification validDesignCreation(Long id, Integer judges, List<String> sampleList, boolean random) {
 		if (LabelServiceImpl.LABEL_MAX_VALUE < judges * sampleList.size()) {
-			return new SamNotification(1,"");
+			return SamNotification.fromCatalog(SamNotificationCatalog.DESIGN_LABELS_OVERFLOW);
 		}
 		
 		return null;
