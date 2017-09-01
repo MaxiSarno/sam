@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.uade.sam.messaging.SamNotification;
+import edu.uade.sam.messaging.SamResponse;
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.Label;
 import edu.uade.sam.service.DesignService;
@@ -24,7 +26,8 @@ import edu.uade.sam.service.impl.LabelServiceImpl;
 @RestController
 @RequestMapping("/evaluation/{id}/design")
 public class DesignController {
-	//FIXME que los controllers devuelvan response para setear errores y http codes
+	// FIXME que los controllers devuelvan response para setear errores y http
+	// codes
 
 	@Inject
 	private DesignService designService;
@@ -35,21 +38,29 @@ public class DesignController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Design> createDesign(@PathVariable(value = "id") Long id,
+	public ResponseEntity<SamResponse> createDesign(@PathVariable(value = "id") Long id,
 			@RequestParam(value = "judges", required = true) Integer judges,
 			@RequestParam(value = "samples", required = true) String samples,
 			@RequestParam(value = "random", required = false, defaultValue = "true") boolean random) {
-		// FIXME validar que exista la SensoryEvaluation
-		// TODO devolver mensaje de error
+
 		List<String> sampleList = Arrays.asList(samples.split(","));
-		
-		if (LabelServiceImpl.LABEL_MAX_VALUE < judges*sampleList.size() ) {
-			return ResponseEntity.badRequest().build();
+		SamNotification notification = this.validDesignCreation(id, judges, sampleList, random);
+
+		if (notification != null) {
+			return ResponseEntity.badRequest().body(new SamResponse(null, notification));
+		}
+
+		Design d = this.designService.generateDesign(id, judges, sampleList, random);
+
+		return ResponseEntity.ok().body(new SamResponse(d, null));
+	}
+
+	private SamNotification validDesignCreation(Long id, Integer judges, List<String> sampleList, boolean random) {
+		if (LabelServiceImpl.LABEL_MAX_VALUE < judges * sampleList.size()) {
+			return new SamNotification(1,"");
 		}
 		
-		Design d = this.designService.generateDesign(id, judges, sampleList, random);
-		
-		return ResponseEntity.ok().body(d);
+		return null;
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
