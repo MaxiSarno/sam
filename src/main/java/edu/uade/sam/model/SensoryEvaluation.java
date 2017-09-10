@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * Esta clase engloba todos los aspectos relacionados con la evaluación
  * sensorial.
@@ -70,6 +72,7 @@ public class SensoryEvaluation {
 		this.scale = scale;
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", locale = "es_AR")
 	public Date getCreated() {
 		return created;
 	}

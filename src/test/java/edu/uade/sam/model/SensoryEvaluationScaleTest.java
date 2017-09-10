@@ -10,16 +10,16 @@ public class SensoryEvaluationScaleTest {
 	
 	@Test
 	public void fromString_nine() {
-		String value = "nine";
-		SensoryEvaluationScale t = SensoryEvaluationScale.fromString(value);
+		String name = "nueve";
+		SensoryEvaluationScale t = SensoryEvaluationScale.fromString(name);
 		
 		assertEquals(SensoryEvaluationScale.NINE, t);
 	}
 	
 	@Test
 	public void fromString_five() {
-		String value = "five";
-		SensoryEvaluationScale t = SensoryEvaluationScale.fromString(value);
+		String name = "cinco";
+		SensoryEvaluationScale t = SensoryEvaluationScale.fromString(name);
 		
 		assertEquals(SensoryEvaluationScale.FIVE, t);
 	}
@@ -28,8 +28,8 @@ public class SensoryEvaluationScaleTest {
 	public void fromString_null() {
 		assertEquals(null, SensoryEvaluationScale.fromString(null));
 		assertEquals(null, SensoryEvaluationScale.fromString("tuvieja"));
-		assertEquals(null, SensoryEvaluationScale.fromString("cinco"));
-		assertEquals(null, SensoryEvaluationScale.fromString("nueve"));
+		assertEquals(null, SensoryEvaluationScale.fromString("five"));
+		assertEquals(null, SensoryEvaluationScale.fromString("nine"));
 	}
 	
 	@Test
