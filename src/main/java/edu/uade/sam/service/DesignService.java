@@ -30,6 +30,6 @@ public interface DesignService {
 	 * @param testId
 	 * @return
 	 */
-	public Design getTestDesign(Long testId);
+	public Design getDesign(Long testId);
 
 }

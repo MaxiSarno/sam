@@ -57,11 +57,11 @@ public class DesignServiceImpl implements DesignService {
 			designSlots.add(new DesignSlot(i, labels));
 		}
 
-		return new Design(testId, designSlots);
+		return new Design(testId, judges, String.join(",", samples), designSlots);
 	}
 	
 	@Override
-	public Design getTestDesign(Long samId) {
+	public Design getDesign(Long samId) {
 		return designDao.findOne(samId);
 	}
 

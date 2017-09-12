@@ -17,67 +17,52 @@ import javax.persistence.OneToMany;
 public class Design {
 
 	@Id
-	private long sensoryEvaluationId;
-
-	@OneToMany(cascade=CascadeType.ALL)
+	private long samId;
+	private Integer judges;
+	private String samples;
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<DesignSlot> designSlots;
-	
-	
-	//for hibernate
-	public Design() {}
-	
-	public Design(long sensoryEvaluationId, List<DesignSlot> designSlots) {
-		this.sensoryEvaluationId = sensoryEvaluationId;
+
+	public Design() {
+	}
+
+	public Design(long samId, Integer judges, String samples, List<DesignSlot> designSlots) {
+		this.judges = judges;
+		this.samples = samples;
+		this.samId = samId;
 		this.designSlots = designSlots;
 	}
 
-	public long getSensoryEvaluationId() {
-		return sensoryEvaluationId;
+	public long getSamId() {
+		return samId;
+	}
+
+	public void setSamId(long samId) {
+		this.samId = samId;
+	}
+
+	public Integer getJudges() {
+		return judges;
+	}
+
+	public void setJudges(Integer judges) {
+		this.judges = judges;
+	}
+
+	public String getSamples() {
+		return samples;
+	}
+
+	public void setSamples(String samples) {
+		this.samples = samples;
 	}
 
 	public List<DesignSlot> getDesignSlots() {
 		return designSlots;
 	}
 
-	public void setSensoryEvaluationId(long sensoryEvaluationId) {
-		this.sensoryEvaluationId = sensoryEvaluationId;
-	}
-
 	public void setDesignSlots(List<DesignSlot> designSlots) {
 		this.designSlots = designSlots;
-	}
-
-	@Override
-	public String toString() {
-		return "Design [sensoryEvaluationId=" + sensoryEvaluationId + ", designSlots=" + designSlots + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((designSlots == null) ? 0 : designSlots.hashCode());
-		result = prime * result + (int) (sensoryEvaluationId ^ (sensoryEvaluationId >>> 32));
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Design other = (Design) obj;
-		if (designSlots == null) {
-			if (other.designSlots != null)
-				return false;
-		} else if (!designSlots.equals(other.designSlots))
-			return false;
-		if (sensoryEvaluationId != other.sensoryEvaluationId)
-			return false;
-		return true;
 	}
 
 }

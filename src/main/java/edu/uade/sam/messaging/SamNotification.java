@@ -7,8 +7,8 @@ package edu.uade.sam.messaging;
 public class SamNotification {
 
 	private int number;
-	private String message;
 
+	private String message;
 	public static SamNotification fromCatalog(SamNotificationCatalog c) {
 		return new SamNotification(c.id, c.description);
 	}

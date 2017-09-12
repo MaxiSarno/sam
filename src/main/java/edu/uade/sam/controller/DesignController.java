@@ -33,7 +33,7 @@ public class DesignController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Design getDesign(@PathVariable(value = "id") Long id) {
-		return designService.getTestDesign(id);
+		return designService.getDesign(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -70,7 +70,7 @@ public class DesignController {
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public String getDesignCsv(@PathVariable(value = "id") Long id,
 			@RequestParam(name = "type", defaultValue = "csv") String type) {
-		Design design = designService.getTestDesign(id);
+		Design design = designService.getDesign(id);
 		return this.writeDesign(design, type);
 	}
 
