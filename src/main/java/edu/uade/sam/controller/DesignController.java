@@ -1,9 +1,11 @@
 package edu.uade.sam.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,7 @@ import edu.uade.sam.service.impl.LabelServiceImpl;
 @RequestMapping("/evaluation/{id}/design")
 public class DesignController {
 
+	private static final String TEMPLATE_NAME = "diseño-sam-";
 	@Inject
 	private DesignService designService;
 
@@ -58,7 +61,7 @@ public class DesignController {
 		if (LabelServiceImpl.LABEL_MAX_VALUE < judges * sampleList.size()) {
 			return SamNotification.fromCatalog(SamNotificationCatalog.DESIGN_LABELS_OVERFLOW);
 		}
-		
+
 		return null;
 	}
 
@@ -68,10 +71,18 @@ public class DesignController {
 	}
 
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
-	public String getDesignCsv(@PathVariable(value = "id") Long id,
-			@RequestParam(name = "type", defaultValue = "csv") String type) {
+	public void getDesignCsv(@PathVariable(value = "id") Long id,
+			@RequestParam(name = "type", defaultValue = "csv") String type, HttpServletResponse response)
+			throws IOException {
+		
 		Design design = designService.getDesign(id);
-		return this.writeDesign(design, type);
+		String csv = this.writeDesign(design, type);
+
+		response.setContentLength((int) csv.length());
+		response.setContentType("application/octet-stream");
+		response.setContentType("application/force-download");
+		response.setHeader("Content-Disposition", "attachment; filename=" + TEMPLATE_NAME + id + ".csv");
+		response.getWriter().print(csv);
 	}
 
 	private String writeDesign(Design design, String type) {

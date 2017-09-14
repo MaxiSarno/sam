@@ -26,7 +26,7 @@ import edu.uade.sam.utils.csv.CSVParser;
 @RequestMapping("/evaluation/{id}/attributes")
 public class AttributesController {
 
-	private static final String TEMPLATE_NAME = "attributes-template-samId-";
+	private static final String TEMPLATE_NAME = "atributos-sam-";
 
 	@Inject
 	private AttributesService attributesService;
