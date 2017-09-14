@@ -16,9 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mysql.jdbc.StringUtils;
 
+import edu.uade.sam.model.Design;
 import edu.uade.sam.model.NumericAttribute;
 import edu.uade.sam.model.SensoryEvaluation;
 import edu.uade.sam.service.AttributesService;
+import edu.uade.sam.service.DesignService;
 import edu.uade.sam.service.SensoryEvaluationService;
 import edu.uade.sam.utils.csv.CSVParser;
 
@@ -30,6 +32,9 @@ public class AttributesController {
 
 	@Inject
 	private AttributesService attributesService;
+	
+	@Inject
+	private DesignService designService;
 
 	@Inject
 	private SensoryEvaluationService samService;
@@ -63,21 +68,20 @@ public class AttributesController {
 
 	@RequestMapping(value = "/template", method = RequestMethod.GET)
 	public void getTemplate(@PathVariable(value = "id", required = true) long id,
-			@RequestParam(value = "judges", required = true) int judges,
-			@RequestParam(value = "products", required = true) String products,
 			@RequestParam(value = "attributes", required = false) String attributes, HttpServletResponse response)
 			throws IOException {
 
 		SensoryEvaluation sam = this.samService.get(id);
+		Design design = this.designService.getDesign(id);
 
-		if (sam == null) {
+		if (sam == null || design == null) {
 			return;
 		}
 
-		List<String> productList = StringUtils.split(products, ",", true);
+		List<String> productList = StringUtils.split(design.getSamples(), ",", true);
 		List<String> attributeList = StringUtils.split(attributes, ",", true);
 
-		String csv = this.attributesService.getTemplate(sam.getType(), judges, productList, attributeList);
+		String csv = this.attributesService.getTemplate(sam.getType(), design.getJudges(), productList, attributeList);
 
 		response.setContentLength((int) csv.length());
 		response.setContentType("application/octet-stream");

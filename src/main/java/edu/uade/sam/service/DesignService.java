@@ -24,12 +24,12 @@ public interface DesignService {
 	 * @param random
 	 * @return
 	 */
-	public Design generateDesign(Long testId, Integer judges, List<String> samples, boolean random);
+	public Design generateDesign(Long samId, Integer judges, List<String> samples, boolean random);
 	
 	/**
 	 * @param testId
 	 * @return
 	 */
-	public Design getDesign(Long testId);
+	public Design getDesign(Long samId);
 
 }

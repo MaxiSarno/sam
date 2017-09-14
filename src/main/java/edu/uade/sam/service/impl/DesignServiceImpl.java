@@ -32,8 +32,8 @@ public class DesignServiceImpl implements DesignService {
 	private DesignRepository designDao;
 	
 
-	public Design generateDesign(Long testId, Integer judges, List<String> samples, boolean random) {
-		Design d = this.generateDesign(testId, judges, samples);
+	public Design generateDesign(Long samId, Integer judges, List<String> samples, boolean random) {
+		Design d = this.generateDesign(samId, judges, samples);
 		
 		if (random) {
 			for (DesignSlot slot : d.getDesignSlots()) {
@@ -44,8 +44,8 @@ public class DesignServiceImpl implements DesignService {
 		return designDao.save(d);
 	}
 	
-	private Design generateDesign(Long testId, Integer judges, List<String> samples) {
-		if (null == this.sensoryEvaluationService.get(testId)) {
+	private Design generateDesign(Long samId, Integer judges, List<String> samples) {
+		if (null == this.sensoryEvaluationService.get(samId)) {
 			return null;
 		}
 		
@@ -57,7 +57,7 @@ public class DesignServiceImpl implements DesignService {
 			designSlots.add(new DesignSlot(i, labels));
 		}
 
-		return new Design(testId, judges, String.join(",", samples), designSlots);
+		return new Design(samId, judges, String.join(",", samples), designSlots);
 	}
 	
 	@Override
