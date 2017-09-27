@@ -37,8 +37,27 @@ public class CalculatorServiceAnova implements CalculatorService {
 		double fValue = owa.anovaFValue(groups.values());
 		double fCritValue = 0;
 		double pValue = owa.anovaPValue(groups.values());
+		String winner = this.findWinner(areDifferent, summaries);
 
-		return new PartialResultAnova(attributeName, areDifferent, summaries, fValue, fCritValue, pValue);
+		return new PartialResultAnova(attributeName, areDifferent, winner, summaries, fValue, fCritValue, pValue);
+	}
+
+	private String findWinner(boolean areDifferent, List<ResultSummary> summaries) {
+		String winner = "iguales";
+		double best = 0;
+		
+		if(!areDifferent) {
+			return winner;
+		}
+		
+		for (ResultSummary r : summaries) {
+			if (r.getAverage() > best) {
+				winner = r.getSampleName();
+				best = r.getAverage();
+			}
+		}
+		
+		return winner;
 	}
 
 }

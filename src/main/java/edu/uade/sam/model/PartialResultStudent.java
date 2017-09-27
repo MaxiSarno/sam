@@ -14,8 +14,8 @@ public class PartialResultStudent extends PartialResult {
 	public PartialResultStudent() {
 	}
 
-	public PartialResultStudent(String attributeName, boolean areDifferent, List<ResultSummary> summaries) {
-		super(attributeName, Distribution.STUDENT_T, areDifferent, summaries);
+	public PartialResultStudent(String attributeName, boolean areDifferent, String winner, List<ResultSummary> summaries) {
+		super(attributeName, Distribution.STUDENT_T, areDifferent, winner, summaries);
 	}
 
 }

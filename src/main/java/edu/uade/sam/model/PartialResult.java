@@ -22,18 +22,20 @@ public class PartialResult {
 	private long id;
 	private String attributeName;
 	private boolean areDifferent;
+	private String winner;
 	private Distribution distribution;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ResultSummary> summaries;
 
 	public PartialResult() {
 	}
 
-	public PartialResult(String attributeName, Distribution distribution, boolean areDifferent,
+	public PartialResult(String attributeName, Distribution distribution, boolean areDifferent, String winner,
 			List<ResultSummary> summaries) {
 		this.attributeName = attributeName;
 		this.distribution = distribution;
 		this.areDifferent = areDifferent;
+		this.winner = winner;
 		this.summaries = summaries;
 	}
 
@@ -59,6 +61,14 @@ public class PartialResult {
 
 	public void setAreDifferent(boolean areDifferent) {
 		this.areDifferent = areDifferent;
+	}
+
+	public String getWinner() {
+		return winner;
+	}
+
+	public void setWinner(String winner) {
+		this.winner = winner;
 	}
 
 	public Distribution getDistribution() {

@@ -17,7 +17,7 @@ public class CalculatorServiceBasic implements CalculatorService {
 	public PartialResult calculate(String attributeName, Map<String, double[]> groups, float alpha) {
 		List<ResultSummary> summaries = calculateSummaries(groups);
 		
-		return new PartialResult(attributeName, Distribution.NONE, false, summaries);
+		return new PartialResult(attributeName, Distribution.NONE, false, "", summaries);
 	}
 
 }
