@@ -87,14 +87,14 @@ public class DesignController {
 
 	private String writeDesign(Design design, String type) {
 		return design.getDesignSlots().stream()
-				.map(s -> "judge:" + s.getJudge() + writeLabels(s.getLabels(), type) + "\n")
+				.map(s -> "panelista " + s.getJudge() + writeLabels(s.getLabels(), type) + "\n")
 				.reduce(new String(), (a, b) -> a + b);
 	}
 
 	private String writeLabels(List<Label> labels, String type) {
 		String separator = type.equals("csv") ? "," : "\t";
 
-		return labels.stream().map(l -> separator + l.getLabelNumber() + "(" + l.getDescription() + ") ")
+		return labels.stream().map(l -> separator + l.getLabelNumber() + "(" + l.getDescription() + ")")
 				.reduce(new String(), (a, b) -> a + b);
 	}
 
