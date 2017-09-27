@@ -40,7 +40,7 @@ public class SensoryEvaluationController {
 			return ResponseEntity.badRequest().body(new SamResponse(null, notification));
 		}
 
-		Long samId = evaluationService.save(name, samType, samScale, "tuvieja");
+		Long samId = evaluationService.save(name, samType, samScale, "Maxi Sarno");
 		return ResponseEntity.ok().body(SamResponse.data(samId));
 	}
 
