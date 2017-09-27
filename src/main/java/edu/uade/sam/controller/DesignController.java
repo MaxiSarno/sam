@@ -72,8 +72,14 @@ public class DesignController {
 
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	public void getDesignCsv(@PathVariable(value = "id") Long id,
-			@RequestParam(name = "type", defaultValue = "csv") String type, HttpServletResponse response)
+			@RequestParam(name = "type", defaultValue = "csv") String type,
+			@RequestParam(name = "judges") Integer judges,
+			@RequestParam(name = "samples") String samples, 
+			@RequestParam(value = "random", required = false, defaultValue = "true") boolean random,
+			HttpServletResponse response)
 			throws IOException {
+		
+		this.createDesign(id, judges, samples, random);
 		
 		Design design = designService.getDesign(id);
 		String csv = this.writeDesign(design, type);
