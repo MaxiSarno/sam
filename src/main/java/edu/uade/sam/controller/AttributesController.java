@@ -1,20 +1,20 @@
 package edu.uade.sam.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.mysql.jdbc.StringUtils;
 
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.NumericAttribute;
@@ -78,8 +78,8 @@ public class AttributesController {
 			return;
 		}
 
-		List<String> productList = StringUtils.split(design.getSamples(), ",", true);
-		List<String> attributeList = StringUtils.split(attributes, ",", true);
+		List<String> productList = Arrays.asList(StringUtils.split(design.getSamples(), ","));
+		List<String> attributeList = Arrays.asList(StringUtils.split(attributes, ","));
 
 		String csv = this.attributesService.getTemplate(sam.getType(), design.getJudges(), productList, attributeList);
 

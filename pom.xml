@@ -25,6 +25,7 @@
 		<guava-version>19.0</guava-version>
 		<commons-math-version>3.6.1</commons-math-version>
 		<commons-collections4-version>4.1</commons-collections4-version>
+		<auth0-spring-security-api-version>1.0.0-rc.2</auth0-spring-security-api-version>
 	</properties>
 
 	<dependencies>
@@ -73,6 +74,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>${commons-collections4-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>auth0-spring-security-api</artifactId>
+			<version>${auth0-spring-security-api-version}</version>
 		</dependency>
 	</dependencies>
 
