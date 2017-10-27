@@ -17,13 +17,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import edu.uade.sam.dao.UserAccountRepository;
+import edu.uade.sam.service.UserService;
 
 @Configuration
 public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
   @Autowired
-  UserAccountRepository accountRepository;
+  private UserService userService;
 
   @Override
   public void init(AuthenticationManagerBuilder auth) throws Exception {
@@ -62,7 +62,7 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
 
       @Override
       public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAccount account = accountRepository.findByUsername(username);
+        UserAccount account = userService.findByUsername(username);
         if(account != null) {
         return new User(account.getUsername(), account.getPassword(), true, true, true, true,
                 AuthorityUtils.createAuthorityList("USER"));
