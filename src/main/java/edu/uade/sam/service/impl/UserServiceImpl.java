@@ -35,6 +35,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void update(UserAccount u) {
+		if (this.findByUsername(u.getUsername()) != null) {
+			this.userRepo.save(u);
+		}
+	}
+
+	@Override
 	public void deleteByUsername(String username) {
 		this.userRepo.delete(username);
 	}

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uade.sam.config.UserAccount;
@@ -38,6 +37,18 @@ public class UserController {
 
 		UserAccount u = new UserAccount(username, password, description);
 		userService.save(u);
+
+		return ResponseEntity.ok().build();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(method = RequestMethod.PUT)
+	public ResponseEntity update(@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "description") String description) {
+
+		UserAccount u = new UserAccount(username, password, description);
+		userService.update(u);
 
 		return ResponseEntity.ok().build();
 	}
