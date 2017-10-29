@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,6 +53,12 @@ public class SensoryEvaluationController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public SensoryEvaluation get(@PathVariable(value = "id") Long id) {
 		return evaluationService.get(id);
+	}
+
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable(value = "id") Long id) {
+		System.out.println("borrar la eval"+id);
 	}
 
 	// TODO sacar a una clase
