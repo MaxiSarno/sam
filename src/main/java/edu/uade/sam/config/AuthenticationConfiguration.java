@@ -76,7 +76,7 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
 				UserAccount account = userService.findByUsername(username);
 				if (account != null) {
 					return new User(account.getUsername(), account.getPassword(), true, true, true, true,
-							AuthorityUtils.createAuthorityList("USER"));
+							AuthorityUtils.createAuthorityList(account.getRole().toString()));
 				} else {
 					throw new UsernameNotFoundException("could not find the user '" + username + "'");
 				}

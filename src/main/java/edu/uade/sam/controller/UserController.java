@@ -60,7 +60,7 @@ public class UserController {
 
 		UserAccount u = this.buildUser(username, password, description, role);
 		userService.update(u);
-		
+
 		return ResponseEntity.ok().build();
 	}
 
@@ -78,7 +78,6 @@ public class UserController {
 	public ResponseEntity<UserAccount> findByUsername(@PathVariable(value = "username") String username) {
 		UserAccount u = this.userService.findByUsername(username.replaceAll("\"", ""));
 
-		
 		if (u != null) {
 			u.obscurePassword();
 		}
@@ -97,10 +96,10 @@ public class UserController {
 	private UserAccount buildUser(String username, String password, String description, String role) {
 		UserRole userRole = UserRole.valueOf(role);
 		final String encoded = AuthenticationConfiguration.ENCODE(password);
-		
+
 		System.out.println(encoded);
-		
-		return new UserAccount(username, encoded, description, userRole != null? userRole : UserRole.USER);
+
+		return new UserAccount(username, encoded, description, userRole != null ? userRole : UserRole.USER);
 	}
 
 }
