@@ -3,6 +3,8 @@ package edu.uade.sam.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +25,9 @@ public class SensoryEvaluation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long samId;
 	private String name;
+	@Enumerated(EnumType.STRING)
 	private SensoryEvaluationType type;
+	@Enumerated(EnumType.STRING)
 	private SensoryEvaluationScale scale;
 	private Date created;
 	private String author;
