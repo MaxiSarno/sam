@@ -1,11 +1,10 @@
 package edu.uade.sam.config;
 
-import java.nio.charset.StandardCharsets;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
@@ -17,16 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
-
 import edu.uade.sam.model.UserAccount;
 import edu.uade.sam.service.UserService;
 
 @Configuration
 public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
-
-	private static final HashFunction ENCODER = Hashing.sha256();
 
 	@Autowired
 	private UserService userService;
@@ -51,20 +45,14 @@ public class AuthenticationConfiguration extends GlobalAuthenticationConfigurerA
 				String password = (String) authentication.getCredentials();
 				UserDetails userDetails = userDetailsService().loadUserByUsername(name);
 				
-				if (userDetails != null && userDetails.getPassword().equals(AuthenticationConfiguration.ENCODE(password))) {
+				if (userDetails != null && userDetails.getPassword().equals(Encoder.ENCODE(password))) {
 					return new UsernamePasswordAuthenticationToken(name, password, userDetails.getAuthorities());
 				}
 
-				return null;
+				throw new BadCredentialsException("Bad credentials, please check your user & password");
 			}
 		};
 
-	}
-	
-	public static final String ENCODE(String password) {
-		return ENCODER
-		        .hashString(password, StandardCharsets.UTF_8)
-		        .toString();
 	}
 
 	@Bean

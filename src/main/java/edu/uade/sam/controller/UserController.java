@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.uade.sam.config.AuthenticationConfiguration;
+import edu.uade.sam.config.Encoder;
 import edu.uade.sam.model.UserAccount;
 import edu.uade.sam.model.UserRole;
 import edu.uade.sam.service.UserService;
@@ -95,7 +95,7 @@ public class UserController {
 
 	private UserAccount buildUser(String username, String password, String description, String role) {
 		UserRole userRole = UserRole.valueOf(role);
-		final String encoded = AuthenticationConfiguration.ENCODE(password);
+		final String encoded = Encoder.ENCODE(password);
 
 		System.out.println(encoded);
 
