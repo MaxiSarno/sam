@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import edu.uade.sam.config.UserAccount;
 import edu.uade.sam.dao.UserAccountRepository;
+import edu.uade.sam.model.UserAccount;
 import edu.uade.sam.service.UserService;
 
 /**

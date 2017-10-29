@@ -2,7 +2,7 @@ package edu.uade.sam.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.uade.sam.config.UserAccount;
+import edu.uade.sam.model.UserAccount;
 
 /**
  * @author msarno

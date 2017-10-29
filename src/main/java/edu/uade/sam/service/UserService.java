@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import edu.uade.sam.config.UserAccount;
+import edu.uade.sam.model.UserAccount;
 
 /**
  * Usuariios del sistema
