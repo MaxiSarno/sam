@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,6 +25,7 @@ public class PartialResult {
 	private String attributeName;
 	private boolean areDifferent;
 	private String winner;
+	@Enumerated(EnumType.STRING)
 	private Distribution distribution;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<ResultSummary> summaries;
