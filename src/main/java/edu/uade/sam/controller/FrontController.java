@@ -1,21 +1,34 @@
 package edu.uade.sam.controller;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.stereotype.Controller;
+import edu.uade.sam.dao.UserAccountRepository;
 
-@Controller
+@RestController
 public class FrontController {
+	
+	@Autowired
+	private UserAccountRepository userRepo;
 
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Consumes(MediaType.TEXT_PLAIN)
-	@Path("keep-alive")
+	@RequestMapping("/keep-alive")
 	public String keepAlive() {
 		return "i'm still alive";
+	}
+
+	@RequestMapping("/health-check")
+	public String healthCheck() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("sam backend : v0.1 \n");
+		sb.append("dependencies : { \n");
+		
+		if(userRepo.findAll().size()>0) {
+			sb.append("\tMysql : OK \n");
+		} else { 
+			sb.append("\tMysql : ERROR \n");
+		}
+		sb.append("}");
+		return sb.toString();
 	}
 }
