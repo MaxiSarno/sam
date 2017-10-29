@@ -116,4 +116,9 @@ public class AttributesServiceImpl implements AttributesService {
 		return sb.toString();
 	}
 
+	@Override
+	public void deleteBySamId(Long samId) {
+		this.dao.deleteBySamId(samId);
+	}
+
 }

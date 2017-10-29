@@ -32,4 +32,11 @@ public interface DesignService {
 	 */
 	public Design getDesign(Long samId);
 
+	/**
+	 * Borra el diseño
+	 * 
+	 * @param id
+	 */
+	public void delete(Long id);
+
 }

@@ -21,17 +21,22 @@ public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	public Long save(String name, SensoryEvaluationType type, SensoryEvaluationScale scale, String author) {
 		SensoryEvaluation e = new SensoryEvaluation(name, type, scale, author);
 		
-		return dao.save(e).getSamId();
+		return this.dao.save(e).getSamId();
 	}
 
 	@Override
 	public List<SensoryEvaluation> getAll() {
-		return dao.findAll();
+		return this.dao.findAll();
 	}
 
 	@Override
 	public SensoryEvaluation get(Long id) {		
-		return dao.findOne(id);
+		return this.dao.findOne(id);
+	}
+
+	@Override
+	public void delete(Long id) {
+		this.dao.delete(id);
 	}
 
 }

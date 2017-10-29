@@ -13,5 +13,7 @@ import edu.uade.sam.model.NumericAttribute;
 public interface AttributeRepository extends CrudRepository<NumericAttribute, Long> {
 
 	public List<NumericAttribute> findBySamId(long samId);
+	
+	public void deleteBySamId(long samId);
 
 }

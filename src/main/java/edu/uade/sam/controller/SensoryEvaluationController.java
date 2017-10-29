@@ -2,8 +2,7 @@ package edu.uade.sam.controller;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,14 +17,23 @@ import edu.uade.sam.messaging.SamResponse;
 import edu.uade.sam.model.SensoryEvaluation;
 import edu.uade.sam.model.SensoryEvaluationScale;
 import edu.uade.sam.model.SensoryEvaluationType;
+import edu.uade.sam.service.AttributesService;
+import edu.uade.sam.service.DesignService;
+import edu.uade.sam.service.ResultsService;
 import edu.uade.sam.service.SensoryEvaluationService;
 
 @RestController
 @RequestMapping("/evaluation")
 public class SensoryEvaluationController {
 
-	@Inject
+	@Autowired
 	private SensoryEvaluationService evaluationService;
+	@Autowired
+	private DesignService designService;
+	@Autowired
+	private AttributesService attributesService;
+	@Autowired
+	private ResultsService resultsService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<SamResponse> save(@RequestParam(value = "name", required = true) String name,
@@ -57,8 +65,11 @@ public class SensoryEvaluationController {
 
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void delete(@PathVariable(value = "id") Long id) {
-		System.out.println("borrar la eval"+id);
+	public void deleteCascade(@PathVariable(value = "id") Long id) {
+		this.evaluationService.delete(id);
+		this.designService.delete(id);
+		this.attributesService.deleteBySamId(id);
+		this.resultsService.delete(id);
 	}
 
 	// TODO sacar a una clase

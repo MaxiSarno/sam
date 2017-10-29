@@ -43,4 +43,11 @@ public interface AttributesService {
 	 */
 	public String getTemplate(SensoryEvaluationType type, int judges, List<String> productList,
 			List<String> attributeList);
+
+	/**
+	 * Borra los atributos
+	 * 
+	 * @param id
+	 */
+	public void deleteBySamId(Long id);
 }

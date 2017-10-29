@@ -25,7 +25,7 @@ import edu.uade.sam.service.ResultsService;
 public class ResultsServiceImpl implements ResultsService {
 
 	@Autowired
-	private ResultRepository resultsDao;
+	private ResultRepository dao;
 	
 	@Autowired
 	private AttributesService attributesService;
@@ -36,7 +36,7 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Override
 	public Result get(long samId) {
-		return resultsDao.findOne(samId);
+		return dao.findOne(samId);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ResultsServiceImpl implements ResultsService {
 			r.getPartialResults().add(this.calculatorService.calculate(attributeName, groups, alpha));
 		}
 		
-		this.resultsDao.save(r);
+		this.dao.save(r);
 
 		return r;
 	}
@@ -88,5 +88,10 @@ public class ResultsServiceImpl implements ResultsService {
 	@VisibleForTesting
 	public void setCalculatorService(CalculatorService c) {
 		this.calculatorService = c;
+	}
+
+	@Override
+	public void delete(Long id) {
+		this.dao.delete(id);
 	}
 }

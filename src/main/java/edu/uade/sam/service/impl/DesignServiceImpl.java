@@ -29,7 +29,7 @@ public class DesignServiceImpl implements DesignService {
 	private SensoryEvaluationService sensoryEvaluationService;
 	
 	@Autowired
-	private DesignRepository designDao;
+	private DesignRepository dao;
 	
 
 	public Design generateDesign(Long samId, Integer judges, List<String> samples, boolean random) {
@@ -41,7 +41,7 @@ public class DesignServiceImpl implements DesignService {
 			}
 		}
 		
-		return designDao.save(d);
+		return this.dao.save(d);
 	}
 	
 	private Design generateDesign(Long samId, Integer judges, List<String> samples) {
@@ -62,7 +62,7 @@ public class DesignServiceImpl implements DesignService {
 	
 	@Override
 	public Design getDesign(Long samId) {
-		return designDao.findOne(samId);
+		return this.dao.findOne(samId);
 	}
 
 	@VisibleForTesting
@@ -72,7 +72,12 @@ public class DesignServiceImpl implements DesignService {
 	
 	@VisibleForTesting
 	public void setDesignDao(DesignRepository designDao) {
-		this.designDao = designDao;
+		this.dao = designDao;
+	}
+
+	@Override
+	public void delete(Long id) {
+		this.dao.delete(id);
 	}
 
 }

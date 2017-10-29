@@ -44,4 +44,12 @@ public interface SensoryEvaluationService {
 	 */
 	public SensoryEvaluation get(Long id);
 
+
+	/**
+	 * Borra la evaluacion sensorial
+	 * 
+	 * @param id
+	 */
+	public void delete(Long id);
+
 }

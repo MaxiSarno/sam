@@ -1,5 +1,7 @@
 package edu.uade.sam.service;
 
+import org.springframework.stereotype.Service;
+
 import edu.uade.sam.model.Result;
 
 /**
@@ -8,6 +10,7 @@ import edu.uade.sam.model.Result;
  * @author msarno
  *
  */
+@Service
 public interface ResultsService {
 	
 	/**
@@ -26,5 +29,12 @@ public interface ResultsService {
 	 * @return
 	 */
 	Result get(long samId);
+
+	/**
+	 * Borra los resultados
+	 * 
+	 * @param id
+	 */
+	void delete(Long id);
 
 }
