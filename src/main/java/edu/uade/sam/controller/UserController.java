@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.uade.sam.config.Encoder;
+import edu.uade.sam.exception.InvalidPasswordException;
+import edu.uade.sam.exception.InvalidRoleException;
 import edu.uade.sam.model.UserAccount;
 import edu.uade.sam.model.UserRole;
 import edu.uade.sam.service.UserService;
@@ -95,11 +97,17 @@ public class UserController {
 
 	private UserAccount buildUser(String username, String password, String description, String role) {
 		UserRole userRole = UserRole.valueOf(role);
+		if (userRole == null) {
+			throw new InvalidRoleException("El rol es invalido");
+		}
+		
+		if (username.equalsIgnoreCase(password) || password.length()<5 ){
+			throw new InvalidPasswordException("El password no puede ser igual al usuario y debe tener 5 o mas caracteres");
+		}
+		
 		final String encoded = Encoder.ENCODE(password);
 
-		System.out.println(encoded);
-
-		return new UserAccount(username, encoded, description, userRole != null ? userRole : UserRole.USER);
+		return new UserAccount(username, encoded, description, userRole);
 	}
 
 }
