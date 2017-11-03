@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import edu.uade.sam.service.impl.LabelServiceImpl;
  */
 @RestController
 @RequestMapping("/evaluation/{id}/design")
+@CrossOrigin(origins = "http://localhost:3000")
 public class DesignController {
 
 	private static final String TEMPLATE_NAME = "diseño-sam-";
