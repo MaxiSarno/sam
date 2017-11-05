@@ -30,9 +30,13 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<UserAccount>> findAll() {
-		List<UserAccount> attributes = userService.findAll();
+		List<UserAccount> users = userService.findAll();
+		
+		for (UserAccount u : users) {
+			u.obscurePassword();
+		}
 
-		return ResponseEntity.ok().body(attributes);
+		return ResponseEntity.ok().body(users);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -90,8 +94,8 @@ public class UserController {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/{username}", method = RequestMethod.DELETE)
-	public ResponseEntity deleteByUsername(@PathVariable(value = "username") String username) {
+	@RequestMapping(method = RequestMethod.DELETE)
+	public ResponseEntity deleteByUsername(@RequestParam(value = "username") String username) {
 		this.userService.deleteByUsername(username);
 
 		return ResponseEntity.ok().build();
