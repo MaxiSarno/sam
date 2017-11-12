@@ -3,6 +3,7 @@ package edu.uade.sam.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.uade.sam.model.SensoryEvaluation;
 import edu.uade.sam.model.SensoryEvaluationScale;
@@ -50,6 +51,7 @@ public interface SensoryEvaluationService {
 	 * 
 	 * @param id
 	 */
+	@Transactional
 	public void delete(Long id);
 
 }

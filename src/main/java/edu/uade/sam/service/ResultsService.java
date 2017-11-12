@@ -1,6 +1,7 @@
 package edu.uade.sam.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.uade.sam.model.Result;
 
@@ -35,6 +36,7 @@ public interface ResultsService {
 	 * 
 	 * @param id
 	 */
+	@Transactional
 	void delete(Long id);
 
 }

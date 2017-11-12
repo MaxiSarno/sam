@@ -26,14 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.antMatchers("/login").permitAll()
-				.antMatchers("/user").hasAnyAuthority(UserRole.ADMIN.toString()).anyRequest().fullyAuthenticated().and()
+				.antMatchers("/user").hasAnyAuthority(UserRole.ADMIN.toString()).anyRequest().fullyAuthenticated()
+				.antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority(UserRole.ADMIN.toString()).anyRequest().fullyAuthenticated().and()
 				.httpBasic();
 	}
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration corsConfig = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfig.addAllowedMethod(HttpMethod.PUT);
+        corsConfig.addAllowedMethod(HttpMethod.DELETE);
+		source.registerCorsConfiguration("/**", corsConfig);
         return source;
     }
 }

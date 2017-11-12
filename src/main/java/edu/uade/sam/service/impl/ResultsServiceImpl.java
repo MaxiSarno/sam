@@ -26,7 +26,7 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Autowired
 	private ResultRepository dao;
-	
+
 	@Autowired
 	private AttributesService attributesService;
 
@@ -60,7 +60,7 @@ public class ResultsServiceImpl implements ResultsService {
 
 			r.getPartialResults().add(this.calculatorService.calculate(attributeName, groups, alpha));
 		}
-		
+
 		this.dao.save(r);
 
 		return r;
@@ -92,6 +92,8 @@ public class ResultsServiceImpl implements ResultsService {
 
 	@Override
 	public void delete(Long id) {
-		this.dao.delete(id);
+		if (this.get(id) != null) {
+			this.dao.delete(id);
+		}
 	}
 }

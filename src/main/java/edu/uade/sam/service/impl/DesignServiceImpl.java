@@ -77,7 +77,9 @@ public class DesignServiceImpl implements DesignService {
 
 	@Override
 	public void delete(Long id) {
-		this.dao.delete(id);
+		if (this.getDesign(id) != null) {
+			this.dao.delete(id);
+		}
 	}
 
 }

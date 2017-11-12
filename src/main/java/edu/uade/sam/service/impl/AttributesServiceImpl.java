@@ -117,8 +117,10 @@ public class AttributesServiceImpl implements AttributesService {
 	}
 
 	@Override
-	public void deleteBySamId(Long samId) {
-		this.dao.deleteBySamId(samId);
+	public void deleteBySamId(Long id) {
+		if (this.get(id) != null) {
+			this.dao.deleteBySamId(id);
+		}
 	}
 
 }

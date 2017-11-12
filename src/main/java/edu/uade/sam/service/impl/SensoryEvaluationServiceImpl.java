@@ -13,14 +13,14 @@ import edu.uade.sam.service.SensoryEvaluationService;
 
 @Component
 public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
-	
+
 	@Autowired
 	private SensoryEvaluationRepository dao;
 
 	@Override
 	public Long save(String name, SensoryEvaluationType type, SensoryEvaluationScale scale, String author) {
 		SensoryEvaluation e = new SensoryEvaluation(name, type, scale, author);
-		
+
 		return this.dao.save(e).getSamId();
 	}
 
@@ -30,13 +30,15 @@ public class SensoryEvaluationServiceImpl implements SensoryEvaluationService {
 	}
 
 	@Override
-	public SensoryEvaluation get(Long id) {		
+	public SensoryEvaluation get(Long id) {
 		return this.dao.findOne(id);
 	}
 
 	@Override
 	public void delete(Long id) {
-		this.dao.delete(id);
+		if (this.get(id) != null) {
+			this.dao.delete(id);
+		}
 	}
 
 }
