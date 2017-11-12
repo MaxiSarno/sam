@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,17 +43,35 @@ public class AttributesController {
 	@Inject
 	private CSVParser csvParser;
 
-	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
+	/**
+	 * Help Me Stack Overflow, you're my only hope
+	 * http://stackoverflow.com/questions/28277182/how-to-upload-csv-file-to-the-database-using-spring-hibernate-mvc
+	 * 
+	 * @param id
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value = "/fileupload", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> processUpload(@PathVariable(value = "id") long id, @RequestParam MultipartFile file) {
 
-		if (samService.get(id) == null) {
+		SensoryEvaluation sam = samService.get(id);
+		
+		if (sam  == null) {
 			return ResponseEntity.badRequest().body("evaluacion sensorial inexistente");
 		}
+		attributesService.deleteBySamId(id);
 
-		List<NumericAttribute> attributes = csvParser.parseNumeric(id, file);
-		attributesService.save(attributes);
-		// http://stackoverflow.com/questions/28277182/how-to-upload-csv-file-to-the-database-using-spring-hibernate-mvc
-		return ResponseEntity.ok().body("OK");
+		List<NumericAttribute> attributes;
+		try {
+			attributes = csvParser.parseNumeric(id, sam.getType(), sam.getScale(), file);
+			attributesService.save(attributes);
+			return ResponseEntity.ok().body("OK");
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

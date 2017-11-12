@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.uade.sam.model.NumericAttribute;
+import edu.uade.sam.model.SensoryEvaluationScale;
+import edu.uade.sam.model.SensoryEvaluationType;
 
 @Component
 public class CSVParserImpl implements CSVParser {
@@ -18,7 +20,7 @@ public class CSVParserImpl implements CSVParser {
 	public static final String SEPARATOR = ",";
 
 	@Override
-	public List<NumericAttribute> parseNumeric(long samId, MultipartFile file) {
+	public List<NumericAttribute> parseNumeric(long samId, SensoryEvaluationType sensoryEvaluationType, SensoryEvaluationScale samScale, MultipartFile file) throws Exception {
 
 		List<NumericAttribute> attributes = new ArrayList<NumericAttribute>();
 
@@ -32,15 +34,18 @@ public class CSVParserImpl implements CSVParser {
 
 			if (0 == count) {
 				headerAttribute = values;
-				// FIXME this.validateHeader(header);
 			} else if (1 == count) {
 				headerProduct = values;
-				// FIXME this.validateHeader(header);
+				this.validateHeaders(headerAttribute, headerProduct);
 			} else {
 				for (int i = 1; i < headerAttribute.length; i++) {
-					NumericAttribute attribute = new NumericAttribute(samId, 
-							headerProduct[i], headerAttribute[i],
-							Integer.parseInt(values[i]));
+					int value = Integer.parseInt(values[i]);
+					NumericAttribute attribute = new NumericAttribute(samId, headerProduct[i], headerAttribute[i], value);
+					
+					if (!samScale.contains(value)) {
+						throw new NuberOutOfScaleException(samScale, attribute);
+					}
+					
 					attributes.add(attribute);
 				}
 			}
@@ -50,14 +55,25 @@ public class CSVParserImpl implements CSVParser {
 		return attributes;
 	}
 
+	private void validateHeaders(String[] headerAttribute, String[] headerProduct) throws AttributesHeaderException {
+		if (headerAttribute.length != headerProduct.length) {
+			throw new AttributesHeaderException("la cantidad de atributos no coincide con la cantidad de productos");
+		}
+		
+		for (int i = 1; i < headerAttribute.length; i++) {
+			if (headerProduct[i].isEmpty() || headerAttribute[i].isEmpty()) {
+				throw new AttributesHeaderException("hay algun campo vacio");
+			}
+		}
+	}
+
 	private List<String> readFileLines(MultipartFile file) {
 		List<String> lines = new ArrayList<String>();
 
 		BufferedReader reader = null;
 
 		try {
-			reader = new BufferedReader(new InputStreamReader(
-					file.getInputStream()));
+			reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
 			String line;
 
 			while ((line = reader.readLine()) != null) {
