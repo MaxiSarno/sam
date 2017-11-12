@@ -13,21 +13,26 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.uade.sam.model.NumericAttribute;
+import edu.uade.sam.model.SensoryEvaluationScale;
+import edu.uade.sam.model.SensoryEvaluationType;
 
 public class CSVParserTest {
+
+	private static final SensoryEvaluationType TYPE = SensoryEvaluationType.HEDONIC;
+	private static final SensoryEvaluationScale SCALE = SensoryEvaluationScale.NINE;
 
 	CSVParser parser = new CSVParserImpl();
 
 	@Test
-	public void parse_all35x8attributes_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(1l, this.mockFile());
+	public void parse_all35x8attributes_ok() throws Exception {
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, TYPE, SCALE, this.mockFile());
 
 		Assert.assertEquals("Obtengo todos los atributos del csv", 35 * 8, a.size());
 	}
 	
 	@Test
-	public void parse_checkValues_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(1l, mockFile());
+	public void parse_checkValues_ok() throws Exception {
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, TYPE, SCALE, mockFile());
 		Integer[] values = {6,5,6,5,3,3,3,3,6,4,4,4,3,4,3,3};
 		// Panelista 1,6,5,6,5,3,3,3,3
 		// Panelista 2,6,4,4,4,3,4,3,3
@@ -38,8 +43,8 @@ public class CSVParserTest {
 	}
 	
 	@Test
-	public void parse_checkProduct_ok() throws IOException {
-		List<NumericAttribute> a = this.parser.parseNumeric(1l, mockFile());
+	public void parse_checkProduct_ok() throws Exception {
+		List<NumericAttribute> a = this.parser.parseNumeric(1l, TYPE, SCALE, mockFile());
 		// Panelista 1,6,5,6,5,3,3,3,3
 		// Panelista 2,6,4,4,4,3,4,3,3
 
