@@ -77,11 +77,6 @@ public class AttributesController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<NumericAttribute>> getAttributes(@PathVariable(value = "id") long id) {
 		List<NumericAttribute> attributes = attributesService.get(id);
-
-		if (attributes == null || attributes.isEmpty()) {
-			return ResponseEntity.badRequest().build();
-		}
-
 		return ResponseEntity.ok().body(attributes);
 	}
 

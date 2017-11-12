@@ -35,12 +35,7 @@ public class ResultsController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Result> get(@PathVariable(value = "id") long id) {
-		Result result = this.resultsService.get(id);
-		
-		if (result == null) {
-			return ResponseEntity.badRequest().build();
-		}
-		
+		Result result = this.resultsService.get(id);		
 		return ResponseEntity.ok().body(result);
 	}
 
