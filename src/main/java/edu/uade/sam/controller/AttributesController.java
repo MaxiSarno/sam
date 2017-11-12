@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +26,6 @@ import edu.uade.sam.utils.csv.CSVParser;
 
 @RestController
 @RequestMapping("/evaluation/{id}/attributes")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AttributesController {
 
 	private static final String TEMPLATE_NAME = "atributos-sam-";

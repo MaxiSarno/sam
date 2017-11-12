@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,6 @@ import edu.uade.sam.dao.UserAccountRepository;
 import edu.uade.sam.model.UserAccount;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class FrontController {
 	
 	@Autowired
