@@ -24,6 +24,10 @@ public class ResultsController {
 	public ResponseEntity<Result> generate(@PathVariable(value = "id") long id,
 			@RequestParam(name = "alpha", required = true) float alpha) {
 		
+		if (alpha <= 0 || alpha >= 1) {
+			return ResponseEntity.badRequest().build();
+		}
+		
 		Result result = resultsService.generate(id, alpha);
 		
 		if (result == null) {
