@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/health-check").permitAll()
+				.antMatchers("/keep-alive").permitAll()
 				.antMatchers("/login").permitAll()
 				.antMatchers("/user").hasAnyAuthority(UserRole.ADMIN.toString()).anyRequest().fullyAuthenticated()
 				.antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority(UserRole.ADMIN.toString()).anyRequest().fullyAuthenticated().and()
