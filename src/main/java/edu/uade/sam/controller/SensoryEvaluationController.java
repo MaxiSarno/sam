@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,14 +44,17 @@ public class SensoryEvaluationController {
 
 		SensoryEvaluationType samType = SensoryEvaluationType.fromString(type);
 		SensoryEvaluationScale samScale = SensoryEvaluationScale.fromString(scale);
-		
+
 		SamNotification notification = this.validateSensoryEvaluationCreation(name, samType, samScale);
 
 		if (notification != null) {
 			return ResponseEntity.badRequest().body(new SamResponse(null, notification));
 		}
 
-		Long samId = evaluationService.save(name, samType, samScale, "Maxi Sarno");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName(); // get logged in username
+
+		Long samId = evaluationService.save(name, samType, samScale, username);
 		return ResponseEntity.ok().body(SamResponse.data(samId));
 	}
 
@@ -75,14 +80,14 @@ public class SensoryEvaluationController {
 	// TODO sacar a una clase
 	private SamNotification validateSensoryEvaluationCreation(String name, SensoryEvaluationType samType,
 			SensoryEvaluationScale samScale) {
-		
+
 		if (samType == null) {
 			return SamNotification.fromCatalog(SamNotificationCatalog.INVALID_SENSORY_EVALUATION_TYPE);
 		}
 		if (samScale == null) {
 			return SamNotification.fromCatalog(SamNotificationCatalog.INVALID_SENSORY_EVALUATION_SCALE);
 		}
-		
+
 		return null;
 	}
 
