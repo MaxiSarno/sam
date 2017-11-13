@@ -3,6 +3,7 @@ package edu.uade.sam.dao;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.uade.sam.model.NumericAttribute;
 
@@ -14,6 +15,7 @@ public interface AttributeRepository extends CrudRepository<NumericAttribute, Lo
 
 	public List<NumericAttribute> findBySamId(long samId);
 	
+	@Transactional
 	public void deleteBySamId(long samId);
 
 }
