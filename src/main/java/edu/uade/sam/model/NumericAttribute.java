@@ -18,6 +18,7 @@ public class NumericAttribute implements Attribute {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private long samId;
+	private int judge;
 	private String product;
 	private String attribute;
 	private Integer value;
@@ -29,9 +30,10 @@ public class NumericAttribute implements Attribute {
 	public NumericAttribute() {
 	}
 
-	public NumericAttribute(long samId, String product, String attribute, Integer value) {
+	public NumericAttribute(long samId, int judge, String product, String attribute, Integer value) {
 		super();
 		this.samId = samId;
+		this.judge = judge;
 		this.product = product;
 		this.attribute = attribute;
 		this.value = value;
@@ -51,6 +53,14 @@ public class NumericAttribute implements Attribute {
 
 	public void setSamId(long samId) {
 		this.samId = samId;
+	}
+
+	public int getJudge() {
+		return judge;
+	}
+
+	public void setJudge(int judge) {
+		this.judge = judge;
 	}
 
 	public String getProduct() {
@@ -79,8 +89,8 @@ public class NumericAttribute implements Attribute {
 
 	@Override
 	public String toString() {
-		return "NumericAttribute [id=" + id + ", samId=" + samId + ", product=" + product + ", attribute=" + attribute
-				+ ", value=" + value + "]";
+		return "NumericAttribute [id=" + id + ", samId=" + samId + ", judge=" + judge + ", product=" + product
+				+ ", attribute=" + attribute + ", value=" + value + "]";
 	}
 
 	@Override
@@ -89,6 +99,7 @@ public class NumericAttribute implements Attribute {
 		int result = 1;
 		result = prime * result + ((attribute == null) ? 0 : attribute.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + judge;
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + (int) (samId ^ (samId >>> 32));
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
@@ -110,6 +121,8 @@ public class NumericAttribute implements Attribute {
 		} else if (!attribute.equals(other.attribute))
 			return false;
 		if (id != other.id)
+			return false;
+		if (judge != other.judge)
 			return false;
 		if (product == null) {
 			if (other.product != null)

@@ -18,7 +18,7 @@ import edu.uade.sam.service.AttributesService;
 @Component
 public class AttributesServiceImpl implements AttributesService {
 
-	private static final String PANELISTA = "panelista ";
+	private static final String PANELISTA = "panelista";
 	private static final String AGRADO = "Nivel de agrado";
 
 	@Inject
@@ -61,7 +61,10 @@ public class AttributesServiceImpl implements AttributesService {
 		StringBuilder sb = new StringBuilder();
 		StringBuilder aHeader = new StringBuilder();
 		StringBuilder pHeader = new StringBuilder();
-
+		
+		aHeader.append(PANELISTA);
+		pHeader.append(PANELISTA);
+		
 		for (String a : attributes) {
 			for (String p : products) {
 				aHeader.append(",").append(a);
@@ -88,6 +91,7 @@ public class AttributesServiceImpl implements AttributesService {
 
 	private String templateHeaderConsumer(int size) {
 		StringBuilder sb = new StringBuilder();
+		sb.append(PANELISTA);
 
 		for (int i = 0; i < size; i++) {
 			sb.append(",").append(AGRADO);
@@ -98,6 +102,7 @@ public class AttributesServiceImpl implements AttributesService {
 
 	private String templateHeaderProducts(List<String> products) {
 		StringBuilder sb = new StringBuilder();
+		sb.append(PANELISTA);
 
 		for (String p : products) {
 			sb.append(",").append(p);
@@ -110,7 +115,7 @@ public class AttributesServiceImpl implements AttributesService {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 1; i <= judges; i++) {
-			sb.append(PANELISTA + i).append(",").append("\n");
+			sb.append(i).append(",").append("\n");
 		}
 
 		return sb.toString();

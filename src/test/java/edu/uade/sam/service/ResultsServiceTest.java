@@ -36,28 +36,28 @@ public class ResultsServiceTest {
 	
 	@BeforeClass
 	public static void init() {
-		NumericAttribute a11 = new NumericAttribute(1,"p1", "a1", 2);
-		NumericAttribute a12 = new NumericAttribute(1,"p1", "a1", 2);
-		NumericAttribute a13 = new NumericAttribute(1,"p2", "a1", 3);
-		NumericAttribute a14 = new NumericAttribute(1,"p2", "a1", 3);
-		NumericAttribute a15 = new NumericAttribute(1,"p3", "a1", 4);
-		NumericAttribute a16 = new NumericAttribute(1,"p3", "a1", 4);
+		NumericAttribute a11 = new NumericAttribute(1, 1,"p1", "a1", 2);
+		NumericAttribute a12 = new NumericAttribute(1, 1,"p1", "a1", 2);
+		NumericAttribute a13 = new NumericAttribute(1, 1,"p2", "a1", 3);
+		NumericAttribute a14 = new NumericAttribute(1, 1,"p2", "a1", 3);
+		NumericAttribute a15 = new NumericAttribute(1, 1,"p3", "a1", 4);
+		NumericAttribute a16 = new NumericAttribute(1, 1,"p3", "a1", 4);
 		ATTRIBUTE1 = Arrays.asList(a11, a12, a13, a14, a15, a16);
 
-		NumericAttribute a21 = new NumericAttribute(1,"p1", "a2", 2);
-		NumericAttribute a22 = new NumericAttribute(1,"p1", "a2", 2);
-		NumericAttribute a23 = new NumericAttribute(1,"p2", "a2", 3);
-		NumericAttribute a24 = new NumericAttribute(1,"p2", "a2", 3);
-		NumericAttribute a25 = new NumericAttribute(1,"p3", "a2", 4);
-		NumericAttribute a26 = new NumericAttribute(1,"p3", "a2", 4);
+		NumericAttribute a21 = new NumericAttribute(1, 1,"p1", "a2", 2);
+		NumericAttribute a22 = new NumericAttribute(1, 1,"p1", "a2", 2);
+		NumericAttribute a23 = new NumericAttribute(1, 1,"p2", "a2", 3);
+		NumericAttribute a24 = new NumericAttribute(1, 1,"p2", "a2", 3);
+		NumericAttribute a25 = new NumericAttribute(1, 1,"p3", "a2", 4);
+		NumericAttribute a26 = new NumericAttribute(1, 1,"p3", "a2", 4);
 		ATTRIBUTE2 = Arrays.asList(a21, a22, a23, a24, a25, a26);
 
-		NumericAttribute a31 = new NumericAttribute(1,"p1", "a3", 2);
-		NumericAttribute a32 = new NumericAttribute(1,"p1", "a3", 2);
-		NumericAttribute a33 = new NumericAttribute(1,"p2", "a3", 3);
-		NumericAttribute a34 = new NumericAttribute(1,"p2", "a3", 3);
-		NumericAttribute a35 = new NumericAttribute(1,"p3", "a3", 4);
-		NumericAttribute a36 = new NumericAttribute(1,"p3", "a3", 4);
+		NumericAttribute a31 = new NumericAttribute(1, 1,"p1", "a3", 2);
+		NumericAttribute a32 = new NumericAttribute(1, 1,"p1", "a3", 2);
+		NumericAttribute a33 = new NumericAttribute(1, 1,"p2", "a3", 3);
+		NumericAttribute a34 = new NumericAttribute(1, 1,"p2", "a3", 3);
+		NumericAttribute a35 = new NumericAttribute(1, 1,"p3", "a3", 4);
+		NumericAttribute a36 = new NumericAttribute(1, 1,"p3", "a3", 4);
 		ATTRIBUTE3 = Arrays.asList(a31, a32, a33, a34, a35, a36);
 		
 	}

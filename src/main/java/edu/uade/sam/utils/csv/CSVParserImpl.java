@@ -38,9 +38,10 @@ public class CSVParserImpl implements CSVParser {
 				headerProduct = values;
 				this.validateHeaders(headerAttribute, headerProduct);
 			} else {
+				int judge = Integer.parseInt(values[0]);
 				for (int i = 1; i < headerAttribute.length; i++) {
 					int value = Integer.parseInt(values[i]);
-					NumericAttribute attribute = new NumericAttribute(samId, headerProduct[i], headerAttribute[i], value);
+					NumericAttribute attribute = new NumericAttribute(samId, judge, headerProduct[i], headerAttribute[i], value);
 					
 					if (!samScale.contains(value)) {
 						throw new NuberOutOfScaleException(samScale, attribute);
