@@ -7,14 +7,18 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.uade.sam.model.Design;
 import edu.uade.sam.model.NumericAttribute;
@@ -32,7 +36,7 @@ public class AttributesController {
 
 	@Inject
 	private AttributesService attributesService;
-	
+
 	@Inject
 	private DesignService designService;
 
@@ -41,6 +45,9 @@ public class AttributesController {
 
 	@Inject
 	private CSVParser csvParser;
+
+	@Autowired
+	private ObjectMapper mapper;
 
 	/**
 	 * Help Me Stack Overflow, you're my only hope
@@ -54,8 +61,8 @@ public class AttributesController {
 	public ResponseEntity<String> processUpload(@PathVariable(value = "id") long id, @RequestParam MultipartFile file) {
 
 		SensoryEvaluation sam = samService.get(id);
-		
-		if (sam  == null) {
+
+		if (sam == null) {
 			return ResponseEntity.badRequest().body("evaluacion sensorial inexistente");
 		}
 		attributesService.deleteBySamId(id);
@@ -65,12 +72,12 @@ public class AttributesController {
 			attributes = csvParser.parseNumeric(id, sam.getType(), sam.getScale(), file);
 			attributesService.save(attributes);
 			return ResponseEntity.ok().body("OK");
-			
+
 		} catch (Exception e) {
-			e.printStackTrace();			
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		
+
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -101,6 +108,21 @@ public class AttributesController {
 		response.setContentType("application/force-download");
 		response.setHeader("Content-Disposition", "attachment; filename=" + TEMPLATE_NAME + sam.getSamId() + ".csv");
 		response.getWriter().print(csv);
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<String> postAttributes(@PathVariable(value = "id") long id, @RequestBody String body) {
+		try {
+			List<NumericAttribute> attributes = mapper.readValue(body,
+					mapper.getTypeFactory().constructCollectionType(List.class, NumericAttribute.class));
+			// validate
+			attributesService.save(attributes);
+			return ResponseEntity.ok().body("OK");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 
 }
